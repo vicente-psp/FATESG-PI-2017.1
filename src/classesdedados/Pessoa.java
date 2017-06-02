@@ -11,5 +11,5 @@ package classesdedados;
  */
 public class Pessoa {
     private int identificador = 0;
-    
+    private String nomeCompleto = "";
 }

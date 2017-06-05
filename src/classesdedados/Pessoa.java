@@ -13,5 +13,6 @@ public class Pessoa {
     private int identificador = 0;
     private String nomeCompleto = "";
     private int idade = 0;
+    private int z = 0;
     
 }

@@ -5,12 +5,48 @@
  */
 package classesdedados;
 
+import enumeradores.EnumPessoa;
+import java.util.ArrayList;
+
 /**
  *
  * @author Vicente
  */
 public class Pessoa {
-    private int identificador = 0;
-    private String nomeCompleto = "";
-    private int idade = 0;
+    private int id = 0;
+    private String nome = "";
+    private EnumPessoa tipo = null;
+    private ArrayList<Telefone> telefone = null;
+    
+    
+    Pessoa(){}
+    Pessoa(int id, String nome, EnumPessoa tipo){
+        this.id = id;
+        this.nome = nome;
+        this.tipo = tipo;
+    }
+
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public EnumPessoa getTipo() {
+        return tipo;
+    }
+    public void setTipo(EnumPessoa tipo) {
+        this.tipo = tipo;
+    }
+
+    
+    
 }

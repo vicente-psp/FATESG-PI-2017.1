@@ -21,7 +21,10 @@ import javax.swing.JOptionPane;
 public class GerarId {
     String diretorio = "C:\\Users\\Vicente\\Google Drive\\ADS\\01 - FATESG\\2017.1\\Projetos Equipe ADS\\Projeto Integrador\\br.com.FATESG.PI-2017.1\\br.com.FATESG.PI-2017.1\\FATESG-PI-2017.1\\br.com.FATESG.PI-2017.1\\src\\arquivos\\";
     private int idPessoa = 0;
-    private int idVeiculo = 0;
+    private int idModelo = 0;
+    private int idMarca = 0;
+    private int idLocacao = 0;
+    
     String arquivoID = diretorio + "GeradorDeID.csv";
 
     public GerarId() {
@@ -33,7 +36,7 @@ public class GerarId {
                 FileWriter fw = new FileWriter(arquivoID, false);
                 BufferedWriter bw = new BufferedWriter(fw);
 
-                String saida = 0 + ";" + 0;
+                String saida = 0 + ";" + 0 + ";" + 0 + ";" + 0;
                 bw.write(saida);
 
                 bw.close();
@@ -45,7 +48,9 @@ public class GerarId {
             if(linha != null && !linha.equals("")){
                     String vetorString[] = linha.split(";");
                     idPessoa = Integer.parseInt(vetorString[0]);
-                    idVeiculo = Integer.parseInt(vetorString[1]);
+                    idModelo = Integer.parseInt(vetorString[1]);
+                    idMarca = Integer.parseInt(vetorString[2]);
+                    idLocacao = Integer.parseInt(vetorString[3]);
             }
             br.close();
             
@@ -59,10 +64,19 @@ public class GerarId {
         return ++idPessoa;
     }
 
-    public int getIdVeiculo() {
-        return ++idVeiculo;
+    public int getIdModelo() {
+        return ++idModelo;
+    }
+    
+    public int getIdMarca() {
+        return idMarca;
     }
 
+    public int getIdLocacao() {
+        return idLocacao;
+    }
+    
+    
     @Override
     public void finalize() {
         try {
@@ -70,7 +84,7 @@ public class GerarId {
             FileWriter fw = new FileWriter(arquivoID, false);
             BufferedWriter bw = new BufferedWriter(fw);
 
-            String saida = idPessoa + ";" + idVeiculo;
+            String saida = this.idPessoa + ";" + this.idModelo + ";" + this.idMarca + ";" + this.idLocacao;
             bw.write(saida);
 
             bw.close();
@@ -78,4 +92,6 @@ public class GerarId {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
+
+    
 }

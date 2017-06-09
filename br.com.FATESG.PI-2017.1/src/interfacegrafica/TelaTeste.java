@@ -5,27 +5,37 @@
  */
 package interfacegrafica;
 
+import classesdedados.Email;
+import classesdedados.Formato;
 import classesdedados.Pessoa;
+import classesdedados.PessoaFisica;
 import classesdedados.PessoaJuridica;
-import enumeradores.EnumPessoa;
-import enumeradores.EnumTelefone;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.text.MaskFormatter;
+import jdk.internal.org.objectweb.asm.tree.TryCatchBlockNode;
+import persistencia.PessoaDAO;
 
 /**
  *
  * @author Vicente
  */
 public class TelaTeste extends javax.swing.JFrame {
-
     /**
      * Creates new form TelaTeste
      */
+    
     public TelaTeste() {
         initComponents();
-        jComboBox1.setModel(new DefaultComboBoxModel(EnumPessoa.values()));
+        jComboBox1.setModel(new DefaultComboBoxModel(Pessoa.EnumPessoa.values()));
     }
 
     /**
@@ -41,9 +51,10 @@ public class TelaTeste extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
+        jFormattedTextField1 = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -59,6 +70,18 @@ public class TelaTeste extends javax.swing.JFrame {
         jLabel2.setText("cnpj");
 
         jLabel3.setText("tipo");
+
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
+
+        try {
+            jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -79,11 +102,14 @@ public class TelaTeste extends javax.swing.JFrame {
                         .addComponent(jLabel3)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(23, 23, 23)
-                                .addComponent(jButton1))
-                            .addGroup(layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(23, 23, 23)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButton1)
+                                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap(149, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -101,7 +127,9 @@ public class TelaTeste extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(55, 55, 55))
         );
@@ -111,19 +139,53 @@ public class TelaTeste extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         PessoaJuridica pessoaJuridica = new PessoaJuridica();
+        Email email = new Email();
+        PessoaFisica pessoaFisica = new PessoaFisica();
+        String resultado = "";
+        
+        Pessoa objPessoa = new Pessoa();
+        
+        
         try {
-            //
+//            email.setEmail(jTextField2.getText());
 //        pessoaJuridica.setTipo(Enum.valueOf(EnumPessoa.class, jComboBox1.getSelectedItem().toString()));
 //        pessoaJuridica.setNome(jTextField1.getText());
-            pessoaJuridica.setCnpj(jTextField2.getText());
-            pessoaJuridica.validaCnpj();
-            JOptionPane.showMessageDialog(this, "Resultado: " + pessoaJuridica.validaCnpj());
+            //pessoaJuridica.setCnpj(jTextField2.getText());
+            //pessoaFisica.setCpf(jTextField2.getText());
+            
+            ////informa a data atual no formato dia/mês/ano
+            ////jTextField2.setText(new SimpleDateFormat("dd/MM/yyyy").format(new Date(System.currentTimeMillis())));
+            
+            //if(pessoaFisica.getCategoriaCnh.equals(EnumCnh.class))throw new Exception("Não cadastrado!");
+            //pessoaFisica.setCategoriaCnh(Enum.valueOf(EnumCnh.class, "B"));
+            
+            //resultado = pessoaFisica.getCategoriaCnh().toString();
+            
+            //JOptionPane.showMessageDialog(this, resultado);
+            
+            PessoaDAO pessoa = new PessoaDAO();
+            objPessoa.setId(1);
+            objPessoa.setNome("JOAQUIM DAS COUVES");
+            objPessoa.setTipo(Enum.valueOf(Pessoa.EnumPessoa.class, jComboBox1.getSelectedItem().toString()));
+            
+            pessoa.incluir(objPessoa);
+            
+            
+            //Date data = pessoaFisica.formataData(jTextField2.getText());
+           // pessoaFisica.setDataDeNasc(data);
+            
+            //resultado = "CPF " + pessoaFisica.imprimeCPF() + " é válido.";
+            //JOptionPane.showMessageDialog(this, "Resultado: " + data.getTime());
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
         
         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -163,6 +225,7 @@ public class TelaTeste extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

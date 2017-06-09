@@ -5,7 +5,6 @@
  */
 package classesdedados;
 
-import enumeradores.EnumTelefone;
 
 /**
  *
@@ -64,4 +63,7 @@ public class Telefone {
         this.tipo = tipo;
     }
     
+    public enum EnumTelefone {
+        RESIDENCIAL, PESSOAL;
+    }
 }

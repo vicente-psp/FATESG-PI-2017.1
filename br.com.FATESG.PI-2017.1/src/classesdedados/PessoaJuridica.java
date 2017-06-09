@@ -22,12 +22,12 @@ public class PessoaJuridica extends Pessoa{
         return cnpj;
     }
     public void setCnpj(String cnpj)throws Exception{
-        if(cnpj.equals("")) throw new Exception("Informe o CNPJ!");
-        if(cnpj.length() != 14 && cnpj.length() != 18) throw new Exception("Quantidade de caracteres inválidas!");
+        if(cnpj.length() == 0) throw new Exception("Informe o CNPJ!");
         this.cnpj = cnpj;
+        if(!validaCnpj())throw new Exception("CNPJ inválido!");
     }
 
-    public boolean validaCnpj()throws Exception {
+    private boolean validaCnpj()throws Exception {
         if (!this.cnpj.substring(0, 1).equals("")) {
             try {
                 this.cnpj = this.cnpj.replace('.', ' ');//onde há ponto coloca espaço

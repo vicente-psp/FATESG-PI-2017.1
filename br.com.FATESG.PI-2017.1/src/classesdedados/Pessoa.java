@@ -5,7 +5,6 @@
  */
 package classesdedados;
 
-import enumeradores.EnumPessoa;
 import java.util.ArrayList;
 
 /**
@@ -17,13 +16,20 @@ public class Pessoa {
     private String nome = "";
     private EnumPessoa tipo = null;
     private ArrayList<Telefone> telefone = null;
+    private ArrayList<Email> email = null;
+    private ArrayList<Endereco> endereco = null;
     
     
-    Pessoa(){}
-    Pessoa(int id, String nome, EnumPessoa tipo){
+    
+    
+    public Pessoa(){}
+    public Pessoa(int id, String nome, EnumPessoa tipo, ArrayList<Telefone> telefone, ArrayList<Email> email, ArrayList<Endereco> endereco){
         this.id = id;
         this.nome = nome;
         this.tipo = tipo;
+        this.telefone = telefone;
+        this.email = email;
+        this.endereco = endereco;
     }
 
     public int getId() {
@@ -47,6 +53,32 @@ public class Pessoa {
         this.tipo = tipo;
     }
 
-    
+    public ArrayList<Telefone> getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(ArrayList<Telefone> telefone) {
+        this.telefone = telefone;
+    }
+
+    public ArrayList<Email> getEmail() {
+        return email;
+    }
+
+    public void setEmail(ArrayList<Email> email) {
+        this.email = email;
+    }
+
+    public ArrayList<Endereco> getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(ArrayList<Endereco> endereco) {
+        this.endereco = endereco;
+    }
+
+    public enum EnumPessoa {
+        JURIDICA, FISICA;
+    }
     
 }

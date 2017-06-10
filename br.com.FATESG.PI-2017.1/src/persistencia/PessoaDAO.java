@@ -19,15 +19,25 @@ import javax.swing.JOptionPane;
  */
 public class PessoaDAO implements CRUD{
     String diretorio = "C:\\Users\\Vicente\\Google Drive\\ADS\\01 - FATESG\\2017.1\\Projetos Equipe ADS\\Projeto Integrador\\br.com.FATESG.PI-2017.1\\br.com.FATESG.PI-2017.1\\FATESG-PI-2017.1\\br.com.FATESG.PI-2017.1\\src\\arquivos\\";
-    String arqPessoa = diretorio + "Pessoa.csv";
+    String arqPJ = diretorio + "PessoaJuridica.csv";
+    String arqPF = diretorio + "PessoaFisica.csv";
+    String arqTelefone = diretorio + "Telefone.csv";
+    String arqEndereco = diretorio + "Endereco.csv";
+    String arqEmail = diretorio + "Email.csv";
     
     FileWriter fwPessoa = null;
     BufferedWriter bwPessoa = null;
+    FileWriter fwTelefone = null;
     
     @Override
     public void incluir(Object objeto) throws Exception {
         Pessoa pessoa = (Pessoa) objeto;
-        fwPessoa = new FileWriter(arqPessoa, true);
+        
+        if(pessoa.getTipo().toString().equals("FISICA")){
+            fwPessoa = new FileWriter(arqPF, true);
+        }else{
+            fwPessoa = new FileWriter(arqPJ, true);
+        }
         bwPessoa = new BufferedWriter(fwPessoa);
         GerarId gerarId = new GerarId();
         pessoa.setId(gerarId.getIdPessoa());
@@ -37,6 +47,7 @@ public class PessoaDAO implements CRUD{
         
         JOptionPane.showMessageDialog(null, "Cliente salvo com sucesso.");
         
+        gerarId.finalize();
         bwPessoa.close();
     }
 

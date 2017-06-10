@@ -64,6 +64,6 @@ public class Telefone {
     }
     
     public enum EnumTelefone {
-        RESIDENCIAL, PESSOAL;
+        RESIDENCIAL, PESSOAL, COMERCIAL;
     }
 }

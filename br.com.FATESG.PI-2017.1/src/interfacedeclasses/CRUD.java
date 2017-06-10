@@ -14,6 +14,6 @@ import java.util.ArrayList;
 public interface CRUD {
     void incluir(Object objeto)throws Exception;
     ArrayList<Object> recuperar()throws Exception;
-    void alterar(int id)throws Exception;
+    void alterar(int id, Object objeto)throws Exception;
     void excluir(int id)throws Exception;
 }

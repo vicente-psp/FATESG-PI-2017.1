@@ -30,6 +30,7 @@ public class Endereco {
         this.complemento = complemento;
         this.cep = cep;
         this.bairro = bairro;
+        this.cidade = cidade;
         this.estado = estado;
         this.pais = pais;
     }

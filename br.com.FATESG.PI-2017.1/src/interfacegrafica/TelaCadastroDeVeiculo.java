@@ -44,6 +44,10 @@ public class TelaCadastroDeVeiculo extends javax.swing.JInternalFrame {
 
         jToggleButton1.setText("jToggleButton1");
 
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+
         jLabel1.setText("CADASTRO DE VEICULO");
 
         jLabel2.setText("Marca:");

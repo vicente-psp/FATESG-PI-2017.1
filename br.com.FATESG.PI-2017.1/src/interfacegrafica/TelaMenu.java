@@ -31,47 +31,98 @@ public class TelaMenu extends javax.swing.JFrame {
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuCadastroGeral = new javax.swing.JMenu();
-        jMenuItemModelo = new javax.swing.JMenuItem();
-        jMenuItemMarca = new javax.swing.JMenuItem();
-        jMenuItemVeiculo = new javax.swing.JMenuItem();
-        jMenuClientes = new javax.swing.JMenu();
+        jMenuItemCadastroModelo = new javax.swing.JMenuItem();
+        jMenuItemCadastroMarca = new javax.swing.JMenuItem();
+        jMenuItemCadastroVeiculo = new javax.swing.JMenuItem();
+        jMenuItemCadastroClientes = new javax.swing.JMenuItem();
         jMenuLocacao = new javax.swing.JMenu();
+        jMenuItemRealizarLocacao = new javax.swing.JMenuItem();
+        jMenuItemRealizarDevolucao = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
+        jMenuItemPesquisarClientes = new javax.swing.JMenuItem();
+        jMenuItemPesquisarVeiculos = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jDesktopPane1.setAlignmentX(344.0F);
+        jDesktopPane1.setAlignmentY(345.0F);
 
         jMenuBar1.setMinimumSize(new java.awt.Dimension(344, 344));
 
         jMenuCadastroGeral.setText("Cadastros");
 
-        jMenuItemModelo.setLabel("Modelo");
-        jMenuItemModelo.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemCadastroModelo.setLabel("Modelo");
+        jMenuItemCadastroModelo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemModeloActionPerformed(evt);
+                jMenuItemCadastroModeloActionPerformed(evt);
             }
         });
-        jMenuCadastroGeral.add(jMenuItemModelo);
+        jMenuCadastroGeral.add(jMenuItemCadastroModelo);
 
-        jMenuItemMarca.setLabel("Marca");
-        jMenuItemMarca.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemCadastroMarca.setLabel("Marca");
+        jMenuItemCadastroMarca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemMarcaActionPerformed(evt);
+                jMenuItemCadastroMarcaActionPerformed(evt);
             }
         });
-        jMenuCadastroGeral.add(jMenuItemMarca);
+        jMenuCadastroGeral.add(jMenuItemCadastroMarca);
 
-        jMenuItemVeiculo.setText("Veiculo");
-        jMenuCadastroGeral.add(jMenuItemVeiculo);
+        jMenuItemCadastroVeiculo.setText("Veiculo");
+        jMenuItemCadastroVeiculo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemCadastroVeiculoActionPerformed(evt);
+            }
+        });
+        jMenuCadastroGeral.add(jMenuItemCadastroVeiculo);
+
+        jMenuItemCadastroClientes.setText("Cliente");
+        jMenuItemCadastroClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemCadastroClientesActionPerformed(evt);
+            }
+        });
+        jMenuCadastroGeral.add(jMenuItemCadastroClientes);
 
         jMenuBar1.add(jMenuCadastroGeral);
 
-        jMenuClientes.setText("Clientes");
-        jMenuBar1.add(jMenuClientes);
-
         jMenuLocacao.setText("Locação");
+
+        jMenuItemRealizarLocacao.setText("Realizar Locação");
+        jMenuItemRealizarLocacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemRealizarLocacaoActionPerformed(evt);
+            }
+        });
+        jMenuLocacao.add(jMenuItemRealizarLocacao);
+
+        jMenuItemRealizarDevolucao.setText("Realizar Devolução");
+        jMenuItemRealizarDevolucao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemRealizarDevolucaoActionPerformed(evt);
+            }
+        });
+        jMenuLocacao.add(jMenuItemRealizarDevolucao);
+
         jMenuBar1.add(jMenuLocacao);
 
         jMenu1.setText("Pesquisar");
+
+        jMenuItemPesquisarClientes.setText("Clientes");
+        jMenuItemPesquisarClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemPesquisarClientesActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItemPesquisarClientes);
+
+        jMenuItemPesquisarVeiculos.setText("Veiculos");
+        jMenuItemPesquisarVeiculos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemPesquisarVeiculosActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItemPesquisarVeiculos);
+
         jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
@@ -80,27 +131,67 @@ public class TelaMenu extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 689, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 529, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItemModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemModeloActionPerformed
-        TelaCadastroDeCliente tela = new TelaCadastroDeCliente();
+    private void jMenuItemCadastroModeloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCadastroModeloActionPerformed
+        TelaCadastroDeModelo tela = new TelaCadastroDeModelo();
         jDesktopPane1.add(tela);
         tela.setVisible(true);
-    }//GEN-LAST:event_jMenuItemModeloActionPerformed
+    }//GEN-LAST:event_jMenuItemCadastroModeloActionPerformed
 
-    private void jMenuItemMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemMarcaActionPerformed
+    private void jMenuItemCadastroMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCadastroMarcaActionPerformed
         TelaCadastroDeMarca tela = new TelaCadastroDeMarca();
         jDesktopPane1.add(tela);
         tela.setVisible(true);
-    }//GEN-LAST:event_jMenuItemMarcaActionPerformed
+    }//GEN-LAST:event_jMenuItemCadastroMarcaActionPerformed
+
+    private void jMenuItemCadastroVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCadastroVeiculoActionPerformed
+        TelaCadastroDeVeiculo tela = new TelaCadastroDeVeiculo();
+        jDesktopPane1.add(tela);
+        tela.setVisible(true);
+    }//GEN-LAST:event_jMenuItemCadastroVeiculoActionPerformed
+
+    private void jMenuItemRealizarLocacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRealizarLocacaoActionPerformed
+        TelaLocacao tela = new TelaLocacao();
+        jDesktopPane1.add(tela);
+        tela.setVisible(true);
+    }//GEN-LAST:event_jMenuItemRealizarLocacaoActionPerformed
+
+    private void jMenuItemCadastroClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCadastroClientesActionPerformed
+        TelaCadastroDeCliente tela = new TelaCadastroDeCliente();
+        jDesktopPane1.add(tela);
+        tela.setVisible(true);
+    }//GEN-LAST:event_jMenuItemCadastroClientesActionPerformed
+
+    private void jMenuItemRealizarDevolucaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRealizarDevolucaoActionPerformed
+        TelaDevolucao tela = new TelaDevolucao();
+        jDesktopPane1.add(tela);
+        tela.setVisible(true);
+    }//GEN-LAST:event_jMenuItemRealizarDevolucaoActionPerformed
+
+    private void jMenuItemPesquisarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemPesquisarClientesActionPerformed
+        TelaPesquisaCliente tela = new TelaPesquisaCliente();
+        jDesktopPane1.add(tela);
+        tela.setVisible(true);
+    }//GEN-LAST:event_jMenuItemPesquisarClientesActionPerformed
+
+    private void jMenuItemPesquisarVeiculosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemPesquisarVeiculosActionPerformed
+        TelaPesquisaVeiculo tela = new TelaPesquisaVeiculo();
+        jDesktopPane1.add(tela);
+        tela.setVisible(true);
+    }//GEN-LAST:event_jMenuItemPesquisarVeiculosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -142,10 +233,14 @@ public class TelaMenu extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuCadastroGeral;
-    private javax.swing.JMenu jMenuClientes;
-    private javax.swing.JMenuItem jMenuItemMarca;
-    private javax.swing.JMenuItem jMenuItemModelo;
-    private javax.swing.JMenuItem jMenuItemVeiculo;
+    private javax.swing.JMenuItem jMenuItemCadastroClientes;
+    private javax.swing.JMenuItem jMenuItemCadastroMarca;
+    private javax.swing.JMenuItem jMenuItemCadastroModelo;
+    private javax.swing.JMenuItem jMenuItemCadastroVeiculo;
+    private javax.swing.JMenuItem jMenuItemPesquisarClientes;
+    private javax.swing.JMenuItem jMenuItemPesquisarVeiculos;
+    private javax.swing.JMenuItem jMenuItemRealizarDevolucao;
+    private javax.swing.JMenuItem jMenuItemRealizarLocacao;
     private javax.swing.JMenu jMenuLocacao;
     // End of variables declaration//GEN-END:variables
 }

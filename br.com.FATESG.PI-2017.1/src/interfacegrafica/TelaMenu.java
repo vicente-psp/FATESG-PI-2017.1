@@ -47,7 +47,10 @@ public class TelaMenu extends javax.swing.JFrame {
         jDesktopPane1.setAlignmentX(344.0F);
         jDesktopPane1.setAlignmentY(345.0F);
 
+        jMenuBar1.setAlignmentX(0.0F);
+        jMenuBar1.setAutoscrolls(true);
         jMenuBar1.setMinimumSize(new java.awt.Dimension(344, 344));
+        jMenuBar1.setPreferredSize(new java.awt.Dimension(700, 22));
 
         jMenuCadastroGeral.setText("Cadastros");
 
@@ -131,9 +134,7 @@ public class TelaMenu extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 689, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jDesktopPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

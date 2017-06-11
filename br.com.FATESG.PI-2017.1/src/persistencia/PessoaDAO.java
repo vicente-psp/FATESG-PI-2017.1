@@ -8,6 +8,7 @@ package persistencia;
 import classesdedados.Email;
 import classesdedados.Endereco;
 import classesdedados.GerarId;
+import classesdedados.Mensagens;
 import classesdedados.Pessoa;
 import classesdedados.Telefone;
 import interfacedeclasses.CRUD;
@@ -92,17 +93,16 @@ public class PessoaDAO implements CRUD {
             }
             bwEnderecos.close();
 
-            JOptionPane.showMessageDialog(null, "Cadastro efetuado com sucesso.");
-
             gerarId.finalize();
+            JOptionPane.showMessageDialog(null, new Mensagens().mensagem("MSG01"));
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Cadastro do cliente " + pessoa.getNome().toUpperCase() + " não efetuado.");
+            JOptionPane.showMessageDialog(null, new Mensagens().mensagem("MSG02"));
         }
     }
 
     @Override
     public ArrayList<Object> recuperar() throws Exception {
-        ArrayList<Pessoa> alPessoa = new ArrayList<Pessoa>();
+        ArrayList<Pessoa> alPessoa = new ArrayList<>();
 
         try {
             File fileClientes = new File(arqClientes);
@@ -117,7 +117,7 @@ public class PessoaDAO implements CRUD {
                 pessoa.setNome(vClientes[1]);
                 pessoa.setTipo(Enum.valueOf(Pessoa.EnumPessoa.class, vClientes[2]));
 
-                ArrayList<Telefone> alTelefones = new ArrayList<Telefone>();
+                ArrayList<Telefone> alTelefones = new ArrayList<>();
                 try {
                     File fileTelefones = new File(arqTelefone);
                     FileReader frTelefones = new FileReader(fileTelefones);
@@ -139,10 +139,10 @@ public class PessoaDAO implements CRUD {
                     }
 
                 } catch (Exception e) {
-                    //JOptionPane.showMessageDialog(null, "Erro ao buscar informações de telefones.");  msg de erro de busca do telefone aguardando documentação para implementar
+                    JOptionPane.showMessageDialog(null, new Mensagens().mensagem("MSG15"));
                 }
 
-                ArrayList<Email> alEmails = new ArrayList<Email>();
+                ArrayList<Email> alEmails = new ArrayList<>();
                 try {
                     File fileEmails = new File(arqEmail);
                     FileReader frEmails = new FileReader(fileEmails);
@@ -160,10 +160,10 @@ public class PessoaDAO implements CRUD {
                         linhaEmails = brEmails.readLine();
                     }
                 } catch (Exception e) {
-                    //JOptionPane.showMessageDialog(null, "Erro ao buscar informações de telefones.");  msg de erro de busca do email aguardando documentação para implementar
+                    JOptionPane.showMessageDialog(null, new Mensagens().mensagem("MSG15"));
                 }
 
-                ArrayList<Endereco> alEnderecos = new ArrayList<Endereco>();
+                ArrayList<Endereco> alEnderecos = new ArrayList<>();
                 try {
                     File fileEnderecos = new File(arqEndereco);
                     FileReader frEnderecos = new FileReader(fileEnderecos);
@@ -189,7 +189,7 @@ public class PessoaDAO implements CRUD {
                     }
 
                 } catch (Exception e) {
-                    //JOptionPane.showMessageDialog(null, "Erro ao buscar informações de telefones.");  msg de erro de busca do endereço aguardando documentação para implementar
+                    JOptionPane.showMessageDialog(null, new Mensagens().mensagem("MSG15"));
                 }
 
                 pessoa.setEndereco(alEnderecos);
@@ -435,17 +435,13 @@ public class PessoaDAO implements CRUD {
                     bwEnderecos.write(dadosEnderecos);
                     bwEnderecos.close();
                 }
-                JOptionPane.showMessageDialog(null, "Nenhum alterado com sucesso!");
+                JOptionPane.showMessageDialog(null, new Mensagens().mensagem("MSG04"));
             } else {
-                JOptionPane.showMessageDialog(null, "Nenhum cliente foi alterado");
+                JOptionPane.showMessageDialog(null, new Mensagens().mensagem("MSG16"));
             }
 
         } catch (Exception e) {
-            //JOptionPane.showMessageDialog(null, ""); msg de erro ao alterar um cliente
+            JOptionPane.showMessageDialog(null, new Mensagens().mensagem("MSG17"));
         }
-    }
-
-    private String desmaterializarEmail(Email email) {
-        return email.getIdPessoa() + ";" + email.getEmail();
     }
 }

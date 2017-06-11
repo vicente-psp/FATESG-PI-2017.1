@@ -159,7 +159,7 @@ public class PessoaFisica extends Pessoa{
     }
     
     public enum EnumCnh {
-        A, B, C, D, E;
+        A, B, C, D, E, AB, AC, AD, AE, ACC;
     }
     
     public BigDecimal calcularIdade() throws ParseException {

@@ -108,9 +108,8 @@ public class TelaCliente extends javax.swing.JFrame {
         jTextFieldBairro = new javax.swing.JTextField();
         jTextFieldEstado = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
-        jScrollPane11 = new javax.swing.JScrollPane();
-        jTextAreaComplementoEndereco = new javax.swing.JTextArea();
         jFormattedTextFieldCEP = new javax.swing.JFormattedTextField();
+        jTextFieldComplementoEndereco = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
         jTextFieldClienteNumeroCNH = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
@@ -517,10 +516,6 @@ public class TelaCliente extends javax.swing.JFrame {
 
         jLabel15.setText("Complemento");
 
-        jTextAreaComplementoEndereco.setColumns(20);
-        jTextAreaComplementoEndereco.setRows(5);
-        jScrollPane11.setViewportView(jTextAreaComplementoEndereco);
-
         try {
             jFormattedTextFieldCEP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-####")));
         } catch (java.text.ParseException ex) {
@@ -565,7 +560,7 @@ public class TelaCliente extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                                 .addComponent(jLabel15)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextFieldComplementoEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel11)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -591,14 +586,14 @@ public class TelaCliente extends javax.swing.JFrame {
                     .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel15)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel15)
+                        .addComponent(jTextFieldComplementoEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(1, 1, 1)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jFormattedTextFieldCEP, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jFormattedTextFieldCEP, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(10, 10, 10)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -872,7 +867,7 @@ public class TelaCliente extends javax.swing.JFrame {
             String cidade = jTextFieldCidade.getText();
             String estado = jTextFieldEstado.getText();
             String pais = jTextFieldPais.getText();
-            String complemento = jTextAreaComplementoEndereco.getText();
+            String complemento = jTextFieldComplementoEndereco.getText();
 
             if (!logradouro.equals("") && !jTextFieldNumeroEndereco.getText().equals("") && !bairro.equals("")
                     && !cidade.equals("") && !estado.equals("") && !pais.equals("")) {
@@ -910,7 +905,7 @@ public class TelaCliente extends javax.swing.JFrame {
                 jTextFieldEstado.setText("");
                 jTextFieldPais.setText("");
                 jFormattedTextFieldCEP.setText("");
-                jTextAreaComplementoEndereco.setText("");
+                jTextFieldComplementoEndereco.setText("");
 
                 jTextFieldNumeroEndereco.requestFocus();
 
@@ -1086,7 +1081,7 @@ public class TelaCliente extends javax.swing.JFrame {
                     jTextFieldPais.setText(String.valueOf(dtm.getValueAt(idx, 4)));
                     jTextFieldEstado.setText(String.valueOf(dtm.getValueAt(idx, 5)));
                     jFormattedTextFieldCEP.setText(String.valueOf(dtm.getValueAt(idx, 6)));
-                    jTextAreaComplementoEndereco.setText(String.valueOf(dtm.getValueAt(idx, 7)));
+                    jTextFieldComplementoEndereco.setText(String.valueOf(dtm.getValueAt(idx, 7)));
 
                     dtm.removeRow(idx);
                     enderecos.remove(idx);
@@ -1209,7 +1204,6 @@ public class TelaCliente extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
-    private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
@@ -1227,10 +1221,10 @@ public class TelaCliente extends javax.swing.JFrame {
     private javax.swing.JTable jTableEndereco;
     private javax.swing.JTable jTableTelefone;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextAreaComplementoEndereco;
     private javax.swing.JTextField jTextFieldBairro;
     private javax.swing.JTextField jTextFieldCidade;
     private javax.swing.JTextField jTextFieldClienteNumeroCNH;
+    private javax.swing.JTextField jTextFieldComplementoEndereco;
     private javax.swing.JTextField jTextFieldDDD;
     private javax.swing.JTextField jTextFieldDDI;
     private javax.swing.JTextField jTextFieldEmail;

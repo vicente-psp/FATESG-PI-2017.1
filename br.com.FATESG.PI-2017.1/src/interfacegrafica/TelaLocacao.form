@@ -108,8 +108,8 @@
                           </Group>
                           <Group type="102" attributes="0">
                               <Component id="jButtonLocacaoSelecionarVeiculo" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jTextFieldLocacaoVeiculoDisponivel" min="-2" pref="333" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jTextFieldLocacaoVeiculoDisponivel" min="-2" pref="339" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>

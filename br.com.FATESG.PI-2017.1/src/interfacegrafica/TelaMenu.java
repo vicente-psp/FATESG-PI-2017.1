@@ -171,7 +171,7 @@ public class TelaMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemRealizarLocacaoActionPerformed
 
     private void jMenuItemCadastroClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCadastroClientesActionPerformed
-        TelaCadastroDeCliente tela = new TelaCadastroDeCliente();
+        TelaCadastroDeCliente2 tela = new TelaCadastroDeCliente2();
         jDesktopPane1.add(tela);
         tela.setVisible(true);
     }//GEN-LAST:event_jMenuItemCadastroClientesActionPerformed

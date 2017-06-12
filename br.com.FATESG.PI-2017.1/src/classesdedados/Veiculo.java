@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package classesdedados;
+import classesdedados.Modelo;
+import classesdedados.Marca;
 
 /**
  *
@@ -12,14 +14,18 @@ package classesdedados;
 public class Veiculo {
     private String placa = "";
     private EnumVeiculo status = null;
+    private Modelo modelo = null;
+    private Marca marca = null;
     
     
     public Veiculo(){
         
     }
-    public Veiculo(String placa, EnumVeiculo status){
+    public Veiculo(String placa, EnumVeiculo status, Modelo modelo, Marca marca){
         this.placa = placa;
         this.status = status;
+        this.modelo = modelo;
+        this.marca = marca;
     }
 
     public String getPlaca() {
@@ -41,4 +47,21 @@ public class Veiculo {
     public enum EnumVeiculo{
         DISPONIVEL, LOCADO, VENDIDO, SINISTRADO;
     }
+
+    public Modelo getModelo() {
+        return modelo;
+    }
+
+    public void setModelo(Modelo modelo) {
+        this.modelo = modelo;
+    }
+
+    public Marca getMarca() {
+        return marca;
+    }
+
+    public void setMarca(Marca marca) {
+        this.marca = marca;
+    }
+    
 }

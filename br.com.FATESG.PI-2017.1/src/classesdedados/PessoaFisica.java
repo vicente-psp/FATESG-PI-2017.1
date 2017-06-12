@@ -23,17 +23,19 @@ import java.math.RoundingMode;
  *
  * @author Vicente
  */
-public class PessoaFisica extends Pessoa{
+public class PessoaFisica extends Pessoa {
+
     private Date dataDeNasc = null;
     private String cpf = "";
     private int cnh = 0;
     private EnumCnh categoriaCnh = null;
     private Date validadeCnh = null;
     private EnumSexo sexo = null;
-    
-    public PessoaFisica(){        
+
+    public PessoaFisica() {
     }
-    public PessoaFisica(Date dataDeNasc, String cpf, int cnh, EnumCnh categoriaCnh, Date validadeCnh, EnumSexo sexo)throws Exception{
+
+    public PessoaFisica(Date dataDeNasc, String cpf, int cnh, EnumCnh categoriaCnh, Date validadeCnh, EnumSexo sexo) throws Exception {
         this.dataDeNasc = dataDeNasc;
         this.cpf = cpf;
         this.cnh = cnh;
@@ -41,55 +43,68 @@ public class PessoaFisica extends Pessoa{
         this.validadeCnh = validadeCnh;
         this.sexo = sexo;
     }
-    
+
     public Date getDataDeNasc() {
         return dataDeNasc;
     }
-    public void setDataDeNasc(Date dataDeNasc)throws Exception{
+
+    public void setDataDeNasc(Date dataDeNasc) throws Exception {
+        if (dataDeNasc == null) {
+            throw new Exception(new Mensagens().mensagem("MSG14"));
+        }
         this.dataDeNasc = dataDeNasc;
     }
 
     public String getCpf() {
         return cpf;
     }
-    public void setCpf(String cpf)throws Exception{
-        if(cpf.length() != 11 && cpf.length() != 14)throw new Exception("CPF inválido!");
+
+    public void setCpf(String cpf) throws Exception {
+        if (cpf.length() != 11 && cpf.length() != 14) {
+            throw new Exception(new Mensagens().mensagem("MSG14"));
+        }
         cpf = cpf.replace('.', ' ');
         cpf = cpf.replace('-', ' ');
         cpf = cpf.replaceAll(" ", "");
         this.cpf = cpf;
-        if(!validaCpf())throw new Exception("CPF inválido!");
+        if (!validaCpf()) {
+            throw new Exception(new Mensagens().mensagem("MSG14"));
+        }
     }
 
     public int getCnh() {
         return cnh;
     }
-    public void setCnh(int cnh)throws Exception{
+
+    public void setCnh(int cnh) throws Exception {
         this.cnh = cnh;
     }
 
     public EnumCnh getCategoriaCnh() {
         return categoriaCnh;
     }
-    public void setCategoriaCnh(EnumCnh categoriaCnh)throws Exception{
+
+    public void setCategoriaCnh(EnumCnh categoriaCnh) throws Exception {
         this.categoriaCnh = categoriaCnh;
     }
 
     public Date getValidadeCnh() {
         return validadeCnh;
     }
-    public void setValidadeCnh(Date validadeCnh)throws Exception{
+
+    public void setValidadeCnh(Date validadeCnh) throws Exception {
         this.validadeCnh = validadeCnh;
     }
 
     public EnumSexo getSexo() {
         return sexo;
     }
-    public void setSexo(EnumSexo sexo){
+
+    public void setSexo(EnumSexo sexo) {
         this.sexo = sexo;
     }
-    
-    private boolean validaCpf(){
+
+    private boolean validaCpf() {
 // considera-se erro CPF's formados por uma sequencia de numeros iguais
         if (this.cpf.equals("00000000000") || this.cpf.equals("11111111111")
                 || this.cpf.equals("22222222222") || this.cpf.equals("33333333333")
@@ -153,39 +168,39 @@ public class PessoaFisica extends Pessoa{
         return (this.cpf.substring(0, 3) + "." + this.cpf.substring(3, 6) + "."
                 + this.cpf.substring(6, 9) + "-" + this.cpf.substring(9, 11));
     }
-  
+
     public enum EnumSexo {
         MASCULINO, FEMININO;
     }
-    
+
     public enum EnumCnh {
-        A, B, C, D, E, AB, AC, AD, AE, ACC;
+        B, C, D, E, AB, AC, AD, AE, ACC;
     }
-    
+
     public BigDecimal calcularIdade() throws ParseException {
         String data = String.valueOf(this.dataDeNasc);
-        
+
         // pega a data atual
         GregorianCalendar calendario = new GregorianCalendar();
         String dataIguana = String.valueOf(calendario.DAY_OF_MONTH + "/" + calendario.MONTH + "/" + calendario.YEAR);
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         String dataAtual = df.format(new Date());
-        
+
         //retorna o intervalo de dias entre duas datas
-        DateFormat df2 = new SimpleDateFormat("dd/MM/yyyy");  
-        df.setLenient(false);  
-        Date dataInicio = df2.parse(data);  
-        Date dataFim = df2.parse(dataAtual);  
-        long dt = (dataFim.getTime() - dataInicio.getTime()) + 3600000;  
-        Long diasCorridosAnoLong = (dt / 86400000L);  
-        Integer diasDecorridosInt = Integer.valueOf(diasCorridosAnoLong.toString());  
+        DateFormat df2 = new SimpleDateFormat("dd/MM/yyyy");
+        df.setLenient(false);
+        Date dataInicio = df2.parse(data);
+        Date dataFim = df2.parse(dataAtual);
+        long dt = (dataFim.getTime() - dataInicio.getTime()) + 3600000;
+        Long diasCorridosAnoLong = (dt / 86400000L);
+        Integer diasDecorridosInt = Integer.valueOf(diasCorridosAnoLong.toString());
         String contaDias = String.valueOf(diasDecorridosInt); //Sem numeros formatados; 
-        
+
         // agora para calcular a idade
         BigDecimal qtdDias = new BigDecimal(contaDias);
         BigDecimal ano = new BigDecimal(365.25);
         BigDecimal idade = qtdDias.divide(ano, 0, RoundingMode.DOWN);
         return idade;
     }
-    
+
 }

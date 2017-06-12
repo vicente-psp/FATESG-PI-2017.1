@@ -27,7 +27,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Vicente
  */
-public class TelaCadastroDeCliente extends javax.swing.JFrame {
+public class TelaCliente extends javax.swing.JFrame {
 
     ArrayList<Email> emails = new ArrayList<>();
     ArrayList<Telefone> telefones = new ArrayList<>();
@@ -36,7 +36,7 @@ public class TelaCadastroDeCliente extends javax.swing.JFrame {
     /**
      * Creates new form TelaDeContatos
      */
-    public TelaCadastroDeCliente() {
+    public TelaCliente() {
         initComponents();
         jComboBoxTiposDeTelefones.setModel(new DefaultComboBoxModel(Telefone.EnumTelefone.values()));
         jComboBoxTipoCNH.setModel(new DefaultComboBoxModel(PessoaFisica.EnumCnh.values()));
@@ -522,7 +522,7 @@ public class TelaCadastroDeCliente extends javax.swing.JFrame {
         jScrollPane11.setViewportView(jTextAreaComplementoEndereco);
 
         try {
-            jFormattedTextFieldCEP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+            jFormattedTextFieldCEP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -983,11 +983,15 @@ public class TelaCadastroDeCliente extends javax.swing.JFrame {
             pessoaFisica.setNome(jTextFieldNome.getText().toUpperCase());
             pessoaFisica.setDataDeNasc(Date.valueOf(jFormattedTextFieldClienteDataNascimento.getText()));
             pessoaFisica.setTipo(Pessoa.EnumPessoa.FISICA);
+            try {
+                pessoaFisica.setCpf(jFormattedTextFieldClienteCPF.getText());
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, e.getMessage());
+            }
             pessoaFisica.setTelefone(telefones);
             pessoaFisica.setEmail(emails);
             pessoaFisica.setEndereco(enderecos);
             pessoaFisica.setCpf(jFormattedTextFieldClienteCPF.getText());
-            
             try {
                 pessoaFisica.setCnh(Integer.parseInt(jTextFieldClienteNumeroCNH.getText()));
                 
@@ -1118,14 +1122,30 @@ public class TelaCadastroDeCliente extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaCadastroDeCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaCadastroDeCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaCadastroDeCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaCadastroDeCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -1146,7 +1166,7 @@ public class TelaCadastroDeCliente extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaCadastroDeCliente().setVisible(true);
+                new TelaCliente().setVisible(true);
             }
         });
     }

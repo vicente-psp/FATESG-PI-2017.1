@@ -34,7 +34,7 @@ public class TelaMenu extends javax.swing.JFrame {
         jMenuItemCadastroModelo = new javax.swing.JMenuItem();
         jMenuItemCadastroMarca = new javax.swing.JMenuItem();
         jMenuItemCadastroVeiculo = new javax.swing.JMenuItem();
-        jMenuItemCadastroClientes = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenuLocacao = new javax.swing.JMenu();
         jMenuItemRealizarLocacao = new javax.swing.JMenuItem();
         jMenuItemRealizarDevolucao = new javax.swing.JMenuItem();
@@ -78,13 +78,13 @@ public class TelaMenu extends javax.swing.JFrame {
         });
         jMenuCadastroGeral.add(jMenuItemCadastroVeiculo);
 
-        jMenuItemCadastroClientes.setText("Cliente");
-        jMenuItemCadastroClientes.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem1.setText("Clientes");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemCadastroClientesActionPerformed(evt);
+                jMenuItem1ActionPerformed(evt);
             }
         });
-        jMenuCadastroGeral.add(jMenuItemCadastroClientes);
+        jMenuCadastroGeral.add(jMenuItem1);
 
         jMenuBar1.add(jMenuCadastroGeral);
 
@@ -170,12 +170,6 @@ public class TelaMenu extends javax.swing.JFrame {
         tela.setVisible(true);
     }//GEN-LAST:event_jMenuItemRealizarLocacaoActionPerformed
 
-    private void jMenuItemCadastroClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCadastroClientesActionPerformed
-        TelaCadastroDeCliente tela = new TelaCadastroDeCliente();
-        jDesktopPane1.add(tela);
-        tela.setVisible(true);
-    }//GEN-LAST:event_jMenuItemCadastroClientesActionPerformed
-
     private void jMenuItemRealizarDevolucaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRealizarDevolucaoActionPerformed
         TelaDevolucao tela = new TelaDevolucao();
         jDesktopPane1.add(tela);
@@ -193,6 +187,10 @@ public class TelaMenu extends javax.swing.JFrame {
         jDesktopPane1.add(tela);
         tela.setVisible(true);
     }//GEN-LAST:event_jMenuItemPesquisarVeiculosActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -234,7 +232,7 @@ public class TelaMenu extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuCadastroGeral;
-    private javax.swing.JMenuItem jMenuItemCadastroClientes;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItemCadastroMarca;
     private javax.swing.JMenuItem jMenuItemCadastroModelo;
     private javax.swing.JMenuItem jMenuItemCadastroVeiculo;

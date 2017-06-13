@@ -28,7 +28,6 @@ public class TelaCadastroDeMarca extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jTextFieldMarcaDescricao = new javax.swing.JTextField();
         jButtonMarcaLimpar = new javax.swing.JButton();
@@ -40,8 +39,6 @@ public class TelaCadastroDeMarca extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setMinimumSize(new java.awt.Dimension(541, 464));
-
-        jLabel1.setText("CADASTRO DE MARCA");
 
         jLabel2.setText("Descrição:");
 
@@ -62,33 +59,27 @@ public class TelaCadastroDeMarca extends javax.swing.JInternalFrame {
                 .addGap(54, 54, 54)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextFieldMarcaDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(jLabel1)))
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addComponent(jTextFieldMarcaDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(60, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonMarcaLimpar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonMarcaSalvar)
-                .addGap(132, 132, 132))
+                .addGap(125, 125, 125))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(39, 39, 39)
+                .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldMarcaDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(54, 54, 54)
+                .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonMarcaLimpar)
                     .addComponent(jButtonMarcaSalvar))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         pack();
@@ -103,7 +94,6 @@ public class TelaCadastroDeMarca extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButtonMarcaLimpar;
     private javax.swing.JButton jButtonMarcaSalvar;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField jTextFieldMarcaDescricao;
     // End of variables declaration//GEN-END:variables

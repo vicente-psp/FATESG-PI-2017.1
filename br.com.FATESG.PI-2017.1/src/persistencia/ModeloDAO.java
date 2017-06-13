@@ -10,6 +10,7 @@ import classesdedados.Modelo;
 import classesdedados.GerarId;
 import classesdedados.Mensagens;
 import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 

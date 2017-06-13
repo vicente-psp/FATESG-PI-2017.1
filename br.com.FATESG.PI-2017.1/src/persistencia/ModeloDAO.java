@@ -8,6 +8,7 @@ package persistencia;
 import interfacedeclasses.CRUD;
 import classesdedados.Modelo;
 import classesdedados.GerarId;
+import classesdedados.Marca;
 import classesdedados.Mensagens;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -64,14 +65,15 @@ public class ModeloDAO implements CRUD{
             String linhaModelos = brModelos.readLine();
             while (linhaModelos != null && !linhaModelos.equals("")){
                 Modelo modelo = new Modelo();
+                Marca marca = new Marca();
                 
                 String vModelos[] = linhaModelos.split(";");
                 modelo.setIdModelo(Integer.parseInt(vModelos[0]));
                 modelo.setDescricao(vModelos[1]);
-                //modelo.setMarca(vModelos[2]);
-                modelo.setAnoDeFabricacao(Integer.parseInt(vModelos[3]));
-                modelo.setMotor(Float.parseFloat(vModelos[4]));
-                modelo.setValorLocacao(Float.parseFloat(vModelos[5]));
+                modelo.setAnoDeFabricacao(Integer.parseInt(vModelos[2]));
+                modelo.setMotor(Float.parseFloat(vModelos[3]));
+                modelo.setValorLocacao(Float.parseFloat(vModelos[4]));
+                marca.setDescricao(vModelos[5]);
                 
                 modelos.add(modelo);
                 
@@ -87,7 +89,34 @@ public class ModeloDAO implements CRUD{
 
     @Override
     public void excluir(int id) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            Object objModelos = recuperar();
+            ArrayList<Modelo> modelos = (ArrayList<Modelo>) (objModelos);
+            
+            boolean achou = false;
+            String dadosModelo = "";
+            
+            if(modelos.size() >= 0 && modelos != null){
+                for (int i = 0; i < modelos.size(); i++){
+                    if(modelos.get(i).getIdModelo() != id){
+                        
+                        dadosModelo += modelos.get(i).getIdModelo() + ";" + modelos.get(i).getDescricao() + ";" + modelos.get(i).getAnoDeFabricacao() + ";" +
+                                modelos.get(i).getMarca() + ";" + modelos.get(i).getMotor() + ";" + modelos.get(i).getValorLocacao() + "/n";
+                    }
+                }
+            }else{
+                achou = true;
+            }
+            if (achou){
+                fwModelos = new FileWriter(arqModelos);
+                bwModelos = new BufferedWriter(fwModelos);
+                bwModelos.write(dadosModelo);
+                bwModelos.close();
+            }
+            JOptionPane.showMessageDialog(null, new Mensagens().mensagem("MSG04"));
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, new Mensagens().mensagem("MSG17"));
+        }
     }
 
     @Override

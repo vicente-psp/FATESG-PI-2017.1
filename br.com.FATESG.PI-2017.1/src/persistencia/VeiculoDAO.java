@@ -6,6 +6,7 @@
 package persistencia;
 
 import classesdedados.Veiculo;
+import classesdedados.GerarId;
 import classesdedados.Mensagens;
 import classesdedados.Modelo;
 import classesdedados.Marca;
@@ -31,13 +32,23 @@ public class VeiculoDAO implements CRUD{
     
     @Override
     public void incluir(Object objeto) throws Exception {
+        Veiculo veiculo = (Veiculo) objeto;
+         Modelo modelo = (Modelo) objeto;
+         
         try {
-       Veiculo veiculo = (Veiculo) objeto;
-       Modelo modelo = (Modelo) objeto;
+       
+       ArrayList<Veiculo> veiculos = (ArrayList<Veiculo>) recuperar();
+       for(int i = 0; i < veiculos.size(); i++){
+           if(veiculos.get(i).getPlaca().equals(veiculo.getPlaca())){
+               JOptionPane.showMessageDialog(null, new Mensagens().mensagem("MSG02"));
+               return;
+           }
+       }
        
        fwVeiculo = new FileWriter(arqVeiculo, true);
        bwVeiculo = new BufferedWriter(fwVeiculo);
-              
+       
+                
        String dados = veiculo.getPlaca() + ";" + veiculo.getStatus() + ";" + modelo.getDescricao() + ";" + modelo.getAnoDeFabricacao() + ";" +
                modelo.getMarca() + ";" + modelo.getMotor() + ";" + modelo.getValorLocacao() + "/n";
        bwVeiculo.write(dados);
@@ -77,17 +88,36 @@ public class VeiculoDAO implements CRUD{
         } catch (Exception e) {
             
         }
+        return (ArrayList<Object>) (Object) (veiculos);
     }
 
 
     @Override
     public void excluir(int id) throws Exception {
-       throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     @Override
     public void alterar(int id, Object objeto) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            Object objVeiculos = recuperar();
+            ArrayList<Veiculo> veiculos = (ArrayList<Veiculo>) (objVeiculos);
+            Veiculo objVeiculo = (Veiculo) objeto;
+            
+            String dadosVeiculo = "";
+            
+            if(veiculos.size() >= 0 && veiculos != null){
+                for (int i = 0; i < veiculos.size(); i++){
+                    if(veiculos.get(i).get() != id){
+                        
+                        dadosVeiculo += veiculos.get(i).getPlaca() + ";" + veiculos.get(i).getMarca() + ";" + veiculos.get(i).getModelo() + ";" + veiculos.get(i).getStatus() + "/n";
+                    }else{
+                        dadosVeiculo += id
+                    }
+                }
+            }
+        } catch (Exception e) {
+        }
     }
     
 }

@@ -12,6 +12,7 @@ import classesdedados.Marca;
  * @author renatowsilva
  */
 public class Veiculo {
+    private int idVeiculo = 0;
     private String placa = "";
     private EnumVeiculo status = null;
     private Modelo modelo = null;
@@ -21,11 +22,20 @@ public class Veiculo {
     public Veiculo(){
         
     }
-    public Veiculo(String placa, EnumVeiculo status, Modelo modelo, Marca marca){
+    public Veiculo(int idVeiculo, String placa, EnumVeiculo status, Modelo modelo, Marca marca){
+        this.idVeiculo = idVeiculo;
         this.placa = placa;
         this.status = status;
         this.modelo = modelo;
         this.marca = marca;
+    }
+    
+    public int getidVeiculo(){
+        return idVeiculo;
+    }
+    
+    public void setidVeiculo(int idVeiculo) {
+        this.idVeiculo = idVeiculo;
     }
 
     public String getPlaca() {

@@ -793,7 +793,7 @@ public class TelaCadastroDeCliente2 extends javax.swing.JInternalFrame {
         jLabel36.setText("Complemento");
 
         try {
-            jFormattedTextFieldCEP1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+            jFormattedTextFieldCEP1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-###")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -1490,36 +1490,36 @@ public class TelaCadastroDeCliente2 extends javax.swing.JInternalFrame {
         PessoaDAO contatos = new PessoaDAO();
 
         try {
-            pessoaFisica.setNome(jTextFieldNome.getText().toUpperCase());
-            pessoaFisica.setDataDeNasc(Date.valueOf(jFormattedTextFieldClienteDataNascimento.getText()));
+            pessoaFisica.setNome(jTextFieldNome1.getText().toUpperCase());
+            pessoaFisica.setDataDeNasc(Date.valueOf(jFormattedTextFieldClienteDataNascimento1.getText()));
             pessoaFisica.setTipo(Pessoa.EnumPessoa.FISICA);
             pessoaFisica.setTelefone(telefones);
             pessoaFisica.setEmail(emails);
             pessoaFisica.setEndereco(enderecos);
-            pessoaFisica.setCpf(jFormattedTextFieldClienteCPF.getText());
+            pessoaFisica.setCpf(jFormattedTextFieldClienteCPF1.getText());
 
             try {
-                pessoaFisica.setCnh(Integer.parseInt(jTextFieldClienteNumeroCNH.getText()));
+                pessoaFisica.setCnh(Integer.parseInt(jTextFieldClienteNumeroCNH1.getText()));
 
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, new Mensagens().mensagem("MSG14"));
             }
 
-            if (jTextFieldNome.getText().equals("")) {
+            if (jTextFieldNome1.getText().equals("")) {
                 JOptionPane.showMessageDialog(this, new Mensagens().mensagem("MSG02"));
-                jTextFieldNome.requestFocus();
+                jTextFieldNome1.requestFocus();
                 return;
             }
             if (telefones.size() <= 0) {
                 JOptionPane.showMessageDialog(this, new Mensagens().mensagem("MSG02"));
                 jTabbedPane.setSelectedIndex(0);
-                jTextFieldDDI.requestFocus();
+                jTextFieldDDI1.requestFocus();
                 return;
             }
             if(enderecos.size() <= 0){
                 JOptionPane.showMessageDialog(this, new Mensagens().mensagem("MSG02"));
                 jTabbedPane.setSelectedIndex(2);
-                jTextFieldLogradouro.requestFocus();
+                jTextFieldLogradouro1.requestFocus();
                 return;
             }
 
@@ -1688,16 +1688,16 @@ public class TelaCadastroDeCliente2 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTableEmail1MouseClicked
 
     private void jButtonIncluirEmail1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIncluirEmail1ActionPerformed
-        DefaultTableModel dtm = (DefaultTableModel) jTableEmail.getModel();
+        DefaultTableModel dtm = (DefaultTableModel) jTableEmail1.getModel();
         Email email = new Email();
-        String campoEmail = jTextFieldEmail.getText();
+        String campoEmail = jTextFieldEmail1.getText();
 
         try {
             if (dtm.getRowCount() > 0) {
                 for (int i = 0; i < dtm.getRowCount(); i++) {
                     if (String.valueOf(dtm.getValueAt(i, 0)).equals(campoEmail)) {
                         JOptionPane.showMessageDialog(this, "Email já informado para este contato");
-                        jTextFieldEmail.requestFocus();
+                        jTextFieldEmail1.requestFocus();
                         return;
                     }
                 }
@@ -1709,11 +1709,11 @@ public class TelaCadastroDeCliente2 extends javax.swing.JInternalFrame {
                 Object[] dados = {campoEmail};
                 dtm.addRow(dados);
 
-                jTextFieldEmail.setText("");
-                jTextFieldEmail.requestFocus(); //coloca o cursor na caixa de texto
+                jTextFieldEmail1.setText("");
+                jTextFieldEmail1.requestFocus(); //coloca o cursor na caixa de texto
             } else {
                 JOptionPane.showMessageDialog(null, "Informe o e-mail.");
-                jTextFieldEmail.requestFocus(); //coloca o cursor na caixa de texto
+                jTextFieldEmail1.requestFocus(); //coloca o cursor na caixa de texto
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -1721,11 +1721,11 @@ public class TelaCadastroDeCliente2 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButtonIncluirEmail1ActionPerformed
 
     private void jButtonExcluirEmail1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirEmail1ActionPerformed
-        DefaultTableModel dtm = (DefaultTableModel) jTableEmail.getModel();
+        DefaultTableModel dtm = (DefaultTableModel) jTableEmail1.getModel();
 
         try {
-            int idx[] = jTableEmail.getSelectedRows();
-            if (jTableEmail.getSelectedRow() >= 0) {
+            int idx[] = jTableEmail1.getSelectedRows();
+            if (jTableEmail1.getSelectedRow() >= 0) {
                 dtm.removeRow(idx[0]);
                 for (int j = 1; j < idx.length; j++) {
                     dtm.removeRow(idx[j] - j);
@@ -1748,28 +1748,28 @@ public class TelaCadastroDeCliente2 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTextFieldLogradouro1ActionPerformed
 
     private void jButtonIncluirEndereco1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIncluirEndereco1ActionPerformed
-        DefaultTableModel dtm = (DefaultTableModel) jTableEndereco.getModel();
+        DefaultTableModel dtm = (DefaultTableModel) jTableEndereco1.getModel();
         Endereco endereco = new Endereco();
         int numeroEndereco = 0;
         int cep = 0;
 
         try {
-            String logradouro = jTextFieldLogradouro.getText();
-            String bairro = jTextFieldBairro.getText();
-            String cidade = jTextFieldCidade.getText();
-            String estado = jTextFieldEstado.getText();
-            String pais = jTextFieldPais.getText();
+            String logradouro = jTextFieldLogradouro1.getText();
+            String bairro = jTextFieldBairro1.getText();
+            String cidade = jTextFieldCidade1.getText();
+            String estado = jTextFieldEstado1.getText();
+            String pais = jTextFieldPais1.getText();
             String complemento = jTextFieldComplento.getText();
 
-            if (!logradouro.equals("") && !jTextFieldNumeroEndereco.getText().equals("") && !bairro.equals("")
+            if (!logradouro.equals("") && !jTextFieldNumeroEndereco1.getText().equals("") && !bairro.equals("")
                 && !cidade.equals("") && !estado.equals("") && !pais.equals("")) {
                 try {
-                    numeroEndereco = Integer.parseInt(jTextFieldNumeroEndereco.getText());
-                    cep = Integer.parseInt(jFormattedTextFieldCEP.getText());
+                    numeroEndereco = Integer.parseInt(jTextFieldNumeroEndereco1.getText());
+                    cep = Integer.parseInt(jFormattedTextFieldCEP1.getText().replaceAll("-", ""));
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, "Erro de conversão de dados.");
-                    jTextFieldNumeroEndereco.setText("");
-                    jTextFieldNumeroEndereco.requestFocus();
+                    jTextFieldNumeroEndereco1.setText("");
+                    jTextFieldNumeroEndereco1.requestFocus();
                     return;
                 }
 
@@ -1790,16 +1790,16 @@ public class TelaCadastroDeCliente2 extends javax.swing.JInternalFrame {
                 Object[] dados = {logradouro, String.valueOf(numeroEndereco), bairro, cidade, estado, pais, cep, complemento};
                 dtm.addRow(dados);
 
-                jTextFieldLogradouro.setText("");
-                jTextFieldNumeroEndereco.setText("");
-                jTextFieldBairro.setText("");
-                jTextFieldCidade.setText("");
-                jTextFieldEstado.setText("");
-                jTextFieldPais.setText("");
-                jFormattedTextFieldCEP.setText("");
+                jTextFieldLogradouro1.setText("");
+                jTextFieldNumeroEndereco1.setText("");
+                jTextFieldBairro1.setText("");
+                jTextFieldCidade1.setText("");
+                jTextFieldEstado1.setText("");
+                jTextFieldPais1.setText("");
+                jFormattedTextFieldCEP1.setText("");
                 jTextAreaComplementoEndereco.setText("");
 
-                jTextFieldNumeroEndereco.requestFocus();
+                jTextFieldNumeroEndereco1.requestFocus();
 
             } else {
                 JOptionPane.showMessageDialog(null, "Existem campos obrigórios que não foram preenchidos.");
@@ -1810,11 +1810,11 @@ public class TelaCadastroDeCliente2 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButtonIncluirEndereco1ActionPerformed
 
     private void jButtonExcluirEndereco1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirEndereco1ActionPerformed
-        DefaultTableModel dtm = (DefaultTableModel) jTableEndereco.getModel();
+        DefaultTableModel dtm = (DefaultTableModel) jTableEndereco1.getModel();
 
         try {
-            int idx[] = jTableEndereco.getSelectedRows();
-            if (jTableEndereco.getSelectedRow() >= 0) {
+            int idx[] = jTableEndereco1.getSelectedRows();
+            if (jTableEndereco1.getSelectedRow() >= 0) {
                 dtm.removeRow(idx[0]);
                 for (int j = 1; j < idx.length; j++) {
                     dtm.removeRow(idx[j] - j);
@@ -1833,26 +1833,26 @@ public class TelaCadastroDeCliente2 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTextFieldNumeroEndereco1ActionPerformed
 
     private void jTableEndereco1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableEndereco1MouseClicked
-        DefaultTableModel dtm = (DefaultTableModel) jTableEndereco.getModel();
+        DefaultTableModel dtm = (DefaultTableModel) jTableEndereco1.getModel();
         int qtdClicks = evt.getClickCount();
 
         try {
-            int idx = jTableEndereco.getSelectedRow();
+            int idx = jTableEndereco1.getSelectedRow();
             if (qtdClicks == 2) {
-                if (jTableEndereco.getSelectedRow() >= 0) {
-                    jTextFieldLogradouro.setText(String.valueOf(dtm.getValueAt(idx, 0)));
-                    jTextFieldNumeroEndereco.setText(String.valueOf(dtm.getValueAt(idx, 1)));
-                    jTextFieldBairro.setText(String.valueOf(dtm.getValueAt(idx, 2)));
-                    jTextFieldCidade.setText(String.valueOf(dtm.getValueAt(idx, 3)));
-                    jTextFieldPais.setText(String.valueOf(dtm.getValueAt(idx, 4)));
-                    jTextFieldEstado.setText(String.valueOf(dtm.getValueAt(idx, 5)));
-                    jFormattedTextFieldCEP.setText(String.valueOf(dtm.getValueAt(idx, 6)));
+                if (jTableEndereco1.getSelectedRow() >= 0) {
+                    jTextFieldLogradouro1.setText(String.valueOf(dtm.getValueAt(idx, 0)));
+                    jTextFieldNumeroEndereco1.setText(String.valueOf(dtm.getValueAt(idx, 1)));
+                    jTextFieldBairro1.setText(String.valueOf(dtm.getValueAt(idx, 2)));
+                    jTextFieldCidade1.setText(String.valueOf(dtm.getValueAt(idx, 3)));
+                    jTextFieldPais1.setText(String.valueOf(dtm.getValueAt(idx, 4)));
+                    jTextFieldEstado1.setText(String.valueOf(dtm.getValueAt(idx, 5)));
+                    jFormattedTextFieldCEP1.setText(String.valueOf(dtm.getValueAt(idx, 6)));
                     jTextAreaComplementoEndereco.setText(String.valueOf(dtm.getValueAt(idx, 7)));
 
                     dtm.removeRow(idx);
                     enderecos.remove(idx);
 
-                    jTextFieldLogradouro.requestFocus();
+                    jTextFieldLogradouro1.requestFocus();
                 } else {
                     JOptionPane.showMessageDialog(null, "Favor selecionar a linha que deseja excluir.");
                 }

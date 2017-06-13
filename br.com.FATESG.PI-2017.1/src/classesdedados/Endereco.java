@@ -84,7 +84,7 @@ public class Endereco {
 
     public void setCep(int cep) throws Exception {
         String validaCep = String.valueOf(cep);
-        if (validaCep.length() == 8) {
+        if (validaCep.length() != 8) {
             throw new Exception(new Mensagens().mensagem("MSG14"));
         }
         this.cep = cep;

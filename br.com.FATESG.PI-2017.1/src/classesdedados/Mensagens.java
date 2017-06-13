@@ -55,6 +55,8 @@ public class Mensagens {
                 return "Informe somente números.";
             case "MSG21":
                 return "Quantidade máxima de caracteres excedida.";
+            case "MSG22":
+                return "Email inválido!";
                 
             default:
                 return "Mensagem não cadastrada.";

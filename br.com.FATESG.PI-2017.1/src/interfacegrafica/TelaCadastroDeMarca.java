@@ -5,6 +5,11 @@
  */
 package interfacegrafica;
 
+import classesdedados.Marca;
+import classesdedados.Mensagens;
+import javax.swing.JOptionPane;
+import persistencia.MarcaDAO;
+
 /**
  *
  * @author renatowsilva
@@ -42,6 +47,12 @@ public class TelaCadastroDeMarca extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Descrição:");
 
+        jTextFieldMarcaDescricao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldMarcaDescricaoActionPerformed(evt);
+            }
+        });
+
         jButtonMarcaLimpar.setText("Limpar");
         jButtonMarcaLimpar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -50,6 +61,11 @@ public class TelaCadastroDeMarca extends javax.swing.JInternalFrame {
         });
 
         jButtonMarcaSalvar.setText("Salvar");
+        jButtonMarcaSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonMarcaSalvarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -60,7 +76,7 @@ public class TelaCadastroDeMarca extends javax.swing.JInternalFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextFieldMarcaDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addContainerGap(62, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonMarcaLimpar)
@@ -88,6 +104,25 @@ public class TelaCadastroDeMarca extends javax.swing.JInternalFrame {
     private void jButtonMarcaLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMarcaLimparActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonMarcaLimparActionPerformed
+
+    private void jTextFieldMarcaDescricaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldMarcaDescricaoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldMarcaDescricaoActionPerformed
+
+    private void jButtonMarcaSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMarcaSalvarActionPerformed
+        Marca cadastromarca = new Marca();
+        MarcaDAO cadmarca = new MarcaDAO();
+        
+        try {
+            
+            cadastromarca.setDescricao(jTextFieldMarcaDescricao.getText().toUpperCase());
+            cadmarca.incluir(cadastromarca);
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, new Mensagens().mensagem("MSG14"));
+        }
+        
+    }//GEN-LAST:event_jButtonMarcaSalvarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

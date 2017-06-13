@@ -54,8 +54,8 @@ public class MarcaDAO implements CRUD{
         ArrayList<Marca> marcas = new ArrayList<>();
         
         try {
-            File fileMArcas = new File(arqMArcas);
-            FileReader frMarcas = new FileReader(fileMArcas);
+            File fileMarcas = new File(arqMArcas);
+            FileReader frMarcas = new FileReader(fileMarcas);
             BufferedReader brMarcas = new BufferedReader(frMarcas);
             String linhaMarcas = brMarcas.readLine();
             while (linhaMarcas != null && !linhaMarcas.equals("")){

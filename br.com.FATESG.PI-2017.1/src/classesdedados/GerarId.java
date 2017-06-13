@@ -24,6 +24,7 @@ public class GerarId {
     private int idModelo = 0;
     private int idMarca = 0;
     private int idLocacao = 0;
+    private int idVeiculo = 0;
     
     String arquivoID = diretorio + "GeradorDeID.csv";
 
@@ -36,7 +37,7 @@ public class GerarId {
                 FileWriter fw = new FileWriter(arquivoID, false);
                 BufferedWriter bw = new BufferedWriter(fw);
 
-                String saida = 0 + ";" + 0 + ";" + 0 + ";" + 0;
+                String saida = 0 + ";" + 0 + ";" + 0 + ";" + 0 + ";" +0;
                 bw.write(saida);
 
                 bw.close();
@@ -51,6 +52,7 @@ public class GerarId {
                     idModelo = Integer.parseInt(vetorString[1]);
                     idMarca = Integer.parseInt(vetorString[2]);
                     idLocacao = Integer.parseInt(vetorString[3]);
+                    idVeiculo = Integer.parseInt(vetorString[4]);
             }
             br.close();
             
@@ -69,11 +71,15 @@ public class GerarId {
     }
     
     public int getIdMarca() {
-        return idMarca;
+        return ++idMarca;
     }
 
     public int getIdLocacao() {
-        return idLocacao;
+        return ++idLocacao;
+    }
+    
+    public int getIdVeiculo(){
+        return ++idVeiculo;
     }
     
     
@@ -84,7 +90,7 @@ public class GerarId {
             FileWriter fw = new FileWriter(arquivoID, false);
             BufferedWriter bw = new BufferedWriter(fw);
 
-            String saida = this.idPessoa + ";" + this.idModelo + ";" + this.idMarca + ";" + this.idLocacao;
+            String saida = this.idPessoa + ";" + this.idModelo + ";" + this.idMarca + ";" + this.idLocacao + ";" + this.idVeiculo;
             bw.write(saida);
 
             bw.close();

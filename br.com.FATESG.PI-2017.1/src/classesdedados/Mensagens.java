@@ -47,6 +47,14 @@ public class Mensagens {
                 return "Nenhum registro foi excluído.";
             case "MSG17":
                 return "Erro ao tentar excluir registro.";
+            case "MSG18":
+                return "Selecione a linha que deseja excluir.";
+            case "MSG19":
+                return "Registro não inserido, verificar os registros informados.";
+            case "MSG20":
+                return "Informe somente números.";
+            case "MSG21":
+                return "Quantidade máxima de caracteres excedida.";
                 
             default:
                 return "Mensagem não cadastrada.";

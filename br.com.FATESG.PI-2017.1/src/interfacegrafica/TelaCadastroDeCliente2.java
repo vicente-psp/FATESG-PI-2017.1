@@ -34,8 +34,8 @@ public class TelaCadastroDeCliente2 extends javax.swing.JInternalFrame {
      */
     public TelaCadastroDeCliente2() {
         initComponents();
-        jComboBoxTiposDeTelefones.setModel(new DefaultComboBoxModel(Telefone.EnumTelefone.values()));
-        jComboBoxTipoCNH.setModel(new DefaultComboBoxModel(PessoaFisica.EnumCnh.values()));
+        jComboBoxTiposDeTelefones1.setModel(new DefaultComboBoxModel(Telefone.EnumTelefone.values()));
+        jComboBoxTipoCNH1.setModel(new DefaultComboBoxModel(PessoaFisica.EnumCnh.values()));
 
     }
 
@@ -111,21 +111,7 @@ public class TelaCadastroDeCliente2 extends javax.swing.JInternalFrame {
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         jFormattedTextFieldClienteCPF1 = new javax.swing.JFormattedTextField();
-        jLabel24 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel5 = new javax.swing.JPanel();
-        jTextFieldDDI1 = new javax.swing.JTextField();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTableTelefone1 = new javax.swing.JTable();
-        jTextFieldNumeroTelefone1 = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel25 = new javax.swing.JLabel();
-        jLabel26 = new javax.swing.JLabel();
-        jLabel27 = new javax.swing.JLabel();
-        jTextFieldDDD1 = new javax.swing.JTextField();
-        jButtonIncluirTelefone1 = new javax.swing.JButton();
-        jButtonExcluirTelefone1 = new javax.swing.JButton();
-        jComboBoxTiposDeTelefones1 = new javax.swing.JComboBox<>();
         jPanel2Email1 = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
         jTableEmail1 = new javax.swing.JTable();
@@ -154,6 +140,20 @@ public class TelaCadastroDeCliente2 extends javax.swing.JInternalFrame {
         jLabel36 = new javax.swing.JLabel();
         jFormattedTextFieldCEP1 = new javax.swing.JFormattedTextField();
         jTextFieldComplento = new javax.swing.JTextField();
+        jPanel5 = new javax.swing.JPanel();
+        jTextFieldDDI1 = new javax.swing.JTextField();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTableTelefone1 = new javax.swing.JTable();
+        jTextFieldNumeroTelefone1 = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        jTextFieldDDD1 = new javax.swing.JTextField();
+        jButtonIncluirTelefone1 = new javax.swing.JButton();
+        jButtonExcluirTelefone1 = new javax.swing.JButton();
+        jComboBoxTiposDeTelefones1 = new javax.swing.JComboBox<>();
+        jLabel24 = new javax.swing.JLabel();
         jFormattedTextFieldClienteDataNascimento1 = new javax.swing.JFormattedTextField();
 
         jTextFieldNome.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -627,132 +627,7 @@ public class TelaCadastroDeCliente2 extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel24.setText("Data de Nascimento: ");
-
         jTabbedPane1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        jTextFieldDDI1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-
-        jTableTelefone1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "DDI", "DDD", "Número", "Tipo"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jTableTelefone1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTableTelefone1MouseClicked(evt);
-            }
-        });
-        jScrollPane3.setViewportView(jTableTelefone1);
-
-        jTextFieldNumeroTelefone1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-
-        jLabel10.setText("DDI");
-
-        jLabel25.setText("NÚMERO");
-
-        jLabel26.setText("DDD");
-
-        jLabel27.setText("TIPO");
-
-        jTextFieldDDD1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-
-        jButtonIncluirTelefone1.setText("INCLUIR");
-        jButtonIncluirTelefone1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonIncluirTelefone1ActionPerformed(evt);
-            }
-        });
-
-        jButtonExcluirTelefone1.setText("EXCLUIR");
-        jButtonExcluirTelefone1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonExcluirTelefone1ActionPerformed(evt);
-            }
-        });
-
-        jComboBoxTiposDeTelefones1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxTiposDeTelefones1ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel10)
-                            .addComponent(jTextFieldDDI1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel26)
-                            .addComponent(jTextFieldDDD1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel25)
-                            .addComponent(jTextFieldNumeroTelefone1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(103, 103, 103)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBoxTiposDeTelefones1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addComponent(jLabel27)
-                                .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButtonIncluirTelefone1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonExcluirTelefone1)))
-                .addContainerGap())
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel26))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextFieldDDI1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldDDD1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(jComboBoxTiposDeTelefones1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel25)
-                            .addComponent(jLabel27))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldNumeroTelefone1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonIncluirTelefone1)
-                    .addComponent(jButtonExcluirTelefone1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        jTabbedPane1.addTab("Telefone", jPanel5);
 
         jTableEmail1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -808,7 +683,7 @@ public class TelaCadastroDeCliente2 extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Email1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Email1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE))
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Email1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel2Email1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -985,7 +860,6 @@ public class TelaCadastroDeCliente2 extends javax.swing.JInternalFrame {
                     .addComponent(jLabel29)
                     .addComponent(jTextFieldNumeroEndereco1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel30))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel36)
@@ -1012,11 +886,138 @@ public class TelaCadastroDeCliente2 extends javax.swing.JInternalFrame {
                     .addComponent(jButtonExcluirEndereco1)
                     .addComponent(jButtonIncluirEndereco1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
+                .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         jTabbedPane1.addTab("Endereço", jPanel6);
+
+        jTextFieldDDI1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+
+        jTableTelefone1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "DDI", "DDD", "Número", "Tipo"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTableTelefone1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableTelefone1MouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(jTableTelefone1);
+
+        jTextFieldNumeroTelefone1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+
+        jLabel10.setText("DDI");
+
+        jLabel25.setText("NÚMERO");
+
+        jLabel26.setText("DDD");
+
+        jLabel27.setText("TIPO");
+
+        jTextFieldDDD1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+
+        jButtonIncluirTelefone1.setText("INCLUIR");
+        jButtonIncluirTelefone1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonIncluirTelefone1ActionPerformed(evt);
+            }
+        });
+
+        jButtonExcluirTelefone1.setText("EXCLUIR");
+        jButtonExcluirTelefone1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonExcluirTelefone1ActionPerformed(evt);
+            }
+        });
+
+        jComboBoxTiposDeTelefones1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxTiposDeTelefones1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel10)
+                            .addComponent(jTextFieldDDI1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel26)
+                            .addComponent(jTextFieldDDD1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel25)
+                            .addComponent(jTextFieldNumeroTelefone1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(151, 151, 151)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jComboBoxTiposDeTelefones1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addComponent(jLabel27)
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButtonIncluirTelefone1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonExcluirTelefone1)))
+                .addContainerGap())
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel26))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextFieldDDI1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldDDD1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel25)
+                            .addComponent(jLabel27))
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextFieldNumeroTelefone1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(jComboBoxTiposDeTelefones1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonIncluirTelefone1)
+                    .addComponent(jButtonExcluirTelefone1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jTabbedPane1.addTab("Telefone", jPanel5);
+
+        jLabel24.setText("Data de Nascimento: ");
 
         try {
             jFormattedTextFieldClienteDataNascimento1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
@@ -1030,20 +1031,16 @@ public class TelaCadastroDeCliente2 extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(76, 76, 76)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButtonClienteSalvar1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel23)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jFormattedTextFieldClienteCPF1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel24)
-                                .addGap(10, 10, 10)
-                                .addComponent(jFormattedTextFieldClienteDataNascimento1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 38, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel23)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jFormattedTextFieldClienteCPF1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel24)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jFormattedTextFieldClienteDataNascimento1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(67, 67, 67)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel21)
@@ -1056,11 +1053,14 @@ public class TelaCadastroDeCliente2 extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel22)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBoxTipoCNH1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                .addComponent(jComboBoxTipoCNH1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jTabbedPane1)))
                 .addGap(16, 16, 16))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 505, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonClienteSalvar1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -1082,11 +1082,11 @@ public class TelaCadastroDeCliente2 extends javax.swing.JInternalFrame {
                     .addComponent(jFormattedTextFieldClienteDataNascimento1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel23)
                     .addComponent(jFormattedTextFieldClienteCPF1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(23, 23, 23)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonClienteSalvar1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         pack();
@@ -1161,7 +1161,7 @@ public class TelaCadastroDeCliente2 extends javax.swing.JInternalFrame {
 
                     jTextFieldDDI.requestFocus();
                 } else {
-                    JOptionPane.showMessageDialog(null, "Favor selecionar a linha que deseja excluir.");
+                    JOptionPane.showMessageDialog(null, new Mensagens().mensagem("MSG18"));
                 }
             }
         } catch (Exception e) {
@@ -1182,7 +1182,7 @@ public class TelaCadastroDeCliente2 extends javax.swing.JInternalFrame {
                     if (String.valueOf(dtm.getValueAt(i, 0)).equals(strDDI)
                         && String.valueOf(dtm.getValueAt(i, 1)).equals(strDDD)
                         && String.valueOf(dtm.getValueAt(i, 2)).equals(strNum)) {
-                        JOptionPane.showMessageDialog(this, "Telefone já informado para este contato");
+                        JOptionPane.showMessageDialog(this, new Mensagens().mensagem("MSG19"));
                         jTextFieldDDI.requestFocus();
                         return;
                     }
@@ -1193,13 +1193,13 @@ public class TelaCadastroDeCliente2 extends javax.swing.JInternalFrame {
                     try {
                         telefone.setDdi(Integer.parseInt(jTextFieldDDI.getText()));
                     } catch (Exception e) {
-                        JOptionPane.showMessageDialog(null, "Informe apenas números para o DDI.");
+                        JOptionPane.showMessageDialog(null, new Mensagens().mensagem("MSG20"));
                         jTextFieldDDI.setText("");
                         jTextFieldDDI.requestFocus();
                         return;
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "Informe no máximo 3 dígitos para o DDI.");
+                    JOptionPane.showMessageDialog(null, new Mensagens().mensagem("MSG21"));
                     jTextFieldDDI.requestFocus();
                     return;
                 }
@@ -1208,13 +1208,13 @@ public class TelaCadastroDeCliente2 extends javax.swing.JInternalFrame {
                     try {
                         telefone.setDdd(Integer.parseInt(jTextFieldDDD.getText()));
                     } catch (Exception e) {
-                        JOptionPane.showMessageDialog(null, "Informe apenas números para o DDD.");
+                        JOptionPane.showMessageDialog(null, new Mensagens().mensagem("MSG20"));
                         jTextFieldDDD.setText("");
                         jTextFieldDDD.requestFocus();
                         return;
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "Informe no máximo 3 dígitos para o DDD.");
+                    JOptionPane.showMessageDialog(null, new Mensagens().mensagem("MSG21"));
                     jTextFieldDDD.requestFocus();
                     return;
                 }
@@ -1223,13 +1223,13 @@ public class TelaCadastroDeCliente2 extends javax.swing.JInternalFrame {
                     try {
                         telefone.setNumero(Integer.parseInt(jTextFieldNumeroTelefone.getText()));
                     } catch (Exception e) {
-                        JOptionPane.showMessageDialog(null, "Informe apenas números para o telefone.");
+                        JOptionPane.showMessageDialog(null, new Mensagens().mensagem("MSG20"));
                         jTextFieldNumeroTelefone.setText("");
                         jTextFieldNumeroTelefone.requestFocus();
                         return;
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "Informe no máximo 10 dígitos para o telefone.");
+                    JOptionPane.showMessageDialog(null, new Mensagens().mensagem("MSG21"));
                     jTextFieldNumeroTelefone.requestFocus();
                     return;
                 }
@@ -1248,7 +1248,7 @@ public class TelaCadastroDeCliente2 extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, e.getMessage());
             }
         } else {
-            JOptionPane.showMessageDialog(this, "Preencha todos os campos!");
+            JOptionPane.showMessageDialog(this, new Mensagens().mensagem("MSG14"));
         }
     }//GEN-LAST:event_jButtonIncluirTelefoneActionPerformed
 
@@ -1264,7 +1264,7 @@ public class TelaCadastroDeCliente2 extends javax.swing.JInternalFrame {
                     telefones.remove(idx[j] - j);
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "Favor selecionar a linha que deseja excluir.");
+                JOptionPane.showMessageDialog(null, new Mensagens().mensagem("MSG18"));
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
@@ -1290,7 +1290,7 @@ public class TelaCadastroDeCliente2 extends javax.swing.JInternalFrame {
 
                     jTextFieldEmail.requestFocus();
                 } else {
-                    JOptionPane.showMessageDialog(null, "Favor selecionar a linha que deseja excluir.");
+                    JOptionPane.showMessageDialog(null, new Mensagens().mensagem("MSG18"));
                 }
             }
         } catch (Exception e) {
@@ -1307,7 +1307,7 @@ public class TelaCadastroDeCliente2 extends javax.swing.JInternalFrame {
             if (dtm.getRowCount() > 0) {
                 for (int i = 0; i < dtm.getRowCount(); i++) {
                     if (String.valueOf(dtm.getValueAt(i, 0)).equals(campoEmail)) {
-                        JOptionPane.showMessageDialog(this, "Email já informado para este contato");
+                        JOptionPane.showMessageDialog(this, new Mensagens().mensagem("MSG19"));
                         jTextFieldEmail.requestFocus();
                         return;
                     }
@@ -1343,7 +1343,7 @@ public class TelaCadastroDeCliente2 extends javax.swing.JInternalFrame {
                     emails.remove(idx[j] - j);
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "Favor selecionar a linha que deseja excluir.");
+                JOptionPane.showMessageDialog(null, new Mensagens().mensagem("MSG18"));
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
@@ -1378,7 +1378,7 @@ public class TelaCadastroDeCliente2 extends javax.swing.JInternalFrame {
                     numeroEndereco = Integer.parseInt(jTextFieldNumeroEndereco.getText());
                     cep = Integer.parseInt(jFormattedTextFieldCEP.getText());
                 } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, "Erro de conversão de dados.");
+                    JOptionPane.showMessageDialog(null, new Mensagens().mensagem("MSG14"));
                     jTextFieldNumeroEndereco.setText("");
                     jTextFieldNumeroEndereco.requestFocus();
                     return;
@@ -1413,7 +1413,7 @@ public class TelaCadastroDeCliente2 extends javax.swing.JInternalFrame {
                 jTextFieldNumeroEndereco.requestFocus();
 
             } else {
-                JOptionPane.showMessageDialog(null, "Existem campos obrigórios que não foram preenchidos.");
+                JOptionPane.showMessageDialog(null, new Mensagens().mensagem("MSG14"));
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -1432,7 +1432,7 @@ public class TelaCadastroDeCliente2 extends javax.swing.JInternalFrame {
                     enderecos.remove(idx[j] - j);
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "Favor selecionar a linha que deseja excluir.");
+                JOptionPane.showMessageDialog(null, new Mensagens().mensagem("MSG18"));
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
@@ -1465,7 +1465,7 @@ public class TelaCadastroDeCliente2 extends javax.swing.JInternalFrame {
 
                     jTextFieldLogradouro.requestFocus();
                 } else {
-                    JOptionPane.showMessageDialog(null, "Favor selecionar a linha que deseja excluir.");
+                    JOptionPane.showMessageDialog(null, new Mensagens().mensagem("MSG18"));
                 }
             }
         } catch (Exception e) {
@@ -1550,7 +1550,7 @@ public class TelaCadastroDeCliente2 extends javax.swing.JInternalFrame {
 
                     jTextFieldDDI.requestFocus();
                 } else {
-                    JOptionPane.showMessageDialog(null, "Favor selecionar a linha que deseja excluir.");
+                    JOptionPane.showMessageDialog(null, new Mensagens().mensagem("MSG18"));
                 }
             }
         } catch (Exception e) {
@@ -1571,7 +1571,7 @@ public class TelaCadastroDeCliente2 extends javax.swing.JInternalFrame {
                     if (String.valueOf(dtm.getValueAt(i, 0)).equals(strDDI)
                         && String.valueOf(dtm.getValueAt(i, 1)).equals(strDDD)
                         && String.valueOf(dtm.getValueAt(i, 2)).equals(strNum)) {
-                        JOptionPane.showMessageDialog(this, "Telefone já informado para este contato");
+                        JOptionPane.showMessageDialog(this, new Mensagens().mensagem("MSG19"));
                         jTextFieldDDI.requestFocus();
                         return;
                     }
@@ -1582,13 +1582,13 @@ public class TelaCadastroDeCliente2 extends javax.swing.JInternalFrame {
                     try {
                         telefone.setDdi(Integer.parseInt(jTextFieldDDI.getText()));
                     } catch (Exception e) {
-                        JOptionPane.showMessageDialog(null, "Informe apenas números para o DDI.");
+                        JOptionPane.showMessageDialog(null, new Mensagens().mensagem("MSG20"));
                         jTextFieldDDI.setText("");
                         jTextFieldDDI.requestFocus();
                         return;
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "Informe no máximo 3 dígitos para o DDI.");
+                    JOptionPane.showMessageDialog(null, new Mensagens().mensagem("MSG21"));
                     jTextFieldDDI.requestFocus();
                     return;
                 }
@@ -1597,13 +1597,13 @@ public class TelaCadastroDeCliente2 extends javax.swing.JInternalFrame {
                     try {
                         telefone.setDdd(Integer.parseInt(jTextFieldDDD.getText()));
                     } catch (Exception e) {
-                        JOptionPane.showMessageDialog(null, "Informe apenas números para o DDD.");
+                        JOptionPane.showMessageDialog(null, new Mensagens().mensagem("MSG20"));
                         jTextFieldDDD.setText("");
                         jTextFieldDDD.requestFocus();
                         return;
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "Informe no máximo 3 dígitos para o DDD.");
+                    JOptionPane.showMessageDialog(null, new Mensagens().mensagem("MSG21"));
                     jTextFieldDDD.requestFocus();
                     return;
                 }
@@ -1612,13 +1612,13 @@ public class TelaCadastroDeCliente2 extends javax.swing.JInternalFrame {
                     try {
                         telefone.setNumero(Integer.parseInt(jTextFieldNumeroTelefone.getText()));
                     } catch (Exception e) {
-                        JOptionPane.showMessageDialog(null, "Informe apenas números para o telefone.");
+                        JOptionPane.showMessageDialog(null, new Mensagens().mensagem("MSG20"));
                         jTextFieldNumeroTelefone.setText("");
                         jTextFieldNumeroTelefone.requestFocus();
                         return;
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "Informe no máximo 10 dígitos para o telefone.");
+                    JOptionPane.showMessageDialog(null, new Mensagens().mensagem("MSG21"));
                     jTextFieldNumeroTelefone.requestFocus();
                     return;
                 }
@@ -1637,7 +1637,7 @@ public class TelaCadastroDeCliente2 extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, e.getMessage());
             }
         } else {
-            JOptionPane.showMessageDialog(this, "Preencha todos os campos!");
+            JOptionPane.showMessageDialog(this, new Mensagens().mensagem("MSG14"));
         }
     }//GEN-LAST:event_jButtonIncluirTelefone1ActionPerformed
 
@@ -1653,7 +1653,7 @@ public class TelaCadastroDeCliente2 extends javax.swing.JInternalFrame {
                     telefones.remove(idx[j] - j);
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "Favor selecionar a linha que deseja excluir.");
+                JOptionPane.showMessageDialog(null, new Mensagens().mensagem("MSG18"));
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage());

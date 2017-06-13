@@ -6,11 +6,17 @@
 package persistencia;
 
 import classesdedados.Veiculo;
+import classesdedados.Mensagens;
+import classesdedados.Modelo;
+import classesdedados.Marca;
 import interfacedeclasses.CRUD;
 import java.io.BufferedWriter;
+import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import java.io.File;
+import java.io.FileReader;
 
 /**
  *
@@ -25,22 +31,52 @@ public class VeiculoDAO implements CRUD{
     
     @Override
     public void incluir(Object objeto) throws Exception {
+        try {
        Veiculo veiculo = (Veiculo) objeto;
+       Modelo modelo = (Modelo) objeto;
+       
        fwVeiculo = new FileWriter(arqVeiculo, true);
        bwVeiculo = new BufferedWriter(fwVeiculo);
               
-       String dados = veiculo.getPlaca() + ";" + veiculo.getStatus() + "/n";
+       String dados = veiculo.getPlaca() + ";" + veiculo.getStatus() + ";" + modelo.getDescricao() + ";" + modelo.getAnoDeFabricacao() + ";" +
+               modelo.getMarca() + ";" + modelo.getMotor() + ";" + modelo.getValorLocacao() + "/n";
        bwVeiculo.write(dados);
-       
-       JOptionPane.showMessageDialog(null, "Cadastro salvo com sucesso.");
-       
        bwVeiculo.close();
        
+       JOptionPane.showMessageDialog(null, new Mensagens().mensagem("MSG01"));
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, new Mensagens().mensagem("MSG02"));
+        }
     }
 
     @Override
     public ArrayList<Object> recuperar() throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<Veiculo> veiculos = new ArrayList<>();
+        
+        try {
+            File fileVeiculos = new File(arqVeiculo);
+            FileReader frVeiculos = new FileReader(fileVeiculos);
+            BufferedReader brVeiculos = new BufferedReader(frVeiculos);
+            String linhaVeiculos = brVeiculos.readLine();
+            
+            while(linhaVeiculos != null && !linhaVeiculos.equals("")){
+                Veiculo veiculo = new Veiculo();
+                Marca marca = new Marca();
+                Modelo modelo = new Modelo();
+                
+                String vVeiculos[] = linhaVeiculos.split(";");
+                veiculo.setPlaca(vVeiculos[0]);
+                modelo.setDescricao(vVeiculos[1]);
+                marca.setDescricao(vVeiculos[2]);
+                veiculo.setStatus(Enum.valueOf(Veiculo.EnumVeiculo.class, vVeiculos[3]));
+
+            veiculos.add(veiculo);
+            linhaVeiculos = brVeiculos.readLine();
+            }
+            
+        } catch (Exception e) {
+            
+        }
     }
 
 

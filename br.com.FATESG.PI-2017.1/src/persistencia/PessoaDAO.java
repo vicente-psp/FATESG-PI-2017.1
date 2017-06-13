@@ -26,7 +26,7 @@ import javax.swing.JOptionPane;
  */
 public class PessoaDAO implements CRUD {
 
-    String diretorio = "C:\\Users\\Vicente\\Google Drive\\ADS\\01 - FATESG\\2017.1\\Projetos Equipe ADS\\Projeto Integrador\\br.com.FATESG.PI-2017.1\\br.com.FATESG.PI-2017.1\\FATESG-PI-2017.1\\br.com.FATESG.PI-2017.1\\src\\arquivos\\";
+    String diretorio = "Y:\\CTC1\\Projetos em Java\\FATESG-PI-2017.1\\br.com.FATESG.PI-2017.1\\src\\arquivos\\";
     String arqClientes = diretorio + "Clientes.csv";
     String arqTelefone = diretorio + "Telefone.csv";
     String arqEndereco = diretorio + "Endereco.csv";

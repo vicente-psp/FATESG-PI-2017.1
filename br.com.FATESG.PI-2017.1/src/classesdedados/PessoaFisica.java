@@ -155,7 +155,7 @@ public class PessoaFisica extends Pessoa{
     }
   
     public enum EnumSexo {
-        MASCULINO, FEMININO;
+        M, F;
     }
     
     public enum EnumCnh {

@@ -102,7 +102,7 @@ public class TelaCadastroDeMarca extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonMarcaLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMarcaLimparActionPerformed
-        // TODO add your handling code here:
+        jTextFieldMarcaDescricao.setText("");
     }//GEN-LAST:event_jButtonMarcaLimparActionPerformed
 
     private void jTextFieldMarcaDescricaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldMarcaDescricaoActionPerformed
@@ -117,6 +117,7 @@ public class TelaCadastroDeMarca extends javax.swing.JInternalFrame {
             
             cadastromarca.setDescricao(jTextFieldMarcaDescricao.getText().toUpperCase());
             cadmarca.incluir(cadastromarca);
+            jTextFieldMarcaDescricao.setText("");
             
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, new Mensagens().mensagem("MSG14"));

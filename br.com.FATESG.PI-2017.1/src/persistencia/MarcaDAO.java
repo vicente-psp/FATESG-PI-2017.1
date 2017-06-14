@@ -51,7 +51,7 @@ public class MarcaDAO implements CRUD{
 
     @Override
     public ArrayList<Object> recuperar() throws Exception {
-        ArrayList<Marca> marcas = new ArrayList<>();
+        ArrayList<Object> marcas = new ArrayList<>();
         
         try {
             File fileMarcas = new File(arqMArcas);
@@ -73,7 +73,7 @@ public class MarcaDAO implements CRUD{
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, new Mensagens().mensagem("MSG15"));
         }
-        return (ArrayList<Object>) (Object) (marcas);
+        return marcas;
     }
 
     @Override

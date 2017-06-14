@@ -5,6 +5,15 @@
  */
 package interfacegrafica;
 
+import classesdedados.Marca;
+import classesdedados.Mensagens;
+import classesdedados.Modelo;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import persistencia.MarcaDAO;
+import persistencia.ModeloDAO;
+
 /**
  *
  * @author renatowsilva
@@ -16,6 +25,18 @@ public class TelaCadastroDeModelo extends javax.swing.JInternalFrame {
      */
     public TelaCadastroDeModelo() {
         initComponents();
+        
+        try {
+            MarcaDAO marcaDAO = new MarcaDAO();
+            System.out.println(marcaDAO.recuperar().size());
+            for (int i = 0; i < marcaDAO.recuperar().size(); i++) {
+            Marca marca = (Marca) marcaDAO.recuperar().get(i);
+            jComboBoxModeloMarca.addItem(marca.getDescricao());
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(TelaCadastroDeModelo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 
     /**
@@ -37,10 +58,11 @@ public class TelaCadastroDeModelo extends javax.swing.JInternalFrame {
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
+        setTitle("CADASTRO DE MODELO");
+        setToolTipText("");
 
         jLabel2.setText("Descrição:");
 
-        jComboBoxModeloMarca.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBoxModeloMarca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxModeloMarcaActionPerformed(evt);
@@ -52,6 +74,11 @@ public class TelaCadastroDeModelo extends javax.swing.JInternalFrame {
         jButtonModeloLimpar.setText("Limpar");
 
         jButtonModeloSalvar.setText("Salvar");
+        jButtonModeloSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonModeloSalvarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -98,8 +125,38 @@ public class TelaCadastroDeModelo extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBoxModeloMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxModeloMarcaActionPerformed
-        // TODO add your handling code here:
+//        Modelo cadastromodelo = new Modelo();
+//        ModeloDAO cadmodelo = new ModeloDAO();
+//        
+//        try {
+//            
+//            cadastromodelo.setDescricao(jTextFieldModeloDescricao.getText().toUpperCase());
+//            cadastromodelo.setDescricao(jComboBoxModeloMarca.getSelectedItem().toString());
+//            cadmodelo.incluir(cadastromodelo);
+//            jTextFieldModeloDescricao.setText("");
+//            
+//        } catch (Exception e) {
+//            JOptionPane.showMessageDialog(this, new Mensagens().mensagem("MSG14"));
+//        }
     }//GEN-LAST:event_jComboBoxModeloMarcaActionPerformed
+
+    private void jButtonModeloSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModeloSalvarActionPerformed
+        Modelo cadastromodelo = new Modelo();
+        ModeloDAO cadmodelo = new ModeloDAO();
+        
+        try {
+            
+            cadastromodelo.setDescricao(jTextFieldModeloDescricao.getText());
+            Marca marca = new Marca();
+            marca.setDescricao(jComboBoxModeloMarca.getSelectedItem().toString());
+            cadastromodelo.setMarca(marca);
+            cadmodelo.incluir(cadastromodelo);
+            jTextFieldModeloDescricao.setText("");
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, new Mensagens().mensagem("MSG14"));
+        }
+    }//GEN-LAST:event_jButtonModeloSalvarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -51,13 +51,13 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="jFormattedTextFieldVeiculoAnoFabricacao" min="-2" pref="52" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                              <Component id="jFormattedTextFieldVeiculoAnoFabricacao" min="-2" pref="70" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jTextFieldVeiculoMotorizacao" min="-2" pref="64" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jComboBoxVeiculoStatusVeiculo" alignment="0" min="-2" pref="122" max="-2" attributes="0"/>
+                          <Component id="jComboBoxVeiculoStatusVeiculo" min="-2" pref="143" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -113,14 +113,12 @@
     <Component class="javax.swing.JComboBox" name="jComboBoxVeiculoMarca">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Item 1"/>
-            <StringItem index="1" value="Item 2"/>
-            <StringItem index="2" value="Item 3"/>
-            <StringItem index="3" value="Item 4"/>
-          </StringArray>
+          <StringArray count="0"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBoxVeiculoMarcaActionPerformed"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
@@ -133,12 +131,7 @@
     <Component class="javax.swing.JComboBox" name="jComboBoxVeiculoModelo">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Item 1"/>
-            <StringItem index="1" value="Item 2"/>
-            <StringItem index="2" value="Item 3"/>
-            <StringItem index="3" value="Item 4"/>
-          </StringArray>
+          <StringArray count="0"/>
         </Property>
       </Properties>
       <AuxValues>
@@ -166,10 +159,10 @@
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="4">
-            <StringItem index="0" value="Item 1"/>
-            <StringItem index="1" value="Item 2"/>
-            <StringItem index="2" value="Item 3"/>
-            <StringItem index="3" value="Item 4"/>
+            <StringItem index="0" value="DISPONIVEL"/>
+            <StringItem index="1" value="LOCADO"/>
+            <StringItem index="2" value="VENDIDO"/>
+            <StringItem index="3" value="SINISTRADO"/>
           </StringArray>
         </Property>
       </Properties>

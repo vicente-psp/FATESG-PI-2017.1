@@ -26,14 +26,14 @@ import java.math.RoundingMode;
 public class PessoaFisica extends Pessoa{
     private Date dataDeNasc = null;
     private String cpf = "";
-    private int cnh = 0;
+    private String cnh = "";
     private EnumCnh categoriaCnh = null;
     private Date validadeCnh = null;
     private EnumSexo sexo = null;
     
     public PessoaFisica(){        
     }
-    public PessoaFisica(Date dataDeNasc, String cpf, int cnh, EnumCnh categoriaCnh, Date validadeCnh, EnumSexo sexo)throws Exception{
+    public PessoaFisica(Date dataDeNasc, String cpf, String cnh, EnumCnh categoriaCnh, Date validadeCnh, EnumSexo sexo)throws Exception{
         this.dataDeNasc = dataDeNasc;
         this.cpf = cpf;
         this.cnh = cnh;
@@ -61,10 +61,10 @@ public class PessoaFisica extends Pessoa{
         if(!validaCpf())throw new Exception("CPF inválido!");
     }
 
-    public int getCnh() {
+    public String getCnh() {
         return cnh;
     }
-    public void setCnh(int cnh)throws Exception{
+    public void setCnh(String cnh)throws Exception{
         this.cnh = cnh;
     }
 

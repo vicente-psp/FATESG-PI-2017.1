@@ -1100,12 +1100,12 @@ public class TelaCadastroDeCliente2 extends javax.swing.JInternalFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLabel21)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextFieldClienteNumeroCNH1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(16, 16, 16)
+                                .addComponent(jTextFieldClienteNumeroCNH1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel22)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGap(10, 10, 10)
                                 .addComponent(jComboBoxTipoCNH1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(24, 24, 24)
+                                .addGap(18, 18, 18)
                                 .addComponent(jLabel37)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jFormattedTextFieldValidadeCNH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1113,12 +1113,12 @@ public class TelaCadastroDeCliente2 extends javax.swing.JInternalFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLabel23)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jFormattedTextFieldClienteCPF1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jFormattedTextFieldClienteCPF1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel24)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jFormattedTextFieldClienteDataNascimento1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                                .addGap(10, 10, 10)
                                 .addComponent(jLabel38)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jComboBoxSexo, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -1144,18 +1144,17 @@ public class TelaCadastroDeCliente2 extends javax.swing.JInternalFrame {
                     .addComponent(jFormattedTextFieldValidadeCNH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel23)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel38)
-                        .addComponent(jComboBoxSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jFormattedTextFieldClienteDataNascimento1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel24)
-                        .addComponent(jFormattedTextFieldClienteCPF1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel38)
+                    .addComponent(jComboBoxSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jFormattedTextFieldClienteDataNascimento1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel24)
+                    .addComponent(jFormattedTextFieldClienteCPF1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel23))
                 .addGap(23, 23, 23)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonClienteSalvar1)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
@@ -1166,47 +1165,41 @@ public class TelaCadastroDeCliente2 extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTextFieldNomeActionPerformed
 
     private void jButtonClienteSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClienteSalvarActionPerformed
-        PessoaFisica pessoaFisica = new PessoaFisica();
-        PessoaDAO contatos = new PessoaDAO();
-        
-        try {
-            pessoaFisica.setNome(jTextFieldNome.getText().toUpperCase());
-            pessoaFisica.setDataDeNasc(Date.valueOf(jFormattedTextFieldClienteDataNascimento.getText()));
-            pessoaFisica.setTipo(Pessoa.EnumPessoa.FISICA);
-            pessoaFisica.setTelefone(telefones);
-            pessoaFisica.setEmail(emails);
-            pessoaFisica.setEndereco(enderecos);
-            pessoaFisica.setCpf(jFormattedTextFieldClienteCPF.getText());
-
-            try {
-                pessoaFisica.setCnh(Integer.parseInt(jTextFieldClienteNumeroCNH.getText()));
-
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, new Mensagens().mensagem("MSG14"));
-            }
-
-            if (jTextFieldNome.getText().equals("")) {
-                JOptionPane.showMessageDialog(this, new Mensagens().mensagem("MSG02"));
-                jTextFieldNome.requestFocus();
-                return;
-            }
-            if (telefones.size() <= 0) {
-                JOptionPane.showMessageDialog(this, new Mensagens().mensagem("MSG02"));
-                jTabbedPane.setSelectedIndex(0);
-                jTextFieldDDI.requestFocus();
-                return;
-            }
-            if(enderecos.size() <= 0){
-                JOptionPane.showMessageDialog(this, new Mensagens().mensagem("MSG02"));
-                jTabbedPane.setSelectedIndex(2);
-                jTextFieldLogradouro.requestFocus();
-                return;
-            }
-
-            contatos.incluir(pessoaFisica);
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, new Mensagens().mensagem("MSG14"));
-        }
+//        PessoaFisica pessoaFisica = new PessoaFisica();
+//        PessoaDAO contatos = new PessoaDAO();
+//        
+//        try {
+//            pessoaFisica.setNome(jTextFieldNome.getText().toUpperCase());
+//            pessoaFisica.setDataDeNasc(Date.valueOf(jFormattedTextFieldClienteDataNascimento.getText()));
+//            pessoaFisica.setTipo(Pessoa.EnumPessoa.FISICA);
+//            pessoaFisica.setTelefone(telefones);
+//            pessoaFisica.setEmail(emails);
+//            pessoaFisica.setEndereco(enderecos);
+//            pessoaFisica.setCpf(jFormattedTextFieldClienteCPF.getText());
+//            pessoaFisica.setCnh(jTextFieldClienteNumeroCNH.getText());
+//
+//            if (jTextFieldNome.getText().equals("")) {
+//                JOptionPane.showMessageDialog(this, new Mensagens().mensagem("MSG02"));
+//                jTextFieldNome.requestFocus();
+//                return;
+//            }
+//            if (telefones.size() <= 0) {
+//                JOptionPane.showMessageDialog(this, new Mensagens().mensagem("MSG02"));
+//                jTabbedPane.setSelectedIndex(0);
+//                jTextFieldDDI.requestFocus();
+//                return;
+//            }
+//            if(enderecos.size() <= 0){
+//                JOptionPane.showMessageDialog(this, new Mensagens().mensagem("MSG02"));
+//                jTabbedPane.setSelectedIndex(2);
+//                jTextFieldLogradouro.requestFocus();
+//                return;
+//            }
+//
+//            contatos.incluir(pessoaFisica);
+//        } catch (Exception ex) {
+//            JOptionPane.showMessageDialog(this, new Mensagens().mensagem("MSG14"));
+//        }
     }//GEN-LAST:event_jButtonClienteSalvarActionPerformed
 
     private void jFormattedTextFieldClienteCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldClienteCPFActionPerformed
@@ -1566,22 +1559,12 @@ public class TelaCadastroDeCliente2 extends javax.swing.JInternalFrame {
             pessoaFisica.setValidadeCnh(sdf.parse(jFormattedTextFieldValidadeCNH.getText()));
             pessoaFisica.setTipo(Pessoa.EnumPessoa.FISICA);
             pessoaFisica.setCpf(jFormattedTextFieldClienteCPF1.getText());
-            pessoaFisica.setCategoriaCnh(PessoaFisica.EnumCnh.valueOf(jComboBoxTipoCNH.getSelectedItem().toString()));
-            
-            pessoaFisica.setCategoriaCnh(Enum.valueOf(PessoaFisica.EnumCnh.class, jComboBoxTipoCNH.getSelectedItem().toString()));
+            pessoaFisica.setCategoriaCnh(Enum.valueOf(PessoaFisica.EnumCnh.class, jComboBoxTipoCNH1.getSelectedItem().toString()));
             pessoaFisica.setSexo(Enum.valueOf(PessoaFisica.EnumSexo.class, jComboBoxSexo.getSelectedItem().toString()));
             pessoaFisica.setTelefone(telefones);
             pessoaFisica.setEmail(emails);
             pessoaFisica.setEndereco(enderecos);
             
-
-            try {
-                pessoaFisica.setCnh(Integer.parseInt(jTextFieldClienteNumeroCNH1.getText()));
-
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, new Mensagens().mensagem("MSG14"));
-            }
-
             if (jTextFieldNome1.getText().equals("")) {
                 JOptionPane.showMessageDialog(this, new Mensagens().mensagem("MSG02"));
                 jTextFieldNome1.requestFocus();

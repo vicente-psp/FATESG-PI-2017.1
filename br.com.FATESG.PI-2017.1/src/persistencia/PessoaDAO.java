@@ -29,7 +29,7 @@ import java.text.SimpleDateFormat;
  */
 public class PessoaDAO implements CRUD {
 
-    String diretorio = "C:\\AmbienteTrabalho\\Projetos\\FATESG-PI-2017.1\\br.com.FATESG.PI-2017.1\\src\\arquivos\\";
+    String diretorio = "Y:\\CTC1\\Projetos em Java\\FATESG\\FATESG-PI-2017.1\\br.com.FATESG.PI-2017.1\\src\\arquivos\\";
     String arqClientes = diretorio + "Clientes.csv";
     String arqTelefone = diretorio + "Telefone.csv";
     String arqEndereco = diretorio + "Endereco.csv";
@@ -48,15 +48,27 @@ public class PessoaDAO implements CRUD {
     public void incluir(Object objeto) throws Exception {
         PessoaFisica pessoaFisica = (PessoaFisica) objeto;
 
+        String id = "", nome = "", dataNasc = "", cpf = "", cnh = "", catCnh = "", dataVal = "", tipoPessoa = "";
+
         try {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            sdf.setLenient(false);
             fwClientes = new FileWriter(arqClientes, true);
             bwClientes = new BufferedWriter(fwClientes);
             GerarId gerarId = new GerarId();
             pessoaFisica.setId(gerarId.getIdPessoa());
-            String dados = pessoaFisica.getId() + ";" + pessoaFisica.getNome().toUpperCase() + ";"
-                    + pessoaFisica.getDataDeNasc().toString() + ";" + pessoaFisica.getCpf() + ";"
-                    + pessoaFisica.getCnh() + ";" + pessoaFisica.getCategoriaCnh().toString() + ";"
-                    + pessoaFisica.getValidadeCnh().toString() + ";" + pessoaFisica.getTipo().toString() + "\n";
+
+            id = String.valueOf(pessoaFisica.getId());
+            nome = pessoaFisica.getNome().toUpperCase();
+            dataNasc = String.valueOf(sdf.parse(pessoaFisica.getDataDeNasc().toString())); //tá dando erro aqui
+            cpf = pessoaFisica.getCpf();
+            cnh = pessoaFisica.getCnh();
+            catCnh = pessoaFisica.getCategoriaCnh().toString();
+            dataVal = String.valueOf(sdf.parse(pessoaFisica.getValidadeCnh().toString()));
+            tipoPessoa = pessoaFisica.getTipo().toString();
+
+            String dados = id + ";" + nome + ";" + dataNasc + ";" + cpf + ";"
+                    + cnh + ";" + catCnh + ";" + dataVal + ";" + tipoPessoa + "\n";
             bwClientes.write(dados);
             bwClientes.close();
 
@@ -124,7 +136,7 @@ public class PessoaDAO implements CRUD {
                 pessoaFisica.setNome(vClientes[1]);
                 pessoaFisica.setDataDeNasc(sdf.parse(vClientes[2]));
                 pessoaFisica.setCpf(vClientes[3]);
-                pessoaFisica.setCnh(Integer.parseInt(vClientes[4]));
+                pessoaFisica.setCnh(vClientes[4]);
                 pessoaFisica.setCategoriaCnh(Enum.valueOf(PessoaFisica.EnumCnh.class, vClientes[5]));
                 pessoaFisica.setValidadeCnh(sdf.parse(vClientes[6]));
                 pessoaFisica.setTipo(Enum.valueOf(Pessoa.EnumPessoa.class, vClientes[7]));

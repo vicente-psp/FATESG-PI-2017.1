@@ -29,7 +29,7 @@ public class Veiculo {
         this.modelo = modelo;
         this.marca = marca;
     }
-    
+
     public int getidVeiculo(){
         return idVeiculo;
     }

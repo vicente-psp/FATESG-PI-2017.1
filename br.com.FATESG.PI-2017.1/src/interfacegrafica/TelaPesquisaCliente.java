@@ -5,6 +5,17 @@
  */
 package interfacegrafica;
 
+import classesdedados.Pessoa;
+import classesdedados.PessoaFisica;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import persistencia.PessoaDAO;
+
 /**
  *
  * @author renatowsilva
@@ -29,14 +40,12 @@ public class TelaPesquisaCliente extends javax.swing.JInternalFrame {
 
         jTextField1 = new javax.swing.JTextField();
         jLayeredPane1 = new javax.swing.JLayeredPane();
-        jLabel1 = new javax.swing.JLabel();
-        jTextFieldPesquisarNome = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jFormattedTextFieldPesquisarCPF = new javax.swing.JFormattedTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTablePesquisarCliente = new javax.swing.JTable();
-        jLabel3 = new javax.swing.JLabel();
-        jTextFieldPesquisaNumeroCNH = new javax.swing.JTextField();
+        jTextFieldPesquisa = new javax.swing.JTextField();
+        jComboBoxTipoDaPesquisa = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         jTextField1.setText("jTextField1");
 
@@ -55,32 +64,16 @@ public class TelaPesquisaCliente extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
 
-        jLabel1.setText("Nome:");
-
-        jTextFieldPesquisarNome.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldPesquisarNomeActionPerformed(evt);
-            }
-        });
-
-        jLabel2.setText("CPF:");
-
-        try {
-            jFormattedTextFieldPesquisarCPF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###########")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-
         jTablePesquisarCliente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "Nome", "CPF", "Telefone Res", "Telefone Cel", "Email", "Num CNH", "Endereço"
+                "Nome", "CPF", "CNH", "Cat.", "Dt. Nasc."
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, true
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -89,11 +82,14 @@ public class TelaPesquisaCliente extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jTablePesquisarCliente);
 
-        jLabel3.setText("N° CNH:");
+        jComboBoxTipoDaPesquisa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NOME", "CNH", "CPF" }));
 
-        jTextFieldPesquisaNumeroCNH.addActionListener(new java.awt.event.ActionListener() {
+        jLabel5.setText("BUSCAR POR");
+
+        jButton1.setText("BUSCAR");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldPesquisaNumeroCNHActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -103,61 +99,99 @@ public class TelaPesquisaCliente extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 258, Short.MAX_VALUE)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jComboBoxTipoDaPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTextFieldPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextFieldPesquisarNome, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jFormattedTextFieldPesquisarCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextFieldPesquisaNumeroCNH, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                .addGap(54, 54, 54)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jFormattedTextFieldPesquisarCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldPesquisarNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(jTextFieldPesquisaNumeroCNH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
+                    .addComponent(jButton1)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jTextFieldPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jComboBoxTipoDaPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel5)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(97, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextFieldPesquisarNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPesquisarNomeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldPesquisarNomeActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        PessoaDAO dao = new PessoaDAO();
+        ArrayList<PessoaFisica> alPessoaFisica = new ArrayList<PessoaFisica>();
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        
+        String pesquisa = "";
+        String strNome = "";
+        String strCpf = "";
+        String strCnh = "";
+        String strCatCnh = "";
+        String strDataNasc = "";
 
-    private void jTextFieldPesquisaNumeroCNHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPesquisaNumeroCNHActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldPesquisaNumeroCNHActionPerformed
+        DefaultTableModel dtm = (DefaultTableModel) jTablePesquisarCliente.getModel();
+
+        try {
+            Object objDAO = dao.recuperar();
+            String texto = jTextFieldPesquisa.getText().toUpperCase();
+            
+            
+            //alPessoaFisica = new PessoaFisica(dataDeNasc, strCpf, WIDTH, PessoaFisica.EnumCnh.AC, validadeCnh, PessoaFisica.EnumSexo.FEMININO);
+            
+            
+            alPessoaFisica = (ArrayList<PessoaFisica>) objDAO;
+            if (jComboBoxTipoDaPesquisa.getSelectedItem().equals("NOME")) {
+                for (int i = 0; i < alPessoaFisica.size(); i++) {
+                    
+                    if (alPessoaFisica.get(i).getNome().contains(texto.toUpperCase())) {
+                        strNome = alPessoaFisica.get(i).getNome();
+                        strCpf = alPessoaFisica.get(i).getCpf();
+                        strCnh = String.valueOf(alPessoaFisica.get(i).getCnh());
+                        alPessoaFisica.get(i).setCategoriaCnh(PessoaFisica.EnumCnh.AC);
+                        strCatCnh = alPessoaFisica.get(i).getCategoriaCnh().toString();
+                        strDataNasc = df.format(alPessoaFisica.get(i).getDataDeNasc());
+                        
+                        Object[] dados = {strNome, strCpf, strCnh, strCatCnh, strDataNasc};
+                        dtm.addRow(dados);
+
+                    }
+                }
+
+                JOptionPane.showMessageDialog(this, texto.contains("nom"));
+            } else if (jComboBoxTipoDaPesquisa.getSelectedItem().equals("CNH")) {
+
+            } else {
+
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+
+
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JFormattedTextField jFormattedTextFieldPesquisarCPF;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<String> jComboBoxTipoDaPesquisa;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTablePesquisarCliente;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextFieldPesquisaNumeroCNH;
-    private javax.swing.JTextField jTextFieldPesquisarNome;
+    private javax.swing.JTextField jTextFieldPesquisa;
     // End of variables declaration//GEN-END:variables
 }

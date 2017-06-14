@@ -57,7 +57,7 @@ public class GerarId {
             br.close();
             
         } catch (Exception erro) {
-            JOptionPane.showMessageDialog(null, erro.getMessage());;
+            JOptionPane.showMessageDialog(null, erro.getMessage());
         }
 
     }
@@ -81,8 +81,7 @@ public class GerarId {
     public int getIdVeiculo(){
         return ++idVeiculo;
     }
-    
-    
+        
     @Override
     public void finalize() {
         try {
@@ -90,7 +89,7 @@ public class GerarId {
             FileWriter fw = new FileWriter(arquivoID, false);
             BufferedWriter bw = new BufferedWriter(fw);
 
-            String saida = this.idPessoa + ";" + this.idModelo + ";" + this.idMarca + ";" + this.idLocacao + ";" + this.idVeiculo;
+            String saida = this.idPessoa + ";" + this.idModelo + ";" + this.idMarca + ";" + this.idLocacao;
             bw.write(saida);
 
             bw.close();

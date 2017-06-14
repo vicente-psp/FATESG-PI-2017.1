@@ -123,7 +123,7 @@ public class VeiculoDAO implements CRUD{
             
             if(veiculos.size() >= 0 && veiculos != null){
                 for (int i = 0; i < veiculos.size(); i++){
-                    if(veiculos.get(i).get() != id){
+                    if(veiculos.get(i).getidVeiculo() != id){
                         
                         dadosVeiculo += veiculos.get(i).getidVeiculo() + ";" + veiculos.get(i).getPlaca() + ";" + veiculos.get(i).getMarca() + ";" + veiculos.get(i).getModelo() + ";" + veiculos.get(i).getStatus() + "/n";
                     }else{

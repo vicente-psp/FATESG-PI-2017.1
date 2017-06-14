@@ -44,7 +44,7 @@ public class TelaPesquisaVeiculo extends javax.swing.JInternalFrame {
 
         jLabel1.setText("Modelo:");
 
-        jComboBoxPesquisarModelo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxPesquisarModelo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Item 2", "Item 3", "Item 4" }));
 
         jLabel2.setText("Marca:");
 

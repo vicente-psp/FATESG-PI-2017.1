@@ -36,8 +36,17 @@ public class VeiculoDAO implements CRUD{
          Modelo modelo = (Modelo) objeto;
          
         try {
+            fwVeiculo = new FileWriter(arqVeiculo, true);
+            bwVeiculo = new BufferedWriter(fwVeiculo);
+            GerarId gerarId = new GerarId();
+            veiculo.setidVeiculo(gerarId.getIdVeiculo());
+            
+            String dados = veiculo.getidVeiculo() + ";" + veiculo.getPlaca() + ";" + veiculo.getMarca() + ";" + veiculo.getModelo() + ";" + veiculo.getStatus() + "/n";
+            bwVeiculo.write(dados);
+            bwVeiculo.close();
        
        ArrayList<Veiculo> veiculos = (ArrayList<Veiculo>) recuperar();
+       
        for(int i = 0; i < veiculos.size(); i++){
            if(veiculos.get(i).getPlaca().equals(veiculo.getPlaca())){
                JOptionPane.showMessageDialog(null, new Mensagens().mensagem("MSG02"));
@@ -49,7 +58,7 @@ public class VeiculoDAO implements CRUD{
        bwVeiculo = new BufferedWriter(fwVeiculo);
        
                 
-       String dados = veiculo.getPlaca() + ";" + veiculo.getStatus() + ";" + modelo.getDescricao() + ";" + modelo.getAnoDeFabricacao() + ";" +
+       String dados = veiculo.getidVeiculo() + ";" + veiculo.getPlaca() + ";" + veiculo.getStatus() + ";" + modelo.getDescricao() + ";" + modelo.getAnoDeFabricacao() + ";" +
                modelo.getMarca() + ";" + modelo.getMotor() + ";" + modelo.getValorLocacao() + "/n";
        bwVeiculo.write(dados);
        bwVeiculo.close();
@@ -76,10 +85,11 @@ public class VeiculoDAO implements CRUD{
                 Modelo modelo = new Modelo();
                 
                 String vVeiculos[] = linhaVeiculos.split(";");
-                veiculo.setPlaca(vVeiculos[0]);
-                modelo.setDescricao(vVeiculos[1]);
-                marca.setDescricao(vVeiculos[2]);
-                veiculo.setStatus(Enum.valueOf(Veiculo.EnumVeiculo.class, vVeiculos[3]));
+                veiculo.setidVeiculo(Integer.parseInt(vVeiculos[0]));
+                veiculo.setPlaca(vVeiculos[1]);
+                modelo.setDescricao(vVeiculos[2]);
+                marca.setDescricao(vVeiculos[3]);
+                veiculo.setStatus(Enum.valueOf(Veiculo.EnumVeiculo.class, vVeiculos[4]));
 
             veiculos.add(veiculo);
             linhaVeiculos = brVeiculos.readLine();
@@ -110,13 +120,18 @@ public class VeiculoDAO implements CRUD{
                 for (int i = 0; i < veiculos.size(); i++){
                     if(veiculos.get(i).get() != id){
                         
-                        dadosVeiculo += veiculos.get(i).getPlaca() + ";" + veiculos.get(i).getMarca() + ";" + veiculos.get(i).getModelo() + ";" + veiculos.get(i).getStatus() + "/n";
+                        dadosVeiculo += veiculos.get(i).getidVeiculo() + ";" + veiculos.get(i).getPlaca() + ";" + veiculos.get(i).getMarca() + ";" + veiculos.get(i).getModelo() + ";" + veiculos.get(i).getStatus() + "/n";
                     }else{
-                        dadosVeiculo += id
+                        dadosVeiculo += id + ";" + objVeiculo.getPlaca() + ";" + objVeiculo.getMarca() + ";" + objVeiculo.getModelo() + ";" + objVeiculo.getStatus() + "/n";
                     }
                 }
             }
+            bwVeiculo = new BufferedWriter(fwVeiculo);
+            bwVeiculo.write(dadosVeiculo);
+            bwVeiculo.close();
+            
         } catch (Exception e) {
+            
         }
     }
     

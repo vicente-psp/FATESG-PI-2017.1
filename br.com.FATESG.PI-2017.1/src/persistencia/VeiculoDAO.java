@@ -44,25 +44,8 @@ public class VeiculoDAO implements CRUD{
             String dados = veiculo.getidVeiculo() + ";" + veiculo.getPlaca() + ";" + veiculo.getMarca() + ";" + veiculo.getModelo() + ";" + veiculo.getStatus() + "/n";
             bwVeiculo.write(dados);
             bwVeiculo.close();
-       
-       ArrayList<Veiculo> veiculos = (ArrayList<Veiculo>) recuperar();
-       
-       for(int i = 0; i < veiculos.size(); i++){
-           if(veiculos.get(i).getPlaca().equals(veiculo.getPlaca())){
-               JOptionPane.showMessageDialog(null, new Mensagens().mensagem("MSG02"));
-               return;
-           }
-       }
-       
-       fwVeiculo = new FileWriter(arqVeiculo, true);
-       bwVeiculo = new BufferedWriter(fwVeiculo);
-       
-                
-       String dados = veiculo.getidVeiculo() + ";" + veiculo.getPlaca() + ";" + veiculo.getStatus() + ";" + modelo.getDescricao() + ";" + modelo.getAnoDeFabricacao() + ";" +
-               modelo.getMarca() + ";" + modelo.getMotor() + ";" + modelo.getValorLocacao() + "/n";
-       bwVeiculo.write(dados);
-       bwVeiculo.close();
-       
+      
+           gerarId.finalize();
        JOptionPane.showMessageDialog(null, new Mensagens().mensagem("MSG01"));
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, new Mensagens().mensagem("MSG02"));
@@ -104,7 +87,29 @@ public class VeiculoDAO implements CRUD{
 
     @Override
     public void excluir(int id) throws Exception {
+        Object objVeiculos = recuperar();
+        ArrayList<Veiculo> veiculos = (ArrayList<Veiculo>) (objVeiculos);
         
+        boolean achou = false;
+        String dadosVeiculo = "";
+        
+        if(veiculos.size() >= 0 && veiculos != null){
+            for (int i = 0; i < veiculos.size(); i++){
+                if(veiculos.get(i).getidVeiculo() != id){
+                    
+                    dadosVeiculo += veiculos.get(i).getidVeiculo() + ";" + veiculos.get(i).getPlaca() + ";" + veiculos.get(i).getMarca() + ";" + 
+                            veiculos.get(i).getModelo() + ";" + veiculos.get(i).getStatus() + "/n";
+                }
+            }
+        }else{
+            achou = true;
+        }
+        if (achou){
+            fwVeiculo = new FileWriter(arqVeiculo);
+            bwVeiculo = new BufferedWriter(fwVeiculo);
+            bwVeiculo.write(dadosVeiculo);
+            bwVeiculo.close();
+        }
     }
 
     @Override

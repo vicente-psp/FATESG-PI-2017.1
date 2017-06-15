@@ -10,7 +10,6 @@ import classesdedados.Endereco;
 import classesdedados.GerarId;
 import classesdedados.Mensagens;
 import classesdedados.Pessoa;
-import classesdedados.PessoaFisica;
 import classesdedados.Telefone;
 import interfacedeclasses.CRUD;
 import java.io.BufferedReader;
@@ -21,7 +20,6 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import java.io.BufferedReader;
-import java.text.SimpleDateFormat;
 
 /**
  *
@@ -29,7 +27,7 @@ import java.text.SimpleDateFormat;
  */
 public class PessoaDAO implements CRUD {
 
-    String diretorio = "Y:\\CTC1\\Projetos em Java\\FATESG\\FATESG-PI-2017.1\\br.com.FATESG.PI-2017.1\\src\\arquivos\\";
+    String diretorio = "/Users/renatowsilva/Documents/Faculdade Senai/Segundo Semestre/NetBeansProjects/FATESG-PI-2017.1/br.com.FATESG.PI-2017.1/src/arquivos/";
     String arqClientes = diretorio + "Clientes.csv";
     String arqTelefone = diretorio + "Telefone.csv";
     String arqEndereco = diretorio + "Endereco.csv";
@@ -46,41 +44,26 @@ public class PessoaDAO implements CRUD {
 
     @Override
     public void incluir(Object objeto) throws Exception {
-        PessoaFisica pessoaFisica = (PessoaFisica) objeto;
-
-        String id = "", nome = "", dataNasc = "", cpf = "", cnh = "", catCnh = "", dataVal = "", tipoPessoa = "";
+        Pessoa pessoa = (Pessoa) objeto;
 
         try {
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-            sdf.setLenient(false);
             fwClientes = new FileWriter(arqClientes, true);
             bwClientes = new BufferedWriter(fwClientes);
             GerarId gerarId = new GerarId();
-            pessoaFisica.setId(gerarId.getIdPessoa());
-
-            id = String.valueOf(pessoaFisica.getId());
-            nome = pessoaFisica.getNome().toUpperCase();
-            dataNasc = String.valueOf(sdf.parse(pessoaFisica.getDataDeNasc().toString())); //tá dando erro aqui
-            cpf = pessoaFisica.getCpf();
-            cnh = pessoaFisica.getCnh();
-            catCnh = pessoaFisica.getCategoriaCnh().toString();
-            dataVal = String.valueOf(sdf.parse(pessoaFisica.getValidadeCnh().toString()));
-            tipoPessoa = pessoaFisica.getTipo().toString();
-
-            String dados = id + ";" + nome + ";" + dataNasc + ";" + cpf + ";"
-                    + cnh + ";" + catCnh + ";" + dataVal + ";" + tipoPessoa + "\n";
+            pessoa.setId(gerarId.getIdPessoa());
+            String dados = pessoa.getId() + ";" + pessoa.getNome().toUpperCase() + ";" + pessoa.getTipo().toString() + "\n";
             bwClientes.write(dados);
             bwClientes.close();
 
-            ArrayList<Telefone> telefones = pessoaFisica.getTelefone();
-            ArrayList<Email> emails = pessoaFisica.getEmail();
-            ArrayList<Endereco> enderecos = pessoaFisica.getEndereco();
+            ArrayList<Telefone> telefones = pessoa.getTelefone();
+            ArrayList<Email> emails = pessoa.getEmail();
+            ArrayList<Endereco> enderecos = pessoa.getEndereco();
 
             fwTelefones = new FileWriter(arqTelefone, true);
             bwTelefones = new BufferedWriter(fwTelefones);
             if (telefones != null) {
                 for (int i = 0; i < telefones.size(); i++) {
-                    String dadosTelefone = pessoaFisica.getId() + ";" + telefones.get(i).getDdi() + ";"
+                    String dadosTelefone = pessoa.getId() + ";" + telefones.get(i).getDdi() + ";"
                             + telefones.get(i).getDdd() + ";" + telefones.get(i).getNumero()
                             + ";" + telefones.get(i).getTipo() + "\n";
                     bwTelefones.write(dadosTelefone);
@@ -92,7 +75,7 @@ public class PessoaDAO implements CRUD {
             bwEmails = new BufferedWriter(fwEmails);
             if (emails != null) {
                 for (int i = 0; i < emails.size(); i++) {
-                    String dadosEmail = pessoaFisica.getId() + ";" + emails.get(i).getEmail().toUpperCase() + "\n";
+                    String dadosEmail = pessoa.getId() + ";" + emails.get(i).getEmail().toUpperCase() + "\n";
                     bwEmails.write(dadosEmail);
                 }
             }
@@ -102,7 +85,7 @@ public class PessoaDAO implements CRUD {
             bwEnderecos = new BufferedWriter(fwEnderecos);
             if (enderecos != null) {
                 for (int i = 0; i < enderecos.size(); i++) {
-                    String dadosEndereco = pessoaFisica.getId() + ";" + enderecos.get(i).getLogradouro().toUpperCase() + ";" + enderecos.get(i).getNumero()
+                    String dadosEndereco = pessoa.getId() + ";" + enderecos.get(i).getLogradouro().toUpperCase() + ";" + enderecos.get(i).getNumero()
                             + ";" + enderecos.get(i).getComplemento().toUpperCase() + ";" + enderecos.get(i).getCep() + ";"
                             + enderecos.get(i).getBairro().toUpperCase() + ";" + enderecos.get(i).getCidade().toUpperCase() + ";"
                             + enderecos.get(i).getEstado().toUpperCase() + ";" + enderecos.get(i).getPais().toUpperCase() + "\n";
@@ -120,9 +103,7 @@ public class PessoaDAO implements CRUD {
 
     @Override
     public ArrayList<Object> recuperar() throws Exception {
-        ArrayList<PessoaFisica> alPessoaFisica = new ArrayList<>();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        sdf.setLenient(false);
+        ArrayList<Pessoa> alPessoa = new ArrayList<>();
 
         try {
             File fileClientes = new File(arqClientes);
@@ -130,16 +111,12 @@ public class PessoaDAO implements CRUD {
             BufferedReader brClientes = new BufferedReader(frClientes);
             String linhaClientes = brClientes.readLine();
             while (linhaClientes != null && !linhaClientes.equals("")) {
-                PessoaFisica pessoaFisica = new PessoaFisica();
+                Pessoa pessoa = new Pessoa();
+
                 String vClientes[] = linhaClientes.split(";");
-                pessoaFisica.setId(Integer.parseInt(vClientes[0]));
-                pessoaFisica.setNome(vClientes[1]);
-                pessoaFisica.setDataDeNasc(sdf.parse(vClientes[2]));
-                pessoaFisica.setCpf(vClientes[3]);
-                pessoaFisica.setCnh(vClientes[4]);
-                pessoaFisica.setCategoriaCnh(Enum.valueOf(PessoaFisica.EnumCnh.class, vClientes[5]));
-                pessoaFisica.setValidadeCnh(sdf.parse(vClientes[6]));
-                pessoaFisica.setTipo(Enum.valueOf(Pessoa.EnumPessoa.class, vClientes[7]));
+                pessoa.setId(Integer.parseInt(vClientes[0]));
+                pessoa.setNome(vClientes[1]);
+                pessoa.setTipo(Enum.valueOf(Pessoa.EnumPessoa.class, vClientes[2]));
 
                 ArrayList<Telefone> alTelefones = new ArrayList<>();
                 try {
@@ -150,7 +127,7 @@ public class PessoaDAO implements CRUD {
                     while (linhaTelefones != null && !linhaTelefones.equals("")) {
                         Telefone telefone = new Telefone();
                         String vTelefones[] = linhaTelefones.split(";");
-                        if (pessoaFisica.getId() == Integer.parseInt(vTelefones[0])) {
+                        if (pessoa.getId() == Integer.parseInt(vTelefones[0])) {
                             telefone.setIdPessoa(Integer.parseInt(vTelefones[0]));
                             telefone.setDdi(Integer.parseInt(vTelefones[1]));
                             telefone.setDdd(Integer.parseInt(vTelefones[2]));
@@ -175,7 +152,7 @@ public class PessoaDAO implements CRUD {
                     while (linhaEmails != null && !linhaEmails.equals("")) {
                         Email email = new Email();
                         String vEmaisl[] = linhaEmails.split(";");
-                        if (pessoaFisica.getId() == Integer.parseInt(vEmaisl[0])) {
+                        if (pessoa.getId() == Integer.parseInt(vEmaisl[0])) {
                             email.setIdPessoa(Integer.parseInt(vEmaisl[0]));
                             email.setEmail(vEmaisl[1]);
 
@@ -196,7 +173,7 @@ public class PessoaDAO implements CRUD {
                     while (linhaEnderecos != null && !linhaEnderecos.equals("")) {
                         Endereco endereco = new Endereco();
                         String vEnderecos[] = linhaEnderecos.split(";");
-                        if (pessoaFisica.getId() == Integer.parseInt(vEnderecos[0])) {
+                        if (pessoa.getId() == Integer.parseInt(vEnderecos[0])) {
                             endereco.setIdPessoa(Integer.parseInt(vEnderecos[0]));
                             endereco.setLogradouro(vEnderecos[1]);
                             endereco.setNumero(Integer.parseInt(vEnderecos[2]));
@@ -216,18 +193,17 @@ public class PessoaDAO implements CRUD {
                     JOptionPane.showMessageDialog(null, new Mensagens().mensagem("MSG15"));
                 }
 
-                pessoaFisica.setEndereco(alEnderecos);
-                pessoaFisica.setEmail(alEmails);
-                pessoaFisica.setTelefone(alTelefones);
-                alPessoaFisica.add(pessoaFisica);
+                pessoa.setEndereco(alEnderecos);
+                pessoa.setEmail(alEmails);
+                pessoa.setTelefone(alTelefones);
+                alPessoa.add(pessoa);
                 linhaClientes = brClientes.readLine();
             }
 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao buscar informações"); //alterar msg depois
         }
 
-        return (ArrayList<Object>) (Object) (alPessoaFisica);
+        return (ArrayList<Object>) (Object) (alPessoa);
     }
 
     @Override

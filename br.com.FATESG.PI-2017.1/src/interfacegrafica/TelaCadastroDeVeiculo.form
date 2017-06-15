@@ -57,7 +57,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jTextFieldVeiculoMotorizacao" min="-2" pref="64" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jComboBoxVeiculoStatusVeiculo" alignment="0" min="-2" pref="122" max="-2" attributes="0"/>
+                          <Component id="jComboBoxVeiculoStatusVeiculo" min="-2" pref="139" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -113,12 +113,7 @@
     <Component class="javax.swing.JComboBox" name="jComboBoxVeiculoMarca">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Item 1"/>
-            <StringItem index="1" value="Item 2"/>
-            <StringItem index="2" value="Item 3"/>
-            <StringItem index="3" value="Item 4"/>
-          </StringArray>
+          <StringArray count="0"/>
         </Property>
       </Properties>
       <AuxValues>
@@ -133,12 +128,7 @@
     <Component class="javax.swing.JComboBox" name="jComboBoxVeiculoModelo">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Item 1"/>
-            <StringItem index="1" value="Item 2"/>
-            <StringItem index="2" value="Item 3"/>
-            <StringItem index="3" value="Item 4"/>
-          </StringArray>
+          <StringArray count="0"/>
         </Property>
       </Properties>
       <AuxValues>
@@ -166,10 +156,10 @@
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="4">
-            <StringItem index="0" value="Item 1"/>
-            <StringItem index="1" value="Item 2"/>
-            <StringItem index="2" value="Item 3"/>
-            <StringItem index="3" value="Item 4"/>
+            <StringItem index="0" value="DISPONIVEL"/>
+            <StringItem index="1" value="LOCADO"/>
+            <StringItem index="2" value="VENDIDO"/>
+            <StringItem index="3" value="SINISTRADO"/>
           </StringArray>
         </Property>
       </Properties>

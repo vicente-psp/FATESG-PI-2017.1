@@ -23,7 +23,7 @@ import javax.swing.JOptionPane;
  */
 public class MarcaDAO implements CRUD{
     
-    String diretorio = "C:\\Users\\Vicente\\Google Drive\\ADS\\01 - FATESG\\2017.1\\Projetos Equipe ADS\\Projeto Integrador\\br.com.FATESG.PI-2017.1\\br.com.FATESG.PI-2017.1\\FATESG-PI-2017.1\\br.com.FATESG.PI-2017.1\\src\\arquivos\\";
+    String diretorio = "/Users/renatowsilva/Documents/Faculdade Senai/Segundo Semestre/NetBeansProjects/FATESG-PI-2017.1/br.com.FATESG.PI-2017.1/src/arquivos/";
     String arqMArcas = diretorio + "Marcas.csv";
         
     FileWriter fwMarcas = null;
@@ -38,7 +38,7 @@ public class MarcaDAO implements CRUD{
             bwMarcas = new BufferedWriter(fwMarcas);
             GerarId gerarId = new GerarId();
             marca.setIdMarca(gerarId.getIdMarca());
-            String dados = marca.getIdMarca() + ";" + marca.getDescricao() + "/n";
+            String dados = marca.getIdMarca() + ";" + marca.getDescricao() + "\n";
             bwMarcas.write(dados);
             bwMarcas.close();
             
@@ -51,7 +51,7 @@ public class MarcaDAO implements CRUD{
 
     @Override
     public ArrayList<Object> recuperar() throws Exception {
-        ArrayList<Marca> marcas = new ArrayList<>();
+        ArrayList<Object> marcas = new ArrayList<>();
         
         try {
             File fileMarcas = new File(arqMArcas);
@@ -73,7 +73,7 @@ public class MarcaDAO implements CRUD{
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, new Mensagens().mensagem("MSG15"));
         }
-        return (ArrayList<Object>) (Object) (marcas);
+        return marcas;
     }
 
     @Override

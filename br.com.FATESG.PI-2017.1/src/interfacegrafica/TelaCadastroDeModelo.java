@@ -4,7 +4,14 @@
  * and open the template in the editor.
  */
 package interfacegrafica;
-
+import classesdedados.Marca;
+import classesdedados.Mensagens;
+import classesdedados.Modelo;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import persistencia.MarcaDAO;
+import persistencia.ModeloDAO;
 /**
  *
  * @author renatowsilva
@@ -16,6 +23,16 @@ public class TelaCadastroDeModelo extends javax.swing.JInternalFrame {
      */
     public TelaCadastroDeModelo() {
         initComponents();
+        try {
+            MarcaDAO marcaDAO = new MarcaDAO();
+            System.out.println(marcaDAO.recuperar().size());
+            for (int i = 0; i < marcaDAO.recuperar().size(); i++) {
+            Marca marca = (Marca) marcaDAO.recuperar().get(i);
+            jComboBoxModeloMarca.addItem(marca.getDescricao());
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(TelaCadastroDeModelo.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -40,7 +57,6 @@ public class TelaCadastroDeModelo extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Descrição:");
 
-        jComboBoxModeloMarca.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBoxModeloMarca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxModeloMarcaActionPerformed(evt);

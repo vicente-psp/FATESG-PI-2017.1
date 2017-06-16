@@ -351,12 +351,10 @@ public class PessoaDAO implements CRUD {
                             }
                         }
                     }
-
                 }
-
             }
 
-            fwClientes = new FileWriter(arqClientes);
+            fwClientes = new FileWriter(arqClientes, false);
             bwClientes = new BufferedWriter(fwClientes);
             bwClientes.write(dadosCliente);
             bwClientes.close();

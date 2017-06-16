@@ -5,6 +5,8 @@
  */
 package interfacegrafica;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -134,7 +136,9 @@ public class TelaMenu extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1082, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -169,7 +173,7 @@ public class TelaMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemRealizarLocacaoActionPerformed
 
     private void jMenuItemCadastroClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCadastroClientesActionPerformed
-        TelaCadastroDeCliente2 tela = new TelaCadastroDeCliente2();
+        TelaClienteCadastro tela = new TelaClienteCadastro();
         jDesktopPane1.add(tela);
         tela.setVisible(true);
     }//GEN-LAST:event_jMenuItemCadastroClientesActionPerformed
@@ -181,7 +185,12 @@ public class TelaMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemRealizarDevolucaoActionPerformed
 
     private void jMenuItemPesquisarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemPesquisarClientesActionPerformed
-        TelaPesquisaCliente tela = new TelaPesquisaCliente();
+        TelaClientePesquisa tela = null;
+        try {
+            tela = new TelaClientePesquisa();
+        } catch (Exception ex) {
+            Logger.getLogger(TelaMenu.class.getName()).log(Level.SEVERE, null, ex);
+        }
         jDesktopPane1.add(tela);
         tela.setVisible(true);
     }//GEN-LAST:event_jMenuItemPesquisarClientesActionPerformed
@@ -217,6 +226,7 @@ public class TelaMenu extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(TelaMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */

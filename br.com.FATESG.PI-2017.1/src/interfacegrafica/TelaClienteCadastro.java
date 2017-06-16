@@ -28,13 +28,13 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author renatowsilva
  */
-public class TelaCadastroDeCliente2 extends javax.swing.JInternalFrame {
+public class TelaClienteCadastro extends javax.swing.JInternalFrame {
     ArrayList<Email> emails = new ArrayList<>();
     ArrayList<Telefone> telefones = new ArrayList<>();
     ArrayList<Endereco> enderecos = new ArrayList<>();    /**
      * Creates new form TelaCadastroDeCliente2
      */
-    public TelaCadastroDeCliente2() {
+    public TelaClienteCadastro() {
         initComponents();
         jComboBoxTiposDeTelefones1.setModel(new DefaultComboBoxModel(Telefone.EnumTelefone.values()));
         jComboBoxTipoCNH1.setModel(new DefaultComboBoxModel(PessoaFisica.EnumCnh.values()));
@@ -1100,10 +1100,10 @@ public class TelaCadastroDeCliente2 extends javax.swing.JInternalFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLabel21)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextFieldClienteNumeroCNH1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel22)
+                                .addComponent(jTextFieldClienteNumeroCNH1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(10, 10, 10)
+                                .addComponent(jLabel22)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jComboBoxTipoCNH1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel37)
@@ -1113,14 +1113,14 @@ public class TelaCadastroDeCliente2 extends javax.swing.JInternalFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLabel23)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jFormattedTextFieldClienteCPF1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                                .addComponent(jFormattedTextFieldClienteCPF1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(16, 16, 16)
                                 .addComponent(jLabel24)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jFormattedTextFieldClienteDataNascimento1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(10, 10, 10)
+                                .addGap(16, 16, 16)
                                 .addComponent(jLabel38)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jComboBoxSexo, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(20, 20, 20)
@@ -1154,7 +1154,7 @@ public class TelaCadastroDeCliente2 extends javax.swing.JInternalFrame {
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonClienteSalvar1)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         pack();
@@ -1550,17 +1550,17 @@ public class TelaCadastroDeCliente2 extends javax.swing.JInternalFrame {
     private void jButtonClienteSalvar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClienteSalvar1ActionPerformed
         PessoaFisica pessoaFisica = new PessoaFisica();
         PessoaDAO contatos = new PessoaDAO();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        sdf.setLenient(false);
 
         try {
             pessoaFisica.setNome(jTextFieldNome1.getText().toUpperCase());
-            pessoaFisica.setDataDeNasc(sdf.parse(jFormattedTextFieldClienteDataNascimento1.getText()));
-            pessoaFisica.setValidadeCnh(sdf.parse(jFormattedTextFieldValidadeCNH.getText()));
+            pessoaFisica.setDataDeNasc(jFormattedTextFieldClienteDataNascimento1.getText());
+            pessoaFisica.setValidadeCnh(jFormattedTextFieldValidadeCNH.getText());
             pessoaFisica.setTipo(Pessoa.EnumPessoa.FISICA);
             pessoaFisica.setCpf(jFormattedTextFieldClienteCPF1.getText());
+            pessoaFisica.setCnh(jTextFieldClienteNumeroCNH1.getText());
             pessoaFisica.setCategoriaCnh(Enum.valueOf(PessoaFisica.EnumCnh.class, jComboBoxTipoCNH1.getSelectedItem().toString()));
             pessoaFisica.setSexo(Enum.valueOf(PessoaFisica.EnumSexo.class, jComboBoxSexo.getSelectedItem().toString()));
+            
             pessoaFisica.setTelefone(telefones);
             pessoaFisica.setEmail(emails);
             pessoaFisica.setEndereco(enderecos);

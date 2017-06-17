@@ -49,6 +49,9 @@ public class PessoaFisica extends Pessoa {
     }
 
     public void setDataDeNasc(String dataDeNasc) throws Exception {
+        if (!validaData(dataDeNasc)) {
+            throw new Exception("Data inválida!");
+        }
         this.dataDeNasc = dataDeNasc;
     }
 
@@ -90,6 +93,9 @@ public class PessoaFisica extends Pessoa {
     }
 
     public void setValidadeCnh(String validadeCnh) throws Exception {
+        if (!validaData(validadeCnh)) {
+            throw new Exception("Data inválida!");
+        }
         this.validadeCnh = validadeCnh;
     }
 
@@ -161,6 +167,17 @@ public class PessoaFisica extends Pessoa {
         }
     }
 
+    private boolean validaData(String data) {
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        df.setLenient(false); // aqui o pulo do gato
+        try {
+            df.parse(data);
+            return true;
+        } catch (ParseException ex) {
+            return false;
+        }
+    }
+
     private String formatoCPF() {
         return (this.cpf.substring(0, 3) + "." + this.cpf.substring(3, 6) + "."
                 + this.cpf.substring(6, 9) + "-" + this.cpf.substring(9, 11));
@@ -199,5 +216,5 @@ public class PessoaFisica extends Pessoa {
         BigDecimal idade = qtdDias.divide(ano, 0, RoundingMode.DOWN);
         return idade;
     }
-
+    
 }

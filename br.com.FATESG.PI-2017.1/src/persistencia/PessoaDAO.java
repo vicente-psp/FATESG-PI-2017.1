@@ -276,7 +276,7 @@ public class PessoaDAO implements CRUD {
                         this.sexo = alPessoaFisica.get(i).getSexo().toString();
                         this.tipoPessoa = alPessoaFisica.get(i).getTipo().toString();
 
-                        String dados = id + ";" + nome + ";" + dataNasc + ";" + cpf + ";"
+                        dadosCliente += this.id + ";" + nome + ";" + dataNasc + ";" + cpf + ";"
                                 + cnh + ";" + catCnh + ";" + dataVal + ";" + sexo + ";" + tipoPessoa + "\n";
 
                         //adiciona as informações de telefones do cliente se houver
@@ -319,7 +319,7 @@ public class PessoaDAO implements CRUD {
                         this.sexo = objPessoa.getSexo().toString();
                         this.tipoPessoa = objPessoa.getTipo().toString();
 
-                        String dados = id + ";" + nome + ";" + dataNasc + ";" + cpf + ";"
+                        dadosCliente += id + ";" + nome + ";" + dataNasc + ";" + cpf + ";"
                                 + cnh + ";" + catCnh + ";" + dataVal + ";" + sexo + ";" + tipoPessoa + "\n";
 
                         //adiciona informações modificadas de telefones do cliente se houver
@@ -430,14 +430,14 @@ public class PessoaDAO implements CRUD {
                         this.sexo = alPessoaFisica.get(i).getSexo().toString();
                         this.tipoPessoa = alPessoaFisica.get(i).getTipo().toString();
 
-                        String dados = id + ";" + nome + ";" + dataNasc + ";" + cpf + ";"
+                        dadosCliente += this.id + ";" + nome + ";" + dataNasc + ";" + cpf + ";"
                                 + cnh + ";" + catCnh + ";" + dataVal + ";" + sexo + ";" + tipoPessoa + "\n";
 
                         //adiciona as informações de telefones do cliente se houver
                         if (alPessoaFisica.get(i).getTelefone().size() >= 0 && alPessoaFisica.get(i).getTelefone() != null) {
                             for (int j = 0; j < alPessoaFisica.get(i).getTelefone().size(); j++) {
                                 if (alPessoaFisica.get(i).getTelefone().get(j).getIdPessoa() != id) {
-                                    dadosTels += alPessoaFisica.get(i).getTelefone().get(j).getIdPessoa() + ";" + alPessoaFisica.get(i).getTelefone().get(j).getDdi()
+                                    dadosTels += this.id + ";" + alPessoaFisica.get(i).getTelefone().get(j).getDdi()
                                             + ";" + alPessoaFisica.get(i).getTelefone().get(j).getDdd() + ";" + alPessoaFisica.get(i).getTelefone().get(j).getNumero()
                                             + ";" + alPessoaFisica.get(i).getTelefone().get(j).getTipo().toString() + "\n";
                                 }
@@ -447,14 +447,14 @@ public class PessoaDAO implements CRUD {
                         //adiciona as informações de emails do cliente se houver
                         if (alPessoaFisica.get(i).getEmail().size() >= 0 && alPessoaFisica.get(i).getEmail() != null) {
                             for (int j = 0; j < alPessoaFisica.get(i).getEmail().size(); j++) {
-                                dadosEmails += alPessoaFisica.get(i).getEmail().get(j).getIdPessoa() + ";" + alPessoaFisica.get(i).getEmail().get(j).getEmail() + "\n";
+                                dadosEmails += this.id + ";" + alPessoaFisica.get(i).getEmail().get(j).getEmail() + "\n";
                             }
                         }
 
                         //adiciona as informações de endereços do cliente se houver
                         if (alPessoaFisica.get(i).getEndereco().size() >= 0 && alPessoaFisica.get(i).getEndereco() != null) {
                             for (int j = 0; j < alPessoaFisica.get(i).getEndereco().size(); j++) {
-                                dadosEnderecos += alPessoaFisica.get(i).getEndereco().get(j).getIdPessoa() + ";" + alPessoaFisica.get(i).getEndereco().get(j).getLogradouro().toUpperCase()
+                                dadosEnderecos += this.id + ";" + alPessoaFisica.get(i).getEndereco().get(j).getLogradouro().toUpperCase()
                                         + ";" + alPessoaFisica.get(i).getEndereco().get(j).getNumero() + ";" + alPessoaFisica.get(i).getEndereco().get(j).getComplemento().toUpperCase()
                                         + ";" + alPessoaFisica.get(i).getEndereco().get(j).getCep() + ";" + alPessoaFisica.get(i).getEndereco().get(j).getBairro().toUpperCase()
                                         + ";" + alPessoaFisica.get(i).getEndereco().get(j).getCidade().toUpperCase() + ";" + alPessoaFisica.get(i).getEndereco().get(j).getEstado().toUpperCase()
@@ -468,7 +468,7 @@ public class PessoaDAO implements CRUD {
             }
 
             if (achou) {
-                fwClientes = new FileWriter(arqClientes);
+                fwClientes = new FileWriter(arqClientes,false);
                 bwClientes = new BufferedWriter(fwClientes);
                 bwClientes.write(dadosCliente);
                 bwClientes.close();

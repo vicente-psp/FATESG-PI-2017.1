@@ -19,7 +19,7 @@ import javax.swing.JOptionPane;
  * @author Alexandre Fernandes
  */
 public class GerarId {
-    String diretorio = "C:\\Users\\Vicente\\Desktop\\PI 2017-1\\FATESG-PI-2017.1\\br.com.FATESG.PI-2017.1\\src\\arquivos\\";
+    String diretorio = "C:\\AmbienteTrabalho\\Projetos\\FATESG-PI-2017.1\\br.com.FATESG.PI-2017.1\\src\\arquivos\\";
     private int idPessoa = 0;
     private int idModelo = 0;
     private int idMarca = 0;
@@ -89,7 +89,7 @@ public class GerarId {
             FileWriter fw = new FileWriter(arquivoID, false);
             BufferedWriter bw = new BufferedWriter(fw);
 
-            String saida = this.idPessoa + ";" + this.idModelo + ";" + this.idMarca + ";" + this.idLocacao;
+            String saida = this.idPessoa + ";" + this.idModelo + ";" + this.idMarca + ";" + this.idLocacao + ";" + this.idVeiculo;
             bw.write(saida);
 
             bw.close();

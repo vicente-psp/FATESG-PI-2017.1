@@ -29,7 +29,7 @@ import java.text.SimpleDateFormat;
  */
 public class PessoaDAO implements CRUD {
 
-    String diretorio = "C:\\Users\\Vicente\\Desktop\\PI 2017-1\\FATESG-PI-2017.1\\br.com.FATESG.PI-2017.1\\src\\arquivos\\";
+    String diretorio = "C:\\AmbienteTrabalho\\Projetos\\FATESG-PI-2017.1\\br.com.FATESG.PI-2017.1\\src\\arquivos\\";
     String arqClientes = diretorio + "Clientes.csv";
     String arqTelefone = diretorio + "Telefone.csv";
     String arqEndereco = diretorio + "Endereco.csv";
@@ -51,8 +51,6 @@ public class PessoaDAO implements CRUD {
         PessoaFisica pessoaFisica = (PessoaFisica) objeto;
 
         try {
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-            sdf.setLenient(false);
             fwClientes = new FileWriter(arqClientes, true);
             bwClientes = new BufferedWriter(fwClientes);
             GerarId gerarId = new GerarId();

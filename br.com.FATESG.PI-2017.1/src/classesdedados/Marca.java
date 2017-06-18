@@ -26,7 +26,7 @@ public class Marca {
         return idMarca;
     }
 
-    public void setIdMarca(int idMarca) {
+    public void setIdMarca(int idMarca)throws Exception{
         this.idMarca = idMarca;
     }
 
@@ -34,7 +34,7 @@ public class Marca {
         return descricao;
     }
 
-    public void setDescricao(String descricao) {
+    public void setDescricao(String descricao)throws Exception{
         this.descricao = descricao;
     }
         

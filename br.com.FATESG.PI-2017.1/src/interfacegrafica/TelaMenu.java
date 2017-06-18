@@ -5,6 +5,9 @@
  */
 package interfacegrafica;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -41,6 +44,7 @@ public class TelaMenu extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenuItemPesquisarClientes = new javax.swing.JMenuItem();
         jMenuItemPesquisarVeiculos = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -128,13 +132,28 @@ public class TelaMenu extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
+        jMenu2.setText("Marcas");
+        jMenu2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu2MouseClicked(evt);
+            }
+        });
+        jMenu2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu2ActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(jMenu2);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jDesktopPane1)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1082, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -169,7 +188,7 @@ public class TelaMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemRealizarLocacaoActionPerformed
 
     private void jMenuItemCadastroClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCadastroClientesActionPerformed
-        TelaCadastroDeCliente2 tela = new TelaCadastroDeCliente2();
+        TelaClienteCadastro tela = new TelaClienteCadastro();
         jDesktopPane1.add(tela);
         tela.setVisible(true);
     }//GEN-LAST:event_jMenuItemCadastroClientesActionPerformed
@@ -181,7 +200,12 @@ public class TelaMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemRealizarDevolucaoActionPerformed
 
     private void jMenuItemPesquisarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemPesquisarClientesActionPerformed
-        TelaPesquisaCliente tela = new TelaPesquisaCliente();
+        TelaClientePesquisa tela = null;
+        try {
+            tela = new TelaClientePesquisa();
+        } catch (Exception ex) {
+            Logger.getLogger(TelaMenu.class.getName()).log(Level.SEVERE, null, ex);
+        }
         jDesktopPane1.add(tela);
         tela.setVisible(true);
     }//GEN-LAST:event_jMenuItemPesquisarClientesActionPerformed
@@ -191,6 +215,20 @@ public class TelaMenu extends javax.swing.JFrame {
         jDesktopPane1.add(tela);
         tela.setVisible(true);
     }//GEN-LAST:event_jMenuItemPesquisarVeiculosActionPerformed
+
+    private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
+    }//GEN-LAST:event_jMenu2ActionPerformed
+
+    private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
+        try {
+            TelaMarca tela;
+            tela = new TelaMarca();
+            jDesktopPane1.add(tela);
+            tela.setVisible(true);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao tentar abrir Tela de Marcas!");
+        }
+    }//GEN-LAST:event_jMenu2MouseClicked
 
     /**
      * @param args the command line arguments
@@ -218,6 +256,7 @@ public class TelaMenu extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(TelaMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -230,6 +269,7 @@ public class TelaMenu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuCadastroGeral;
     private javax.swing.JMenuItem jMenuItemCadastroClientes;

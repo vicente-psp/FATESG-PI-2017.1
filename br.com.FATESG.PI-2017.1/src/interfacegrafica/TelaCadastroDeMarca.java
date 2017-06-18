@@ -4,7 +4,10 @@
  * and open the template in the editor.
  */
 package interfacegrafica;
-
+import classesdedados.Marca;
+import classesdedados.Mensagens;
+import javax.swing.JOptionPane;
+import persistencia.MarcaDAO;
 /**
  *
  * @author renatowsilva
@@ -60,7 +63,7 @@ public class TelaCadastroDeMarca extends javax.swing.JInternalFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextFieldMarcaDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addContainerGap(51, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonMarcaLimpar)
@@ -79,12 +82,26 @@ public class TelaCadastroDeMarca extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonMarcaLimpar)
                     .addComponent(jButtonMarcaSalvar))
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(71, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    private void jButtonMarcaSalvarActionPerformed(java.awt.event.ActionEvent evt) {                                                   
+        Marca cadastromarca = new Marca();
+        MarcaDAO cadmarca = new MarcaDAO();
+        
+        try {
+            
+            cadastromarca.setDescricao(jTextFieldMarcaDescricao.getText().toUpperCase());
+            cadmarca.incluir(cadastromarca);
+            jTextFieldMarcaDescricao.setText("");
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, new Mensagens().mensagem("MSG14"));
+        }
+        
+    } 
     private void jButtonMarcaLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMarcaLimparActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonMarcaLimparActionPerformed

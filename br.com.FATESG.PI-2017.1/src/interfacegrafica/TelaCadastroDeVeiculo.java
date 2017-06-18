@@ -4,7 +4,13 @@
  * and open the template in the editor.
  */
 package interfacegrafica;
-
+import classesdedados.Marca;
+import classesdedados.Modelo;
+import com.sun.org.apache.xpath.internal.operations.Mod;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import persistencia.MarcaDAO;
+import persistencia.ModeloDAO;
 /**
  *
  * @author renatowsilva
@@ -16,6 +22,23 @@ public class TelaCadastroDeVeiculo extends javax.swing.JInternalFrame {
      */
     public TelaCadastroDeVeiculo() {
         initComponents();
+        try {
+            MarcaDAO marcaDAO = new MarcaDAO();
+            System.out.println(marcaDAO.recuperar().size());
+            for (int i = 0; i < marcaDAO.recuperar().size(); i++) {
+            Marca marca = (Marca) marcaDAO.recuperar().get(i);
+            jComboBoxVeiculoMarca.addItem(marca.getDescricao());
+            }
+            
+            ModeloDAO modeloDAO = new ModeloDAO();
+            System.out.println(modeloDAO.recuperar().size());
+            for (int i = 0; i < modeloDAO.recuperar().size(); i++) {
+            Modelo modelo = (Modelo) modeloDAO.recuperar().get(i);
+            jComboBoxVeiculoModelo.addItem(modelo.getDescricao());
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(TelaCadastroDeModelo.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -49,11 +72,7 @@ public class TelaCadastroDeVeiculo extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Marca:");
 
-        jComboBoxVeiculoMarca.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLabel3.setText("Modelo:");
-
-        jComboBoxVeiculoModelo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel4.setText("Ano de Fabricação:");
 
@@ -65,7 +84,7 @@ public class TelaCadastroDeVeiculo extends javax.swing.JInternalFrame {
 
         jLabel5.setText("Status do Veiculo: ");
 
-        jComboBoxVeiculoStatusVeiculo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxVeiculoStatusVeiculo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DISPONIVEL", "LOCADO", "VENDIDO", "SINISTRADO" }));
 
         jLabel6.setText("Motorização:");
 
@@ -100,7 +119,7 @@ public class TelaCadastroDeVeiculo extends javax.swing.JInternalFrame {
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTextFieldVeiculoMotorizacao, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jComboBoxVeiculoStatusVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jComboBoxVeiculoStatusVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(46, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)

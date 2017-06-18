@@ -29,11 +29,13 @@ import java.text.SimpleDateFormat;
  */
 public class PessoaDAO implements CRUD {
 
-    String diretorio = "Y:\\CTC1\\Projetos em Java\\FATESG\\FATESG-PI-2017.1\\br.com.FATESG.PI-2017.1\\src\\arquivos\\";
+    String diretorio = "C:\\AmbienteTrabalho\\Projetos\\FATESG-PI-2017.1\\br.com.FATESG.PI-2017.1\\src\\arquivos\\";
     String arqClientes = diretorio + "Clientes.csv";
     String arqTelefone = diretorio + "Telefone.csv";
     String arqEndereco = diretorio + "Endereco.csv";
     String arqEmail = diretorio + "Email.csv";
+
+    String id = "", nome = "", dataNasc = "", cpf = "", cnh = "", catCnh = "", dataVal = "", sexo = "", tipoPessoa = "";
 
     FileWriter fwClientes = null;
     BufferedWriter bwClientes = null;
@@ -48,11 +50,7 @@ public class PessoaDAO implements CRUD {
     public void incluir(Object objeto) throws Exception {
         PessoaFisica pessoaFisica = (PessoaFisica) objeto;
 
-        String id = "", nome = "", dataNasc = "", cpf = "", cnh = "", catCnh = "", dataVal = "", tipoPessoa = "";
-
         try {
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-            sdf.setLenient(false);
             fwClientes = new FileWriter(arqClientes, true);
             bwClientes = new BufferedWriter(fwClientes);
             GerarId gerarId = new GerarId();
@@ -60,15 +58,16 @@ public class PessoaDAO implements CRUD {
 
             id = String.valueOf(pessoaFisica.getId());
             nome = pessoaFisica.getNome().toUpperCase();
-            dataNasc = String.valueOf(sdf.parse(pessoaFisica.getDataDeNasc().toString())); //tá dando erro aqui
+            dataNasc = pessoaFisica.getDataDeNasc();
             cpf = pessoaFisica.getCpf();
             cnh = pessoaFisica.getCnh();
             catCnh = pessoaFisica.getCategoriaCnh().toString();
-            dataVal = String.valueOf(sdf.parse(pessoaFisica.getValidadeCnh().toString()));
+            dataVal = pessoaFisica.getValidadeCnh();
+            sexo = pessoaFisica.getSexo().toString();
             tipoPessoa = pessoaFisica.getTipo().toString();
 
             String dados = id + ";" + nome + ";" + dataNasc + ";" + cpf + ";"
-                    + cnh + ";" + catCnh + ";" + dataVal + ";" + tipoPessoa + "\n";
+                    + cnh + ";" + catCnh + ";" + dataVal + ";" + sexo + ";" + tipoPessoa + "\n";
             bwClientes.write(dados);
             bwClientes.close();
 
@@ -121,25 +120,45 @@ public class PessoaDAO implements CRUD {
     @Override
     public ArrayList<Object> recuperar() throws Exception {
         ArrayList<PessoaFisica> alPessoaFisica = new ArrayList<>();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        sdf.setLenient(false);
 
         try {
-            File fileClientes = new File(arqClientes);
-            FileReader frClientes = new FileReader(fileClientes);
-            BufferedReader brClientes = new BufferedReader(frClientes);
-            String linhaClientes = brClientes.readLine();
+            String linhaClientes = "";
+            File fileClientes = null;
+            FileReader frClientes = null;
+            BufferedReader brClientes = null;
+            try {
+                fileClientes = new File(arqClientes);
+                frClientes = new FileReader(fileClientes);
+                brClientes = new BufferedReader(frClientes);
+                linhaClientes = brClientes.readLine();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Diretório não localizado."); //documantar mensagem
+                return null;
+            }
+
             while (linhaClientes != null && !linhaClientes.equals("")) {
                 PessoaFisica pessoaFisica = new PessoaFisica();
                 String vClientes[] = linhaClientes.split(";");
-                pessoaFisica.setId(Integer.parseInt(vClientes[0]));
-                pessoaFisica.setNome(vClientes[1]);
-                pessoaFisica.setDataDeNasc(sdf.parse(vClientes[2]));
-                pessoaFisica.setCpf(vClientes[3]);
-                pessoaFisica.setCnh(vClientes[4]);
-                pessoaFisica.setCategoriaCnh(Enum.valueOf(PessoaFisica.EnumCnh.class, vClientes[5]));
-                pessoaFisica.setValidadeCnh(sdf.parse(vClientes[6]));
-                pessoaFisica.setTipo(Enum.valueOf(Pessoa.EnumPessoa.class, vClientes[7]));
+
+                id = vClientes[0];
+                nome = vClientes[1];
+                dataNasc = vClientes[2];
+                cpf = vClientes[3];
+                cnh = vClientes[4];
+                catCnh = vClientes[5];
+                dataVal = vClientes[6];
+                sexo = vClientes[7];
+                tipoPessoa = vClientes[8];
+
+                pessoaFisica.setId(Integer.parseInt(id));
+                pessoaFisica.setNome(nome);
+                pessoaFisica.setDataDeNasc(dataNasc);
+                pessoaFisica.setCpf(cpf);
+                pessoaFisica.setCnh(cnh);
+                pessoaFisica.setCategoriaCnh(Enum.valueOf(PessoaFisica.EnumCnh.class, catCnh));
+                pessoaFisica.setValidadeCnh(dataVal);
+                pessoaFisica.setSexo(Enum.valueOf(PessoaFisica.EnumSexo.class, sexo));
+                pessoaFisica.setTipo(Enum.valueOf(Pessoa.EnumPessoa.class, tipoPessoa));
 
                 ArrayList<Telefone> alTelefones = new ArrayList<>();
                 try {
@@ -151,6 +170,7 @@ public class PessoaDAO implements CRUD {
                         Telefone telefone = new Telefone();
                         String vTelefones[] = linhaTelefones.split(";");
                         if (pessoaFisica.getId() == Integer.parseInt(vTelefones[0])) {
+
                             telefone.setIdPessoa(Integer.parseInt(vTelefones[0]));
                             telefone.setDdi(Integer.parseInt(vTelefones[1]));
                             telefone.setDdd(Integer.parseInt(vTelefones[2]));
@@ -234,51 +254,73 @@ public class PessoaDAO implements CRUD {
     public void alterar(int id, Object objeto) throws Exception {
         try {
             Object objPessoas = recuperar();
-            ArrayList<Pessoa> alPessoa = (ArrayList<Pessoa>) (objPessoas);
-            Pessoa objPessoa = (Pessoa) objeto;
+            ArrayList<PessoaFisica> alPessoaFisica = (ArrayList<PessoaFisica>) (objPessoas);
+            PessoaFisica objPessoa = (PessoaFisica) objeto;
 
             String dadosCliente = "";
             String dadosTels = "";
             String dadosEmails = "";
             String dadosEnderecos = "";
 
-            if (alPessoa.size() >= 0 && alPessoa != null) {
-                for (int i = 0; i < alPessoa.size(); i++) {
-                    if (alPessoa.get(i).getId() != id) { //adiciona os clientes que não foram modificados
+            if (alPessoaFisica.size() >= 0 && alPessoaFisica != null) {
+                for (int i = 0; i < alPessoaFisica.size(); i++) {
+                    if (alPessoaFisica.get(i).getId() != id) { //adiciona os clientes que não foram modificados
                         //adiciona as informações do cliente
-                        dadosCliente += alPessoa.get(i).getId() + ";" + alPessoa.get(i).getNome() + ";" + alPessoa.get(i).getTipo().toString() + "\n";
+                        this.id = alPessoaFisica.get(i).getId() + "";
+                        this.nome = alPessoaFisica.get(i).getNome().toUpperCase();
+                        this.dataNasc = alPessoaFisica.get(i).getDataDeNasc();
+                        this.cpf = alPessoaFisica.get(i).getCpf();
+                        this.cnh = alPessoaFisica.get(i).getCnh();
+                        this.catCnh = alPessoaFisica.get(i).getCategoriaCnh().toString();
+                        this.dataVal = alPessoaFisica.get(i).getValidadeCnh();
+                        this.sexo = alPessoaFisica.get(i).getSexo().toString();
+                        this.tipoPessoa = alPessoaFisica.get(i).getTipo().toString();
+
+                        dadosCliente += this.id + ";" + nome + ";" + dataNasc + ";" + cpf + ";"
+                                + cnh + ";" + catCnh + ";" + dataVal + ";" + sexo + ";" + tipoPessoa + "\n";
 
                         //adiciona as informações de telefones do cliente se houver
-                        if (alPessoa.get(i).getTelefone().size() >= 0 && alPessoa.get(i).getTelefone() != null) {
-                            for (int j = 0; j < alPessoa.get(i).getTelefone().size(); j++) {
-                                if (alPessoa.get(i).getTelefone().get(j).getIdPessoa() != id) {
-                                    dadosTels += alPessoa.get(i).getTelefone().get(j).getIdPessoa() + ";" + alPessoa.get(i).getTelefone().get(j).getDdi()
-                                            + ";" + alPessoa.get(i).getTelefone().get(j).getDdd() + ";" + alPessoa.get(i).getTelefone().get(j).getNumero()
-                                            + ";" + alPessoa.get(i).getTelefone().get(j).getTipo().toString() + "\n";
+                        if (alPessoaFisica.get(i).getTelefone().size() >= 0 && alPessoaFisica.get(i).getTelefone() != null) {
+                            for (int j = 0; j < alPessoaFisica.get(i).getTelefone().size(); j++) {
+                                if (alPessoaFisica.get(i).getTelefone().get(j).getIdPessoa() != id) {
+                                    dadosTels += alPessoaFisica.get(i).getTelefone().get(j).getIdPessoa() + ";" + alPessoaFisica.get(i).getTelefone().get(j).getDdi()
+                                            + ";" + alPessoaFisica.get(i).getTelefone().get(j).getDdd() + ";" + alPessoaFisica.get(i).getTelefone().get(j).getNumero()
+                                            + ";" + alPessoaFisica.get(i).getTelefone().get(j).getTipo().toString() + "\n";
                                 }
                             }
                         }
 
                         //adiciona as informações de emails do cliente se houver
-                        if (alPessoa.get(i).getEmail().size() >= 0 && alPessoa.get(i).getEmail() != null) {
-                            for (int j = 0; j < alPessoa.get(i).getEmail().size(); j++) {
-                                dadosEmails += alPessoa.get(i).getEmail().get(j).getIdPessoa() + ";" + alPessoa.get(i).getEmail().get(j).getEmail() + "\n";
+                        if (alPessoaFisica.get(i).getEmail().size() >= 0 && alPessoaFisica.get(i).getEmail() != null) {
+                            for (int j = 0; j < alPessoaFisica.get(i).getEmail().size(); j++) {
+                                dadosEmails += alPessoaFisica.get(i).getEmail().get(j).getIdPessoa() + ";" + alPessoaFisica.get(i).getEmail().get(j).getEmail() + "\n";
                             }
                         }
 
                         //adiciona as informações de endereços do cliente se houver
-                        if (alPessoa.get(i).getEndereco().size() >= 0 && alPessoa.get(i).getEndereco() != null) {
-                            for (int j = 0; j < alPessoa.get(i).getEndereco().size(); j++) {
-                                dadosEnderecos += alPessoa.get(i).getEndereco().get(j).getIdPessoa() + ";" + alPessoa.get(i).getEndereco().get(j).getLogradouro().toUpperCase()
-                                        + ";" + alPessoa.get(i).getEndereco().get(j).getNumero() + ";" + alPessoa.get(i).getEndereco().get(j).getComplemento().toUpperCase()
-                                        + ";" + alPessoa.get(i).getEndereco().get(j).getCep() + ";" + alPessoa.get(i).getEndereco().get(j).getBairro().toUpperCase()
-                                        + ";" + alPessoa.get(i).getEndereco().get(j).getCidade().toUpperCase() + ";" + alPessoa.get(i).getEndereco().get(j).getEstado().toUpperCase()
-                                        + ";" + alPessoa.get(i).getEndereco().get(j).getPais().toUpperCase() + "\n";;
+                        if (alPessoaFisica.get(i).getEndereco().size() >= 0 && alPessoaFisica.get(i).getEndereco() != null) {
+                            for (int j = 0; j < alPessoaFisica.get(i).getEndereco().size(); j++) {
+                                dadosEnderecos += alPessoaFisica.get(i).getEndereco().get(j).getIdPessoa() + ";" + alPessoaFisica.get(i).getEndereco().get(j).getLogradouro().toUpperCase()
+                                        + ";" + alPessoaFisica.get(i).getEndereco().get(j).getNumero() + ";" + alPessoaFisica.get(i).getEndereco().get(j).getComplemento().toUpperCase()
+                                        + ";" + alPessoaFisica.get(i).getEndereco().get(j).getCep() + ";" + alPessoaFisica.get(i).getEndereco().get(j).getBairro().toUpperCase()
+                                        + ";" + alPessoaFisica.get(i).getEndereco().get(j).getCidade().toUpperCase() + ";" + alPessoaFisica.get(i).getEndereco().get(j).getEstado().toUpperCase()
+                                        + ";" + alPessoaFisica.get(i).getEndereco().get(j).getPais().toUpperCase() + "\n";;
                             }
                         }
 
                     } else { //adiciona o cliente modificado
-                        dadosCliente += id + ";" + objPessoa.getNome().toUpperCase() + ";" + objPessoa.getTipo().toString() + "\n";
+                        this.id = id + "";
+                        this.nome = objPessoa.getNome().toUpperCase();
+                        this.dataNasc = objPessoa.getDataDeNasc();
+                        this.cpf = objPessoa.getCpf();
+                        this.cnh = objPessoa.getCnh();
+                        this.catCnh = objPessoa.getCategoriaCnh().toString();
+                        this.dataVal = objPessoa.getValidadeCnh();
+                        this.sexo = objPessoa.getSexo().toString();
+                        this.tipoPessoa = objPessoa.getTipo().toString();
+
+                        dadosCliente += id + ";" + nome + ";" + dataNasc + ";" + cpf + ";"
+                                + cnh + ";" + catCnh + ";" + dataVal + ";" + sexo + ";" + tipoPessoa + "\n";
 
                         //adiciona informações modificadas de telefones do cliente se houver
                         if (objPessoa.getTelefone().size() >= 0 && objPessoa.getTelefone() != null) {
@@ -307,12 +349,10 @@ public class PessoaDAO implements CRUD {
                             }
                         }
                     }
-
                 }
-
             }
 
-            fwClientes = new FileWriter(arqClientes);
+            fwClientes = new FileWriter(arqClientes, false);
             bwClientes = new BufferedWriter(fwClientes);
             bwClientes.write(dadosCliente);
             bwClientes.close();
@@ -367,7 +407,7 @@ public class PessoaDAO implements CRUD {
     public void excluir(int id) throws Exception {
         try {
             Object objPessoas = recuperar();
-            ArrayList<Pessoa> alPessoa = (ArrayList<Pessoa>) (objPessoas);
+            ArrayList<PessoaFisica> alPessoaFisica = (ArrayList<PessoaFisica>) (objPessoas);
 
             boolean achou = false;
             String dadosCliente = "";
@@ -375,38 +415,50 @@ public class PessoaDAO implements CRUD {
             String dadosEmails = "";
             String dadosEnderecos = "";
 
-            if (alPessoa.size() >= 0 && alPessoa != null) {
-                for (int i = 0; i < alPessoa.size(); i++) {
-                    if (alPessoa.get(i).getId() != id) { //adiciona os clientes que não foram modificados
+            if (alPessoaFisica.size() >= 0 && alPessoaFisica != null) {
+                for (int i = 0; i < alPessoaFisica.size(); i++) {
+                    if (alPessoaFisica.get(i).getId() != id) { //adiciona os clientes que não foram modificados
                         //adiciona as informações do cliente
-                        dadosCliente += alPessoa.get(i).getId() + ";" + alPessoa.get(i).getNome() + ";" + alPessoa.get(i).getTipo().toString() + "\n";
+
+                        this.id = alPessoaFisica.get(i).getId() + "";
+                        this.nome = alPessoaFisica.get(i).getNome().toUpperCase();
+                        this.dataNasc = alPessoaFisica.get(i).getDataDeNasc();
+                        this.cpf = alPessoaFisica.get(i).getCpf();
+                        this.cnh = alPessoaFisica.get(i).getCnh();
+                        this.catCnh = alPessoaFisica.get(i).getCategoriaCnh().toString();
+                        this.dataVal = alPessoaFisica.get(i).getValidadeCnh();
+                        this.sexo = alPessoaFisica.get(i).getSexo().toString();
+                        this.tipoPessoa = alPessoaFisica.get(i).getTipo().toString();
+
+                        dadosCliente += this.id + ";" + nome + ";" + dataNasc + ";" + cpf + ";"
+                                + cnh + ";" + catCnh + ";" + dataVal + ";" + sexo + ";" + tipoPessoa + "\n";
 
                         //adiciona as informações de telefones do cliente se houver
-                        if (alPessoa.get(i).getTelefone().size() >= 0 && alPessoa.get(i).getTelefone() != null) {
-                            for (int j = 0; j < alPessoa.get(i).getTelefone().size(); j++) {
-                                if (alPessoa.get(i).getTelefone().get(j).getIdPessoa() != id) {
-                                    dadosTels += alPessoa.get(i).getTelefone().get(j).getIdPessoa() + ";" + alPessoa.get(i).getTelefone().get(j).getDdi()
-                                            + ";" + alPessoa.get(i).getTelefone().get(j).getDdd() + ";" + alPessoa.get(i).getTelefone().get(j).getNumero()
-                                            + ";" + alPessoa.get(i).getTelefone().get(j).getTipo().toString() + "\n";
+                        if (alPessoaFisica.get(i).getTelefone().size() >= 0 && alPessoaFisica.get(i).getTelefone() != null) {
+                            for (int j = 0; j < alPessoaFisica.get(i).getTelefone().size(); j++) {
+                                if (alPessoaFisica.get(i).getTelefone().get(j).getIdPessoa() != id) {
+                                    dadosTels += this.id + ";" + alPessoaFisica.get(i).getTelefone().get(j).getDdi()
+                                            + ";" + alPessoaFisica.get(i).getTelefone().get(j).getDdd() + ";" + alPessoaFisica.get(i).getTelefone().get(j).getNumero()
+                                            + ";" + alPessoaFisica.get(i).getTelefone().get(j).getTipo().toString() + "\n";
                                 }
                             }
                         }
 
                         //adiciona as informações de emails do cliente se houver
-                        if (alPessoa.get(i).getEmail().size() >= 0 && alPessoa.get(i).getEmail() != null) {
-                            for (int j = 0; j < alPessoa.get(i).getEmail().size(); j++) {
-                                dadosEmails += alPessoa.get(i).getEmail().get(j).getIdPessoa() + ";" + alPessoa.get(i).getEmail().get(j).getEmail() + "\n";
+                        if (alPessoaFisica.get(i).getEmail().size() >= 0 && alPessoaFisica.get(i).getEmail() != null) {
+                            for (int j = 0; j < alPessoaFisica.get(i).getEmail().size(); j++) {
+                                dadosEmails += this.id + ";" + alPessoaFisica.get(i).getEmail().get(j).getEmail() + "\n";
                             }
                         }
 
                         //adiciona as informações de endereços do cliente se houver
-                        if (alPessoa.get(i).getEndereco().size() >= 0 && alPessoa.get(i).getEndereco() != null) {
-                            for (int j = 0; j < alPessoa.get(i).getEndereco().size(); j++) {
-                                dadosEnderecos += alPessoa.get(i).getEndereco().get(j).getIdPessoa() + ";" + alPessoa.get(i).getEndereco().get(j).getLogradouro().toUpperCase()
-                                        + ";" + alPessoa.get(i).getEndereco().get(j).getNumero() + ";" + alPessoa.get(i).getEndereco().get(j).getComplemento().toUpperCase()
-                                        + ";" + alPessoa.get(i).getEndereco().get(j).getCep() + ";" + alPessoa.get(i).getEndereco().get(j).getBairro().toUpperCase()
-                                        + ";" + alPessoa.get(i).getEndereco().get(j).getCidade().toUpperCase() + ";" + alPessoa.get(i).getEndereco().get(j).getEstado().toUpperCase()
-                                        + ";" + alPessoa.get(i).getEndereco().get(j).getPais().toUpperCase() + "\n";;
+                        if (alPessoaFisica.get(i).getEndereco().size() >= 0 && alPessoaFisica.get(i).getEndereco() != null) {
+                            for (int j = 0; j < alPessoaFisica.get(i).getEndereco().size(); j++) {
+                                dadosEnderecos += this.id + ";" + alPessoaFisica.get(i).getEndereco().get(j).getLogradouro().toUpperCase()
+                                        + ";" + alPessoaFisica.get(i).getEndereco().get(j).getNumero() + ";" + alPessoaFisica.get(i).getEndereco().get(j).getComplemento().toUpperCase()
+                                        + ";" + alPessoaFisica.get(i).getEndereco().get(j).getCep() + ";" + alPessoaFisica.get(i).getEndereco().get(j).getBairro().toUpperCase()
+                                        + ";" + alPessoaFisica.get(i).getEndereco().get(j).getCidade().toUpperCase() + ";" + alPessoaFisica.get(i).getEndereco().get(j).getEstado().toUpperCase()
+                                        + ";" + alPessoaFisica.get(i).getEndereco().get(j).getPais().toUpperCase() + "\n";;
                             }
                         }
                     } else {
@@ -416,7 +468,7 @@ public class PessoaDAO implements CRUD {
             }
 
             if (achou) {
-                fwClientes = new FileWriter(arqClientes);
+                fwClientes = new FileWriter(arqClientes,false);
                 bwClientes = new BufferedWriter(fwClientes);
                 bwClientes.write(dadosCliente);
                 bwClientes.close();

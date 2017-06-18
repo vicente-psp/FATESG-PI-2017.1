@@ -25,7 +25,7 @@ import javax.swing.JOptionPane;
  */
 public class ModeloDAO implements CRUD{
     
-    String diretorio = "C:\\Users\\Vicente\\Google Drive\\ADS\\01 - FATESG\\2017.1\\Projetos Equipe ADS\\Projeto Integrador\\br.com.FATESG.PI-2017.1\\br.com.FATESG.PI-2017.1\\FATESG-PI-2017.1\\br.com.FATESG.PI-2017.1\\src\\arquivos\\";
+    String diretorio = "/Users/renatowsilva/Documents/Faculdade Senai/Segundo Semestre/NetBeansProjects/FATESG-PI-2017.1/br.com.FATESG.PI-2017.1/src/arquivos/";
     String arqModelos = diretorio + "Modelos.csv";
         
     FileWriter fwModelos = null;
@@ -40,8 +40,7 @@ public class ModeloDAO implements CRUD{
             bwModelos = new BufferedWriter(fwModelos);
             GerarId gerarId = new GerarId();
             modelo.setIdModelo(gerarId.getIdModelo());
-            String dados = modelo.getIdModelo() + ";" + modelo.getDescricao() + ";" + modelo.getAnoDeFabricacao() + ";" +
-                    modelo.getMarca() + ";" + modelo.getMotor() + ";" + modelo.getValorLocacao() + "/n";
+            String dados = modelo.getIdModelo() + ";" + modelo.getDescricao() + ";" + modelo.getMarca().getDescricao() + "\n";
             bwModelos.write(dados);
             bwModelos.close();
             
@@ -56,7 +55,7 @@ public class ModeloDAO implements CRUD{
 
     @Override
     public ArrayList<Object> recuperar() throws Exception {
-        ArrayList<Modelo> modelos = new ArrayList<>();
+        ArrayList<Object> modelos = new ArrayList<>();
         
         try {
             File fileModelos = new File(arqModelos);
@@ -70,10 +69,10 @@ public class ModeloDAO implements CRUD{
                 String vModelos[] = linhaModelos.split(";");
                 modelo.setIdModelo(Integer.parseInt(vModelos[0]));
                 modelo.setDescricao(vModelos[1]);
-                modelo.setAnoDeFabricacao(Integer.parseInt(vModelos[2]));
-                modelo.setMotor(Float.parseFloat(vModelos[3]));
-                modelo.setValorLocacao(Float.parseFloat(vModelos[4]));
-                marca.setDescricao(vModelos[5]);
+//                modelo.setAnoDeFabricacao(Integer.parseInt(vModelos[2]));
+//                modelo.setMotor(Float.parseFloat(vModelos[3]));
+//                modelo.setValorLocacao(Float.parseFloat(vModelos[4]));
+                marca.setDescricao(vModelos[2]);
                 
                 modelos.add(modelo);
                 
@@ -83,7 +82,7 @@ public class ModeloDAO implements CRUD{
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, new Mensagens().mensagem("MSG15"));
         }
-        return (ArrayList<Object>) (Object) (modelos);
+        return modelos;
     }
 
 

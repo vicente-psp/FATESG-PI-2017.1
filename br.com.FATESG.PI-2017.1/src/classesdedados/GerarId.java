@@ -25,7 +25,7 @@ public class GerarId {
     private int idMarca = 0;
     private int idLocacao = 0;
     private int idVeiculo = 0;
-    
+        
     String arquivoID = diretorio + "GeradorDeID.csv";
 
     public GerarId() {
@@ -37,7 +37,7 @@ public class GerarId {
                 FileWriter fw = new FileWriter(arquivoID, false);
                 BufferedWriter bw = new BufferedWriter(fw);
 
-                String saida = 0 + ";" + 0 + ";" + 0 + ";" + 0 + ";" +0;
+                String saida = 0 + ";" + 0 + ";" + 0 + ";" + 0 + ";" + 0;
                 bw.write(saida);
 
                 bw.close();

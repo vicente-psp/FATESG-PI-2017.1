@@ -53,111 +53,27 @@ public class LocacaoDAO implements CRUD {
 
     @Override
     public ArrayList<Object> recuperar() throws Exception {
-        ArrayList<Locacao> locacoes = new ArrayList<>();
+        ArrayList<Locacao> locacao = new ArrayList<>();
         
         try {
             File fileLocacao = new File(arqLocacao);
-            if(!fileLocacao.exists()){
-                return null;
-            }
             FileReader frLocacao = new FileReader(fileLocacao);
             BufferedReader brLocacao = new BufferedReader(frLocacao);
             String linhaLocacao = brLocacao.readLine();
-            while (linhaLocacao != null && !linhaLocacao.equals("")){
-                Locacao locacao = new Locacao();
-                
-                String vLocacao[] = linhaLocacao.split(";");
-                locacao.setIdLocacao(Integer.parseInt(vLocacao[0]));
-                locacao.setLocalSaidaVeiculo(vLocacao[1]);
-                locacao.setLocalChegadaVeiculo(vLocacao[2]);
-                locacao.setDataInicio(vLocacao[3]);
-                locacao.setDataFim(vLocacao[4]);
-                locacao.setFinalidadeDaLocacao(vLocacao[5]);
-                locacao.setKmInicial(Integer.parseInt(vLocacao[6]));
-                locacao.setKmFinal(Integer.parseInt(vLocacao[7]));
-                locacao.setVistoria(vLocacao[8]);
-                locacao.setStatus(Enum.valueOf(Locacao.EnumLocacao.class, vLocacao[9]));
-                
-                locacoes.add(locacao);
-                
-                linhaLocacao = brLocacao.readLine();                
-            }
             
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, new Mensagens().mensagem("MSG15"));
         }
-        return (ArrayList<Object>) (Object) (locacoes);
+        return (ArrayList<Object>) (Object) (locacao);
     }
 
     @Override
     public void alterar(int id, Object objeto) throws Exception {
-        try {
-            Object locacao = recuperar();
-            ArrayList<Locacao> locacoes = (ArrayList<Locacao>) (locacao);
-            Locacao objLocacao = (Locacao) objeto;
-            
-            String dadosLocacao = "";
-            
-                if(locacoes.size() >= 0 && locacoes != null){
-                    for(int i = 0; i < locacoes.size(); i++){
-                        if (locacoes.get(i).getIdLocacao() != id){
-                            dadosLocacao += locacoes.get(i).getIdLocacao() + ";" + locacoes.get(i).getLocalSaidaVeiculo() + ";" + locacoes.get(i).getLocalChegadaVeiculo() + ";" +
-                        locacoes.get(i).getFinalidadeDaLocacao() + ";" + locacoes.get(i).getDataInicio() + ";" + locacoes.get(i).getDataFim() + ";" + locacoes.get(i).getVistoria() + ";" +
-                        locacoes.get(i).getKmInicial() + ";" + locacoes.get(i).getKmFinal() + ";" + locacoes.get(i).getStatus() + "/n"; 
-                        }else {
-                            dadosLocacao += id + ";" + objLocacao.getIdLocacao() + ";" + objLocacao.getLocalSaidaVeiculo() + ";" + objLocacao.getLocalChegadaVeiculo() + ";" +
-                        objLocacao.getFinalidadeDaLocacao() + ";" + objLocacao.getDataInicio() + ";" + objLocacao.getDataFim() + ";" + objLocacao.getVistoria() + ";" +
-                        objLocacao.getKmInicial() + ";" + objLocacao.getKmFinal() + ";" + objLocacao.getStatus() + "/n";
-                        }
-                    }
-                    if (!dadosLocacao.equals("")){
-                        File file = new File(arqLocacao);
-                        if (!file.exists()){
-                            fwLocacao = new FileWriter(arqLocacao, false);
-                        }else{
-                            fwLocacao = new FileWriter(arqLocacao);
-                        }
-                        fwLocacao = new FileWriter(arqLocacao);
-                        bwLocacao = new BufferedWriter(fwLocacao);
-                        bwLocacao.write(dadosLocacao);
-                        bwLocacao.close();
-                    }
-                    JOptionPane.showMessageDialog(null, new Mensagens().mensagem("MSG12"));
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, new Mensagens().mensagem("MSG13"));
-        }
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void excluir(int id) throws Exception {
-       Object locacao = recuperar();
-       ArrayList<Locacao> locacoes = (ArrayList<Locacao>) (locacao);
-       
-       boolean achou = false;
-       String dadosLocacao = "";
-       
-        if(locacoes.size() >= 0 && locacoes != null){
-            for (int i = 0; i < locacoes.size(); i++){
-                if(locacoes.get(i).getIdLocacao() != id){
-                dadosLocacao += locacoes.get(i).getIdLocacao() + ";" + locacoes.get(i).getLocalSaidaVeiculo() + ";" + locacoes.get(i).getLocalChegadaVeiculo() + ";" +
-                        locacoes.get(i).getFinalidadeDaLocacao() + ";" + locacoes.get(i).getDataInicio() + ";" + locacoes.get(i).getDataFim() + ";" + locacoes.get(i).getVistoria() + ";" +
-                        locacoes.get(i).getKmInicial() + ";" + locacoes.get(i).getKmFinal() + ";" + locacoes.get(i).getStatus() + "/n";
-            }else {
-                    achou = true;
-                }
-        }
-    }
-        if (achou)  {
-            fwLocacao = new FileWriter(arqLocacao);
-            bwLocacao = new BufferedWriter(fwLocacao);
-            bwLocacao.write(dadosLocacao);
-            bwLocacao.close();
-            
-            JOptionPane.showMessageDialog(null, "MSG04");
-        }else{
-            JOptionPane.showMessageDialog(null, "MSG16");
-        }
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

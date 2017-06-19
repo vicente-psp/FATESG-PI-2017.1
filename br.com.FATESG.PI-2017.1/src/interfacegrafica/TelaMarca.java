@@ -70,11 +70,11 @@ public class TelaMarca extends javax.swing.JInternalFrame {
             }
         });
         jTextFieldMarcaPesquisar.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTextFieldMarcaPesquisarKeyReleased(evt);
-            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jTextFieldMarcaPesquisarKeyTyped(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldMarcaPesquisarKeyReleased(evt);
             }
         });
 
@@ -112,6 +112,12 @@ public class TelaMarca extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Descrição:");
 
+        jTextFieldMarcaEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldMarcaEditarActionPerformed(evt);
+            }
+        });
+
         jButtonMarcaExcluir.setText("EXLUIR");
         jButtonMarcaExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -135,6 +141,11 @@ public class TelaMarca extends javax.swing.JInternalFrame {
 
         jLabel3.setText("Descrição:");
 
+        jTextFieldMarcaCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldMarcaCadastrarActionPerformed(evt);
+            }
+        });
         jTextFieldMarcaCadastrar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTextFieldMarcaCadastrarKeyReleased(evt);
@@ -319,7 +330,7 @@ public class TelaMarca extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButtonMarcaLimparActionPerformed
 
     private void jButtonMarcaLimpar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMarcaLimpar1ActionPerformed
-        // TODO add your handling code here:
+        jTextFieldMarcaCadastrar.setText("");
     }//GEN-LAST:event_jButtonMarcaLimpar1ActionPerformed
 
     private void jButtonMarcaSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMarcaSalvarActionPerformed
@@ -473,6 +484,14 @@ public class TelaMarca extends javax.swing.JInternalFrame {
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jButtonMarcaExcluirActionPerformed
+
+    private void jTextFieldMarcaEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldMarcaEditarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldMarcaEditarActionPerformed
+
+    private void jTextFieldMarcaCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldMarcaCadastrarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldMarcaCadastrarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

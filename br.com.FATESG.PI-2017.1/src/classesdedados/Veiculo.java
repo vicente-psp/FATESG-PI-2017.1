@@ -14,20 +14,25 @@ import classesdedados.Marca;
 public class Veiculo {
     private int idVeiculo = 0;
     private String placa = "";
-    private EnumVeiculo status = null;
-    private Modelo modelo = null;
-    private Marca marca = null;
+    private String status = "";
+    private String modelo = "";
+    private String marca = "";
+    protected int anoDeFabricacao = 0;
+    protected float motor = 0;
     
     
     public Veiculo(){
         
     }
-    public Veiculo(int idVeiculo, String placa, EnumVeiculo status, Modelo modelo, Marca marca){
+    public Veiculo(int idVeiculo, String placa, String status, String modelo, String marca, int anoDeFabricacao,
+                            float motor){
         this.idVeiculo = idVeiculo;
         this.placa = placa;
         this.status = status;
         this.modelo = modelo;
         this.marca = marca;
+        this.anoDeFabricacao = anoDeFabricacao;
+        this.motor = motor;
     }
 
     public int getidVeiculo(){
@@ -46,32 +51,64 @@ public class Veiculo {
         this.placa = placa;
     }
 
-    public EnumVeiculo getStatus() {
-        return status;
-    }
+//    public EnumVeiculo getStatus() {
+//        return status;
+//    }
 
-    public void setStatus(EnumVeiculo status) {
+    public void setStatus(String status) {
         this.status = status;
     }
     
-    public enum EnumVeiculo{
-        DISPONIVEL, LOCADO, VENDIDO, SINISTRADO;
+    public String getStatus() {
+        return status;
     }
+    
+//    public enum EnumVeiculo{
+//        DISPONIVEL, LOCADO, VENDIDO, SINISTRADO;
+//    }
 
-    public Modelo getModelo() {
+    public String getModelo() {
         return modelo;
     }
 
-    public void setModelo(Modelo modelo) {
+    public void setModelo(String modelo) {
         this.modelo = modelo;
     }
 
-    public Marca getMarca() {
+    public String getMarca() {
         return marca;
     }
 
-    public void setMarca(Marca marca) {
+    public void setMarca(String marca) {
         this.marca = marca;
+    }
+
+    /**
+     * @return the anoDeFabricacao
+     */
+    public int getAnoDeFabricacao() {
+        return anoDeFabricacao;
+    }
+
+    /**
+     * @param anoDeFabricacao the anoDeFabricacao to set
+     */
+    public void setAnoDeFabricacao(int anoDeFabricacao) {
+        this.anoDeFabricacao = anoDeFabricacao;
+    }
+
+    /**
+     * @return the motor
+     */
+    public float getMotor() {
+        return motor;
+    }
+
+    /**
+     * @param motor the motor to set
+     */
+    public void setMotor(float motor) {
+        this.motor = motor;
     }
     
 }

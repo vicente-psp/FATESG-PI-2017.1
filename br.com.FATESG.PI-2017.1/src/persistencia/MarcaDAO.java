@@ -23,7 +23,7 @@ import javax.swing.JOptionPane;
  */
 public class MarcaDAO implements CRUD {
 
-    String diretorio = "C:\\AmbienteTrabalho\\Projetos\\FATESG-PI-2017.1\\br.com.FATESG.PI-2017.1\\src\\arquivos\\";
+    String diretorio = "/Users/renatowsilva/Documents/Faculdade Senai/Segundo Semestre/NetBeansProjects/FATESG-PI-2017.1/br.com.FATESG.PI-2017.1/src/arquivos/";
     String arqMarcas = diretorio + "Marcas.csv";
 
     FileWriter fwMarcas = null;
@@ -105,7 +105,9 @@ public class MarcaDAO implements CRUD {
         if (alMarcas.size() >= 0 && alMarcas != null) {
             for (int i = 0; i < alMarcas.size(); i++) {
                 if (alMarcas.get(i).getIdMarca() != id) {
+                    
                     dadosMarca += alMarcas.get(i).getIdMarca() + ";" + alMarcas.get(i).getDescricao() + "\n";
+                    
                 } else {
                     achou = true;
                 }

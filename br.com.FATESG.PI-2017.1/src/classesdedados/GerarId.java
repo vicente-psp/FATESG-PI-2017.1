@@ -19,7 +19,7 @@ import javax.swing.JOptionPane;
  * @author Alexandre Fernandes
  */
 public class GerarId {
-    String diretorio = "C:\\AmbienteTrabalho\\Projetos\\FATESG-PI-2017.1\\br.com.FATESG.PI-2017.1\\src\\arquivos\\";
+    String diretorio = "/Users/renatowsilva/Documents/Faculdade Senai/Segundo Semestre/NetBeansProjects/FATESG-PI-2017.1/br.com.FATESG.PI-2017.1/src/arquivos/";
     private int idPessoa = 0;
     private int idModelo = 0;
     private int idMarca = 0;

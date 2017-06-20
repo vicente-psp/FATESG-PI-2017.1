@@ -5,23 +5,38 @@
  */
 package interfacegrafica;
 import classesdedados.Marca;
+import classesdedados.Mensagens;
 import classesdedados.Modelo;
+import classesdedados.Veiculo;
+import classesdedados.Veiculo;
 import com.sun.org.apache.xpath.internal.operations.Mod;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import persistencia.MarcaDAO;
 import persistencia.ModeloDAO;
+import persistencia.VeiculoDAO;
+import persistencia.VeiculoDAO;
 /**
  *
  * @author renatowsilva
  */
 public class TelaCadastroDeVeiculo extends javax.swing.JInternalFrame {
-
+    DefaultTableModel dtm = null;
+    Veiculo objVeiculo = new Veiculo();
     /**
      * Creates new form TelaCadastroDeVeiculo
      */
     public TelaCadastroDeVeiculo() {
         initComponents();
+        jTextFieldVeiculoAnoFabAlterar.requestFocus();
+        jTextFieldVeiculoMotorizacao.requestFocus();
+        jFormattedTextFieldVeiculoPlaca.requestFocus();
+        jTextFieldID.setEnabled(false);
+        jTextFieldVeiculoMarcaAlterar.setEnabled(false);
+        jTextFieldVeiculoModeloEditar.setEnabled(false);
         try {
             MarcaDAO marcaDAO = new MarcaDAO();
             System.out.println(marcaDAO.recuperar().size());
@@ -51,18 +66,39 @@ public class TelaCadastroDeVeiculo extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jToggleButton1 = new javax.swing.JToggleButton();
+        jLabel5 = new javax.swing.JLabel();
+        jComboBoxVeiculoStatusAlterar = new javax.swing.JComboBox<>();
+        jComboBoxVeiculoStatusVeiculo = new javax.swing.JComboBox<>();
+        jTextFieldVeiculoAnoFabAlterar = new javax.swing.JFormattedTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jFormattedTextFieldVeiculoPlaca = new javax.swing.JFormattedTextField();
+        jButtonVeiculoLimpar = new javax.swing.JButton();
+        jTextFieldVeiculoMotorizacao = new javax.swing.JFormattedTextField();
+        jButtonVeiculoSalvar = new javax.swing.JButton();
+        jTextFieldVeiculoMotorizacaoAlterar = new javax.swing.JFormattedTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jTextFieldVeiculoMarcaAlterar = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jTextFieldVeiculoModeloEditar = new javax.swing.JTextField();
+        jButtonVeiculoExcluir = new javax.swing.JButton();
+        jButtonVeiculoAlterar = new javax.swing.JButton();
+        jButtonVeiculoLimparAlteracao = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableVeiculoPesquisa = new javax.swing.JTable();
+        jTextFieldID = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
         jComboBoxVeiculoMarca = new javax.swing.JComboBox<>();
+        jLabel10 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jComboBoxVeiculoModelo = new javax.swing.JComboBox<>();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jFormattedTextFieldVeiculoPlacaAlterar = new javax.swing.JFormattedTextField();
         jFormattedTextFieldVeiculoAnoFabricacao = new javax.swing.JFormattedTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jComboBoxVeiculoStatusVeiculo = new javax.swing.JComboBox<>();
-        jLabel6 = new javax.swing.JLabel();
-        jTextFieldVeiculoMotorizacao = new javax.swing.JTextField();
-        jButtonVeiculoLimpar = new javax.swing.JButton();
-        jButtonVeiculoSalvar = new javax.swing.JButton();
+        jLabel13 = new javax.swing.JLabel();
 
         jToggleButton1.setText("jToggleButton1");
 
@@ -70,11 +106,127 @@ public class TelaCadastroDeVeiculo extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
 
+        jLabel5.setText("Status do Veiculo: ");
+
+        jComboBoxVeiculoStatusAlterar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DISPONIVEL", "LOCADO", "VENDIDO", "SINISTRADO" }));
+
+        jComboBoxVeiculoStatusVeiculo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DISPONIVEL", "LOCADO", "VENDIDO", "SINISTRADO" }));
+
+        try {
+            jTextFieldVeiculoAnoFabAlterar.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        jLabel6.setText("Motorização:");
+
+        try {
+            jFormattedTextFieldVeiculoPlaca.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("???-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        jFormattedTextFieldVeiculoPlaca.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jFormattedTextFieldVeiculoPlacaKeyReleased(evt);
+            }
+        });
+
+        jButtonVeiculoLimpar.setText("LIMPAR");
+
+        try {
+            jTextFieldVeiculoMotorizacao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#.#")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        jButtonVeiculoSalvar.setText("SALVAR");
+        jButtonVeiculoSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonVeiculoSalvarActionPerformed(evt);
+            }
+        });
+
+        try {
+            jTextFieldVeiculoMotorizacaoAlterar.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#.#")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        jLabel1.setText("Placa:");
+
+        jLabel7.setText("Marca:");
+
+        jLabel8.setText("ID:");
+
+        jButtonVeiculoExcluir.setText("EXLUIR");
+        jButtonVeiculoExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonVeiculoExcluirActionPerformed(evt);
+            }
+        });
+
+        jButtonVeiculoAlterar.setText("ALTERAR");
+        jButtonVeiculoAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonVeiculoAlterarActionPerformed(evt);
+            }
+        });
+
+        jButtonVeiculoLimparAlteracao.setText("LIMPAR");
+        jButtonVeiculoLimparAlteracao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonVeiculoLimparAlteracaoActionPerformed(evt);
+            }
+        });
+
+        jTableVeiculoPesquisa.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Modelo", "Marca", "Ano Fab", "Motor", "Placa", "Status"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTableVeiculoPesquisa.setName(""); // NOI18N
+        jTableVeiculoPesquisa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableVeiculoPesquisaMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTableVeiculoPesquisa);
+
         jLabel2.setText("Marca:");
+
+        jLabel9.setText("Modelo");
+
+        jLabel10.setText("Ano Fabricação:");
 
         jLabel3.setText("Modelo:");
 
+        jLabel11.setText("Motorização:");
+
+        jLabel12.setText("Placa:");
+
         jLabel4.setText("Ano de Fabricação:");
+
+        try {
+            jFormattedTextFieldVeiculoPlacaAlterar.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("???-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        jFormattedTextFieldVeiculoPlacaAlterar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jFormattedTextFieldVeiculoPlacaAlterarKeyReleased(evt);
+            }
+        });
 
         try {
             jFormattedTextFieldVeiculoAnoFabricacao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####")));
@@ -82,15 +234,7 @@ public class TelaCadastroDeVeiculo extends javax.swing.JInternalFrame {
             ex.printStackTrace();
         }
 
-        jLabel5.setText("Status do Veiculo: ");
-
-        jComboBoxVeiculoStatusVeiculo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DISPONIVEL", "LOCADO", "VENDIDO", "SINISTRADO" }));
-
-        jLabel6.setText("Motorização:");
-
-        jButtonVeiculoLimpar.setText("Limpar");
-
-        jButtonVeiculoSalvar.setText("Salvar");
+        jLabel13.setText("Status Veiculo:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -98,35 +242,88 @@ public class TelaCadastroDeVeiculo extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(48, 48, 48)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jFormattedTextFieldVeiculoPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel5))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBoxVeiculoMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBoxVeiculoModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jFormattedTextFieldVeiculoAnoFabricacao, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(24, 24, 24)
-                                .addComponent(jLabel6)
+                                .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldVeiculoMotorizacao, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jComboBoxVeiculoStatusVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(46, Short.MAX_VALUE))
+                                .addComponent(jFormattedTextFieldVeiculoAnoFabricacao, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel6))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jComboBoxVeiculoMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel3)))
+                        .addGap(8, 8, 8)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jComboBoxVeiculoModelo, 0, 132, Short.MAX_VALUE)
+                        .addComponent(jComboBoxVeiculoStatusVeiculo, 0, 1, Short.MAX_VALUE))
+                    .addComponent(jTextFieldVeiculoMotorizacao, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonVeiculoLimpar)
-                .addGap(18, 18, 18)
-                .addComponent(jButtonVeiculoSalvar)
-                .addGap(130, 130, 130))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButtonVeiculoExcluir)
+                        .addGap(14, 14, 14))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButtonVeiculoLimparAlteracao)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonVeiculoAlterar)
+                        .addGap(147, 147, 147))))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(179, 179, 179)
+                                .addComponent(jButtonVeiculoLimpar)
+                                .addGap(26, 26, 26)
+                                .addComponent(jButtonVeiculoSalvar))
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel8)
+                                        .addGap(40, 40, 40)
+                                        .addComponent(jLabel7))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jTextFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(12, 12, 12)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel11)
+                                            .addComponent(jTextFieldVeiculoMarcaAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jTextFieldVeiculoMotorizacaoAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextFieldVeiculoModeloEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel12)
+                                    .addComponent(jFormattedTextFieldVeiculoPlacaAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel9))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel10)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(3, 3, 3)
+                                        .addComponent(jLabel13))
+                                    .addComponent(jTextFieldVeiculoAnoFabAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jComboBoxVeiculoStatusAlterar, 0, 127, Short.MAX_VALUE))))
+                        .addGap(14, 14, 14)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,7 +334,7 @@ public class TelaCadastroDeVeiculo extends javax.swing.JInternalFrame {
                     .addComponent(jComboBoxVeiculoMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
                     .addComponent(jComboBoxVeiculoModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jFormattedTextFieldVeiculoAnoFabricacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -145,32 +342,313 @@ public class TelaCadastroDeVeiculo extends javax.swing.JInternalFrame {
                     .addComponent(jTextFieldVeiculoMotorizacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jComboBoxVeiculoStatusVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
-                    .addComponent(jComboBoxVeiculoStatusVeiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                    .addComponent(jFormattedTextFieldVeiculoPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonVeiculoLimpar)
                     .addComponent(jButtonVeiculoSalvar))
-                .addGap(32, 32, 32))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonVeiculoExcluir)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel10))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel7)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldVeiculoMarcaAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldVeiculoModeloEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldVeiculoAnoFabAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel12)
+                    .addComponent(jLabel13))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jFormattedTextFieldVeiculoPlacaAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxVeiculoStatusAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldVeiculoMotorizacaoAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonVeiculoAlterar)
+                    .addComponent(jButtonVeiculoLimparAlteracao))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jFormattedTextFieldVeiculoPlacaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jFormattedTextFieldVeiculoPlacaKeyReleased
+        jFormattedTextFieldVeiculoPlaca.setText(jFormattedTextFieldVeiculoPlaca.getText().toUpperCase());
+    }//GEN-LAST:event_jFormattedTextFieldVeiculoPlacaKeyReleased
+
+    private void jButtonVeiculoSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVeiculoSalvarActionPerformed
+        VeiculoDAO cadveiculo = new VeiculoDAO();
+        Veiculo cadastroveiculo = new Veiculo();
+
+        try {
+
+            Object objDAO = cadveiculo.recuperar();
+            ArrayList<Veiculo> alVeiculos = (ArrayList<Veiculo>) objDAO;
+
+            if (jTextFieldVeiculoMotorizacao.getText().equals("") | jFormattedTextFieldVeiculoAnoFabricacao.getText().equals("")
+                | jFormattedTextFieldVeiculoPlaca.getText().equals("")) {
+                JOptionPane.showMessageDialog(null, "Campo obrigatório.");
+                jTextFieldVeiculoMotorizacao.requestFocus();
+                jFormattedTextFieldVeiculoAnoFabricacao.requestFocus();
+                jFormattedTextFieldVeiculoPlaca.requestFocus();
+                return;
+            }
+            //            if (jFormattedTextFieldVeiculoAnoFabricacao.getText().equals("")) {
+                //                JOptionPane.showMessageDialog(null, "Campo obrigatório.");
+                //                jFormattedTextFieldVeiculoAnoFabricacao.requestFocus();
+                //                return;
+                //            }
+            //            if (jFormattedTextFieldVeiculoPlaca.getText().equals("")) {
+                //                JOptionPane.showMessageDialog(null, "Campo obrigatório.");
+                //                jFormattedTextFieldVeiculoPlaca.requestFocus();
+                //                return;
+                //            }
+
+            cadastroveiculo.setMarca(jComboBoxVeiculoMarca.getSelectedItem().toString());
+            cadastroveiculo.setModelo(jComboBoxVeiculoModelo.getSelectedItem().toString());
+            cadastroveiculo.setAnoDeFabricacao(jFormattedTextFieldVeiculoAnoFabricacao.getText());
+            cadastroveiculo.setMotor(jTextFieldVeiculoMotorizacao.getText());
+            cadastroveiculo.setPlaca(jFormattedTextFieldVeiculoPlaca.getText());
+            cadastroveiculo.setStatus(jComboBoxVeiculoStatusVeiculo.getSelectedItem().toString());
+
+            if (alVeiculos != null) {
+                for (int i = 0; i < alVeiculos.size(); i++) {
+                    if (cadastroveiculo.getPlaca().toUpperCase().equals(alVeiculos.get(i).getPlaca().toUpperCase())) {
+                        JOptionPane.showMessageDialog(null, "Cadastro não realizado, veiculo já cadastrada!");
+                        return;
+                    }
+                }
+            }
+
+            Object objVeiculo = null;
+            objVeiculo = (Object) (cadastroveiculo);
+            cadveiculo.incluir(objVeiculo);
+
+            dtm = (DefaultTableModel) jTableVeiculoPesquisa.getModel();
+            dtm.setNumRows(0);
+            String strId, strMarca, strModelo, strAnoFab, strMotor, strPlaca, strStatus;
+
+            objDAO = cadveiculo.recuperar();
+            alVeiculos = (ArrayList<Veiculo>) objDAO;
+            for (int i = 0; i < alVeiculos.size(); i++) {
+                strId = String.valueOf(alVeiculos.get(i).getidVeiculo());
+                strMarca = alVeiculos.get(i).getMarca();
+                strModelo = alVeiculos.get(i).getModelo();
+                strAnoFab = alVeiculos.get(i).getAnoDeFabricacao();
+                strMotor = alVeiculos.get(i).getMotor()+"";
+                strPlaca = alVeiculos.get(i).getPlaca();
+                strStatus = alVeiculos.get(i).getStatus();
+
+                Object[] dados = {strId, strMarca, strModelo, strAnoFab, strMotor, strPlaca, strStatus};
+                dtm.addRow(dados);
+            }
+            jFormattedTextFieldVeiculoAnoFabricacao.setText("");
+            jFormattedTextFieldVeiculoAnoFabricacao.requestFocus();
+            jTextFieldVeiculoMotorizacao.setText("");
+            jTextFieldVeiculoMotorizacao.requestFocus();
+            jFormattedTextFieldVeiculoPlaca.setText("");
+            jFormattedTextFieldVeiculoPlaca.requestFocus();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, new Mensagens().mensagem("MSG14"));
+        }
+    }//GEN-LAST:event_jButtonVeiculoSalvarActionPerformed
+
+    private void jButtonVeiculoExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVeiculoExcluirActionPerformed
+        try {
+            VeiculoDAO dao = new VeiculoDAO();
+
+            dtm = (DefaultTableModel) jTableVeiculoPesquisa.getModel();
+
+            int idx[] = jTableVeiculoPesquisa.getSelectedRows();
+            if (jTableVeiculoPesquisa.getSelectedRow() >= 0) {
+                for (int j = 0; j < idx.length; j++) {
+                    dao.excluir(Integer.parseInt(String.valueOf(dtm.getValueAt(idx[j], 0))));
+                }
+
+                dtm.setNumRows(0);
+                String strId, strMarca, strModelo, strAnoFab, strMotor, strPlaca, strStatus;
+                Object objDAO = dao.recuperar();
+                ArrayList<Veiculo> alVeiculos = (ArrayList<Veiculo>) objDAO;
+                for (int i = 0; i < alVeiculos.size(); i++) {
+                    strId = String.valueOf(alVeiculos.get(i).getidVeiculo());
+                    strMarca = String.valueOf(alVeiculos.get(i).getMarca());
+                    strModelo = String.valueOf(alVeiculos.get(i).getModelo());
+                    strAnoFab = alVeiculos.get(i).getAnoDeFabricacao();
+                    strMotor = alVeiculos.get(i).getMotor()+"";
+                    strPlaca = alVeiculos.get(i).getPlaca();
+                    strStatus = alVeiculos.get(i).getStatus();
+
+                    Object[] dados = {strId, strMarca, strModelo, strAnoFab, strMotor, strPlaca, strStatus};
+                    dtm.addRow(dados);
+
+                }
+                jFormattedTextFieldVeiculoAnoFabricacao.setText("");
+                jFormattedTextFieldVeiculoAnoFabricacao.requestFocus();
+                jTextFieldVeiculoMotorizacao.setText("");
+                jTextFieldVeiculoMotorizacao.requestFocus();
+                jFormattedTextFieldVeiculoPlaca.setText("");
+                jFormattedTextFieldVeiculoPlaca.requestFocus();
+
+            } else {
+                JOptionPane.showMessageDialog(null, new Mensagens().mensagem("MSG18"));
+            }
+
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_jButtonVeiculoExcluirActionPerformed
+
+    private void jButtonVeiculoAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVeiculoAlterarActionPerformed
+        try {
+            VeiculoDAO dao = new VeiculoDAO();
+            if (!jFormattedTextFieldVeiculoPlacaAlterar.getText().equals("")) {
+                objVeiculo.setAnoDeFabricacao(jTextFieldVeiculoAnoFabAlterar.getText().toUpperCase());
+                objVeiculo.setMotor(jTextFieldVeiculoMotorizacaoAlterar.getText().toUpperCase());
+                objVeiculo.setPlaca(jFormattedTextFieldVeiculoPlacaAlterar.getText().toUpperCase());
+                objVeiculo.setStatus(jComboBoxVeiculoStatusAlterar.getSelectedItem().toString());
+                dao.alterar(objVeiculo.getidVeiculo(), objVeiculo);
+
+                dtm = (DefaultTableModel) jTableVeiculoPesquisa.getModel();
+                dtm.setNumRows(0);
+                String strId, strMarca, strModelo, strAnoFab, strMotor, strPlaca, strStatus;
+
+                Object objDAO = dao.recuperar();
+                ArrayList<Veiculo> alVeiculos = (ArrayList<Veiculo>) objDAO;
+                for (int i = 0; i < alVeiculos.size(); i++) {
+                    strId = String.valueOf(alVeiculos.get(i).getidVeiculo());
+                    strMarca = String.valueOf(alVeiculos.get(i).getMarca());
+                    strModelo = String.valueOf(alVeiculos.get(i).getModelo());
+                    strAnoFab = alVeiculos.get(i).getAnoDeFabricacao();
+                    strMotor = alVeiculos.get(i).getMotor();
+                    strPlaca = alVeiculos.get(i).getPlaca();
+                    strStatus = alVeiculos.get(i).getStatus();
+
+                    Object[] dados = {strId, strMarca, strModelo, strAnoFab, strMotor, strPlaca, strStatus};
+                    dtm.addRow(dados);
+                }
+
+                jFormattedTextFieldVeiculoAnoFabricacao.setText("");
+                jFormattedTextFieldVeiculoAnoFabricacao.requestFocus();
+                jTextFieldVeiculoMotorizacao.setText("");
+                jTextFieldVeiculoMotorizacao.requestFocus();
+                jFormattedTextFieldVeiculoPlaca.setText("");
+                jFormattedTextFieldVeiculoPlaca.requestFocus();
+            } else {
+                JOptionPane.showMessageDialog(this, "Campo obrigatório!");
+                jTextFieldVeiculoModeloEditar.requestFocus();
+                jTextFieldVeiculoMarcaAlterar.requestFocus();
+                jTextFieldVeiculoAnoFabAlterar.requestFocus();
+                jTextFieldVeiculoMotorizacaoAlterar.requestFocus();
+                jFormattedTextFieldVeiculoPlacaAlterar.requestFocus();
+                return;
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(TelaCadastroDeVeiculo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButtonVeiculoAlterarActionPerformed
+
+    private void jButtonVeiculoLimparAlteracaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVeiculoLimparAlteracaoActionPerformed
+        jTextFieldVeiculoMotorizacaoAlterar.setText("");
+        jFormattedTextFieldVeiculoPlacaAlterar.setText("");
+        jTextFieldVeiculoAnoFabAlterar.setText("");
+    }//GEN-LAST:event_jButtonVeiculoLimparAlteracaoActionPerformed
+
+    private void jTableVeiculoPesquisaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableVeiculoPesquisaMouseClicked
+        int qtdClicks = evt.getClickCount();
+        VeiculoDAO dao = new VeiculoDAO();
+
+        try {
+            Object objDAO = dao.recuperar();
+            ArrayList<Veiculo> alVeiculos = (ArrayList<Veiculo>) objDAO;
+            int idx = jTableVeiculoPesquisa.getSelectedRow();
+            if (qtdClicks == 2) {
+                if (jTableVeiculoPesquisa.getSelectedRow() >= 0) {
+                    dtm = (DefaultTableModel) jTableVeiculoPesquisa.getModel();
+                    objVeiculo.setidVeiculo(Integer.parseInt(dtm.getValueAt(idx, 0).toString()));
+                    for (int i = 0; i < alVeiculos.size(); i++) {
+                        if (alVeiculos.get(i).getidVeiculo()== objVeiculo.getidVeiculo()) {
+                            objVeiculo.setMarca(alVeiculos.get(i).getMarca());
+                            jTextFieldVeiculoMarcaAlterar.setText(objVeiculo.getMarca());
+                            objVeiculo.setModelo(alVeiculos.get(i).getModelo());
+                            jTextFieldVeiculoModeloEditar.setText(objVeiculo.getMarca());
+                            objVeiculo.setAnoDeFabricacao(alVeiculos.get(i).getAnoDeFabricacao());
+                            jTextFieldVeiculoAnoFabAlterar.setText(objVeiculo.getAnoDeFabricacao());
+                            objVeiculo.setMotor(alVeiculos.get(i).getMotor());
+                            jTextFieldVeiculoMotorizacaoAlterar.setText(objVeiculo.getMotor());
+                            objVeiculo.setPlaca(alVeiculos.get(i).getPlaca());
+                            jFormattedTextFieldVeiculoPlacaAlterar.setText(objVeiculo.getPlaca());
+                            objVeiculo.setStatus(alVeiculos.get(i).getStatus());
+                            //                            jComboBoxVeiculoStatusAlterar.setSelectedItem(objVeiculo.getStatus());
+
+                            //jTextFieldID.setEnabled(true);
+                            jTextFieldID.setText(objVeiculo.getidVeiculo()+ "");
+                            //jTextFieldID.setEnabled(false);
+                            return;
+                        }
+                    }
+
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+    }//GEN-LAST:event_jTableVeiculoPesquisaMouseClicked
+
+    private void jFormattedTextFieldVeiculoPlacaAlterarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jFormattedTextFieldVeiculoPlacaAlterarKeyReleased
+        jFormattedTextFieldVeiculoPlacaAlterar.setText(jFormattedTextFieldVeiculoPlacaAlterar.getText().toUpperCase());
+    }//GEN-LAST:event_jFormattedTextFieldVeiculoPlacaAlterarKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonVeiculoAlterar;
+    private javax.swing.JButton jButtonVeiculoExcluir;
     private javax.swing.JButton jButtonVeiculoLimpar;
+    private javax.swing.JButton jButtonVeiculoLimparAlteracao;
     private javax.swing.JButton jButtonVeiculoSalvar;
     private javax.swing.JComboBox<String> jComboBoxVeiculoMarca;
     private javax.swing.JComboBox<String> jComboBoxVeiculoModelo;
+    private javax.swing.JComboBox<String> jComboBoxVeiculoStatusAlterar;
     private javax.swing.JComboBox<String> jComboBoxVeiculoStatusVeiculo;
     private javax.swing.JFormattedTextField jFormattedTextFieldVeiculoAnoFabricacao;
+    private javax.swing.JFormattedTextField jFormattedTextFieldVeiculoPlaca;
+    private javax.swing.JFormattedTextField jFormattedTextFieldVeiculoPlacaAlterar;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JTextField jTextFieldVeiculoMotorizacao;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTableVeiculoPesquisa;
+    private javax.swing.JTextField jTextFieldID;
+    private javax.swing.JFormattedTextField jTextFieldVeiculoAnoFabAlterar;
+    private javax.swing.JTextField jTextFieldVeiculoMarcaAlterar;
+    private javax.swing.JTextField jTextFieldVeiculoModeloEditar;
+    private javax.swing.JFormattedTextField jTextFieldVeiculoMotorizacao;
+    private javax.swing.JFormattedTextField jTextFieldVeiculoMotorizacaoAlterar;
     private javax.swing.JToggleButton jToggleButton1;
     // End of variables declaration//GEN-END:variables
 }

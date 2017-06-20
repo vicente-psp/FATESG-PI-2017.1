@@ -24,7 +24,7 @@ import java.io.FileReader;
  * @author Vicente
  */
 public class VeiculoDAO implements CRUD{
-    String diretorio = "C:\\Users\\Vicente\\Google Drive\\ADS\\01 - FATESG\\2017.1\\Projetos Equipe ADS\\Projeto Integrador\\br.com.FATESG.PI-2017.1\\br.com.FATESG.PI-2017.1\\FATESG-PI-2017.1\\br.com.FATESG.PI-2017.1\\src\\arquivos\\";
+    String diretorio = "/Users/renatowsilva/Documents/Faculdade Senai/Segundo Semestre/NetBeansProjects/FATESG-PI-2017.1/br.com.FATESG.PI-2017.1/src/arquivos/";
     String arqVeiculo = diretorio + "Veiculo.csv";
     
     FileWriter fwVeiculo = null;
@@ -33,20 +33,18 @@ public class VeiculoDAO implements CRUD{
     @Override
     public void incluir(Object objeto) throws Exception {
         Veiculo veiculo = (Veiculo) objeto;
-         Modelo modelo = (Modelo) objeto;
          
         try {
             fwVeiculo = new FileWriter(arqVeiculo, true);
             bwVeiculo = new BufferedWriter(fwVeiculo);
             GerarId gerarId = new GerarId();
             veiculo.setidVeiculo(gerarId.getIdVeiculo());
-            
-            String dados = veiculo.getidVeiculo() + ";" + veiculo.getPlaca() + ";" + veiculo.getMarca() + ";" + veiculo.getModelo() + ";" + veiculo.getStatus() + "/n";
+            String dados = veiculo.getidVeiculo() + ";" + veiculo.getMarca() + ";" + veiculo.getModelo() + ";" + veiculo.getAnoDeFabricacao() + ";" + veiculo.getMotor() + ";" + veiculo.getPlaca()+ ";" + veiculo.getStatus() + "\n";
             bwVeiculo.write(dados);
             bwVeiculo.close();
       
            gerarId.finalize();
-       JOptionPane.showMessageDialog(null, new Mensagens().mensagem("MSG01"));
+           JOptionPane.showMessageDialog(null, new Mensagens().mensagem("MSG01"));
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, new Mensagens().mensagem("MSG02"));
         }
@@ -58,28 +56,32 @@ public class VeiculoDAO implements CRUD{
         
         try {
             File fileVeiculos = new File(arqVeiculo);
+            if (!fileVeiculos.exists()) {
+                return null;
+            }
             FileReader frVeiculos = new FileReader(fileVeiculos);
             BufferedReader brVeiculos = new BufferedReader(frVeiculos);
             String linhaVeiculos = brVeiculos.readLine();
-            
             while(linhaVeiculos != null && !linhaVeiculos.equals("")){
                 Veiculo veiculo = new Veiculo();
-                Marca marca = new Marca();
-                Modelo modelo = new Modelo();
+                
                 
                 String vVeiculos[] = linhaVeiculos.split(";");
                 veiculo.setidVeiculo(Integer.parseInt(vVeiculos[0]));
-                veiculo.setPlaca(vVeiculos[1]);
-                modelo.setDescricao(vVeiculos[2]);
-                marca.setDescricao(vVeiculos[3]);
-                veiculo.setStatus(Enum.valueOf(Veiculo.EnumVeiculo.class, vVeiculos[4]));
+                veiculo.setMarca(vVeiculos[1]);
+                veiculo.setModelo(vVeiculos[2]);
+                veiculo.setAnoDeFabricacao((vVeiculos[3]));
+                veiculo.setMotor((vVeiculos[4]));
+                veiculo.setPlaca(vVeiculos[5]);
+                veiculo.setStatus(vVeiculos[6]);
+                
 
             veiculos.add(veiculo);
             linhaVeiculos = brVeiculos.readLine();
             }
             
         } catch (Exception e) {
-            
+            JOptionPane.showMessageDialog(null, new Mensagens().mensagem("MSG15"));
         }
         return (ArrayList<Object>) (Object) (veiculos);
     }
@@ -97,19 +99,25 @@ public class VeiculoDAO implements CRUD{
             for (int i = 0; i < veiculos.size(); i++){
                 if(veiculos.get(i).getidVeiculo() != id){
                     
-                    dadosVeiculo += veiculos.get(i).getidVeiculo() + ";" + veiculos.get(i).getPlaca() + ";" + veiculos.get(i).getMarca() + ";" + 
-                            veiculos.get(i).getModelo() + ";" + veiculos.get(i).getStatus() + "/n";
-                }
-            }
-        }else{
+                    dadosVeiculo += veiculos.get(i).getidVeiculo() + ";" + veiculos.get(i).getMarca() + ";" + 
+                            veiculos.get(i).getModelo() + ";" + veiculos.get(i).getAnoDeFabricacao() + ";" + 
+                            veiculos.get(i).getMotor()+ ";" + veiculos.get(i).getPlaca()+ ";" + veiculos.get(i).getStatus() + "\n";
+                }else{
             achou = true;
+        }
+            }
         }
         if (achou){
             fwVeiculo = new FileWriter(arqVeiculo);
             bwVeiculo = new BufferedWriter(fwVeiculo);
             bwVeiculo.write(dadosVeiculo);
             bwVeiculo.close();
+            
+            JOptionPane.showMessageDialog(null, new Mensagens().mensagem("MSG04"));
+        }else{
+            JOptionPane.showMessageDialog(null, "Registro não foi encontrado!");
         }
+        
     }
 
     @Override
@@ -125,19 +133,33 @@ public class VeiculoDAO implements CRUD{
                 for (int i = 0; i < veiculos.size(); i++){
                     if(veiculos.get(i).getidVeiculo() != id){
                         
-                        dadosVeiculo += veiculos.get(i).getidVeiculo() + ";" + veiculos.get(i).getPlaca() + ";" + veiculos.get(i).getMarca() + ";" + veiculos.get(i).getModelo() + ";" + veiculos.get(i).getStatus() + "/n";
-                    }else{
-                        dadosVeiculo += id + ";" + objVeiculo.getPlaca() + ";" + objVeiculo.getMarca() + ";" + objVeiculo.getModelo() + ";" + objVeiculo.getStatus() + "/n";
+                        dadosVeiculo += veiculos.get(i).getidVeiculo() + ";" + veiculos.get(i).getMarca() + ";" + 
+                            veiculos.get(i).getModelo() + ";" + veiculos.get(i).getAnoDeFabricacao() + ";" + 
+                            veiculos.get(i).getMotor()+ ";" + veiculos.get(i).getPlaca()+ ";" + veiculos.get(i).getStatus() + "\n";
+                    }
+                    else{
+                        dadosVeiculo += id + ";" + objVeiculo.getMarca()+ ";" + objVeiculo.getModelo()+ ";" + 
+                                objVeiculo.getAnoDeFabricacao()+ ";" + objVeiculo.getMotor()+ ";" + objVeiculo.getPlaca() +
+                                ";" + objVeiculo.getStatus()+ "\n";
                     }
                 }
-            }
+            
+            if(!dadosVeiculo.equals("")){
+                    File file = new File(arqVeiculo);
+                    if(!file.exists()){
+                        fwVeiculo = new FileWriter(arqVeiculo, false);
+                    }else {
+                        fwVeiculo = new FileWriter (arqVeiculo);
+                    }
+            fwVeiculo = new FileWriter(arqVeiculo);       
             bwVeiculo = new BufferedWriter(fwVeiculo);
             bwVeiculo.write(dadosVeiculo);
             bwVeiculo.close();
-            
+            }
+            JOptionPane.showMessageDialog(null, new Mensagens().mensagem("MSG12"));
+          }
         } catch (Exception e) {
-            
+            JOptionPane.showMessageDialog(null, new Mensagens().mensagem("MSG13"));
         }
     }
-    
 }

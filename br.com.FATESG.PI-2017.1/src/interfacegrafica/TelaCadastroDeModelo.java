@@ -7,9 +7,11 @@ package interfacegrafica;
 import classesdedados.Marca;
 import classesdedados.Mensagens;
 import classesdedados.Modelo;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import persistencia.MarcaDAO;
 import persistencia.ModeloDAO;
 /**
@@ -17,12 +19,17 @@ import persistencia.ModeloDAO;
  * @author renatowsilva
  */
 public class TelaCadastroDeModelo extends javax.swing.JInternalFrame {
-
+    DefaultTableModel dtm = null;
+    Modelo objModelo = new Modelo();
     /**
      * Creates new form TelaCadastroDeModelo
      */
     public TelaCadastroDeModelo() {
         initComponents();
+        jTextFieldModeloDescricao.requestFocus();
+        jTextFieldID.setEnabled(false);
+        jTextFieldModeloMarcaAlterar.setEnabled(false);
+        
         try {
             MarcaDAO marcaDAO = new MarcaDAO();
             System.out.println(marcaDAO.recuperar().size());
@@ -44,16 +51,76 @@ public class TelaCadastroDeModelo extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButtonModeloExcluir = new javax.swing.JButton();
+        jButtonModeloAlterar = new javax.swing.JButton();
+        jButtonModeloLimparAlteracao = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableModeloPesquisa = new javax.swing.JTable();
+        jTextFieldID = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jTextFieldModeloMarcaAlterar = new javax.swing.JTextField();
         jComboBoxModeloMarca = new javax.swing.JComboBox<>();
         jTextFieldModeloDescricao = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jButtonModeloLimpar = new javax.swing.JButton();
         jButtonModeloSalvar = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jTextFieldModeloEditar = new javax.swing.JTextField();
 
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
+
+        jButtonModeloExcluir.setText("EXLUIR");
+        jButtonModeloExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonModeloExcluirActionPerformed(evt);
+            }
+        });
+
+        jButtonModeloAlterar.setText("ALTERAR");
+        jButtonModeloAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonModeloAlterarActionPerformed(evt);
+            }
+        });
+
+        jButtonModeloLimparAlteracao.setText("LIMPAR");
+        jButtonModeloLimparAlteracao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonModeloLimparAlteracaoActionPerformed(evt);
+            }
+        });
+
+        jTableModeloPesquisa.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Modelo", "Marca"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTableModeloPesquisa.setName(""); // NOI18N
+        jTableModeloPesquisa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableModeloPesquisaMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTableModeloPesquisa);
+
+        jLabel5.setText("Descrição:");
+
+        jLabel1.setText("Marca:");
 
         jLabel2.setText("Descrição:");
 
@@ -63,67 +130,320 @@ public class TelaCadastroDeModelo extends javax.swing.JInternalFrame {
             }
         });
 
+        jTextFieldModeloDescricao.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldModeloDescricaoKeyReleased(evt);
+            }
+        });
+
         jLabel3.setText("Marca:");
 
-        jButtonModeloLimpar.setText("Limpar");
+        jButtonModeloLimpar.setText("LIMPAR");
+        jButtonModeloLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonModeloLimparActionPerformed(evt);
+            }
+        });
 
-        jButtonModeloSalvar.setText("Salvar");
+        jButtonModeloSalvar.setText("SALVAR");
+        jButtonModeloSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonModeloSalvarActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("ID:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(51, 51, 51)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextFieldModeloDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBoxModeloMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(122, 122, 122)
+                                .addComponent(jButtonModeloLimpar)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButtonModeloSalvar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jButtonModeloLimparAlteracao)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jButtonModeloAlterar)
+                                        .addGap(119, 119, 119))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTextFieldModeloDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(104, 104, 104))))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(76, 76, 76)
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jComboBoxModeloMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(38, 38, 38)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(40, 40, 40)
+                                                .addComponent(jLabel1))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(38, 38, 38)
+                                                .addComponent(jTextFieldModeloMarcaAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel5)
+                                            .addComponent(jTextFieldModeloEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jTextFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(327, 327, 327)))))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButtonModeloLimpar)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonModeloSalvar)
-                        .addGap(64, 64, 64)))
-                .addContainerGap(52, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButtonModeloExcluir)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addGap(16, 16, 16)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBoxModeloMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jTextFieldModeloDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBoxModeloMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addGap(46, 46, 46)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonModeloLimpar)
                     .addComponent(jButtonModeloSalvar))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addGap(27, 27, 27)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonModeloExcluir)
+                .addGap(3, 3, 3)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel1)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldModeloMarcaAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldModeloEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonModeloAlterar)
+                    .addComponent(jButtonModeloLimparAlteracao))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButtonModeloExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModeloExcluirActionPerformed
+        try {
+            ModeloDAO dao = new ModeloDAO();
+
+            dtm = (DefaultTableModel) jTableModeloPesquisa.getModel();
+
+            int idx[] = jTableModeloPesquisa.getSelectedRows();
+            if (jTableModeloPesquisa.getSelectedRow() >= 0) {
+                for (int j = 0; j < idx.length; j++) {
+                    dao.excluir(Integer.parseInt(String.valueOf(dtm.getValueAt(idx[j], 0))));
+                }
+
+                dtm.setNumRows(0);
+                String strId, strDescricao, strMarca;
+                Object objDAO = dao.recuperar();
+                ArrayList<Modelo> alModelos = (ArrayList<Modelo>) objDAO;
+                for (int i = 0; i < alModelos.size(); i++) {
+                    strId = String.valueOf(alModelos.get(i).getIdModelo());
+                    strDescricao = alModelos.get(i).getDescricao();
+                    strMarca = alModelos.get(i).getMarca();
+
+                    Object[] dados = {strId, strDescricao, strMarca};
+                    dtm.addRow(dados);
+                }
+                jTextFieldModeloDescricao.setText("");
+                jTextFieldModeloDescricao.requestFocus();
+
+            } else {
+                JOptionPane.showMessageDialog(null, new Mensagens().mensagem("MSG18"));
+            }
+
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_jButtonModeloExcluirActionPerformed
+
+    private void jButtonModeloAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModeloAlterarActionPerformed
+        try {
+            ModeloDAO dao = new ModeloDAO();
+            if (!jTextFieldModeloEditar.getText().equals("")) {
+                objModelo.setDescricao(jTextFieldModeloEditar.getText().toUpperCase());
+                dao.alterar(objModelo.getIdModelo(), objModelo);
+
+                dtm = (DefaultTableModel) jTableModeloPesquisa.getModel();
+                dtm.setNumRows(0);
+                String strId, strDescricao, strMarca;
+
+                Object objDAO = dao.recuperar();
+                ArrayList<Modelo> alModelos = (ArrayList<Modelo>) objDAO;
+                for (int i = 0; i < alModelos.size(); i++) {
+                    strId = String.valueOf(alModelos.get(i).getIdModelo());
+                    strDescricao = alModelos.get(i).getDescricao();
+                    strMarca = String.valueOf(alModelos.get(i).getMarca());
+
+                    Object[] dados = {strId, strDescricao, strMarca};
+                    dtm.addRow(dados);
+                }
+                jTextFieldModeloDescricao.setText("");
+                jTextFieldModeloDescricao.requestFocus();
+                jTextFieldModeloMarcaAlterar.setText("");
+                jTextFieldModeloMarcaAlterar.requestFocus();
+            } else {
+                JOptionPane.showMessageDialog(this, "Campo obrigatório!");
+                jTextFieldModeloEditar.requestFocus();
+                jTextFieldModeloMarcaAlterar.requestFocus();
+                return;
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(TelaCadastroDeModelo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButtonModeloAlterarActionPerformed
+
+    private void jButtonModeloLimparAlteracaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModeloLimparAlteracaoActionPerformed
+        jTextFieldModeloEditar.setText("");
+    }//GEN-LAST:event_jButtonModeloLimparAlteracaoActionPerformed
+
+    private void jTableModeloPesquisaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableModeloPesquisaMouseClicked
+        int qtdClicks = evt.getClickCount();
+        ModeloDAO dao = new ModeloDAO();
+
+        try {
+            Object objDAO = dao.recuperar();
+            ArrayList<Modelo> alModelos = (ArrayList<Modelo>) objDAO;
+            int idx = jTableModeloPesquisa.getSelectedRow();
+            if (qtdClicks == 2) {
+                if (jTableModeloPesquisa.getSelectedRow() >= 0) {
+                    dtm = (DefaultTableModel) jTableModeloPesquisa.getModel();
+                    objModelo.setIdModelo(Integer.parseInt(dtm.getValueAt(idx, 0).toString()));
+                    for (int i = 0; i < alModelos.size(); i++) {
+                        if (alModelos.get(i).getIdModelo() == objModelo.getIdModelo()) {
+                            objModelo.setDescricao(alModelos.get(i).getDescricao());
+                            jTextFieldModeloEditar.setText(objModelo.getDescricao());
+                            objModelo.setMarca(alModelos.get(i).getMarca());
+                            jTextFieldModeloMarcaAlterar.setText(objModelo.getMarca());
+                            //jTextFieldID.setEnabled(true);
+                            jTextFieldID.setText(objModelo.getIdModelo()+ "");
+                            //jTextFieldID.setEnabled(false);
+                            return;
+                        }
+                    }
+
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+    }//GEN-LAST:event_jTableModeloPesquisaMouseClicked
+
     private void jComboBoxModeloMarcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxModeloMarcaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxModeloMarcaActionPerformed
 
+    private void jTextFieldModeloDescricaoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldModeloDescricaoKeyReleased
+        jTextFieldModeloDescricao.setText(jTextFieldModeloDescricao.getText().toUpperCase());
+    }//GEN-LAST:event_jTextFieldModeloDescricaoKeyReleased
+
+    private void jButtonModeloLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModeloLimparActionPerformed
+        jTextFieldModeloDescricao.setText("");
+    }//GEN-LAST:event_jButtonModeloLimparActionPerformed
+
+    private void jButtonModeloSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModeloSalvarActionPerformed
+        ModeloDAO cadmodelo = new ModeloDAO();
+        Modelo cadastromodelo = new Modelo();
+
+        try {
+
+            Object objDAO = cadmodelo.recuperar();
+            ArrayList<Modelo> alModelos = (ArrayList<Modelo>) objDAO;
+            if (jTextFieldModeloDescricao.getText().equals("")) {
+                JOptionPane.showMessageDialog(null, "Campo obrigatório.");
+                jTextFieldModeloDescricao.requestFocus();
+                return;
+            }
+
+            cadastromodelo.setMarca(jComboBoxModeloMarca.getSelectedItem().toString());
+            cadastromodelo.setDescricao(jTextFieldModeloDescricao.getText());
+            if (alModelos != null) {
+                for (int i = 0; i < alModelos.size(); i++) {
+                    if (cadastromodelo.getDescricao().toUpperCase().equals(alModelos.get(i).getDescricao().toUpperCase())) {
+                        JOptionPane.showMessageDialog(null, "Cadastro não realizado, modelo já cadastrada!");
+                        return;
+                    }
+                }
+            }
+
+            Object objModelo = null;
+            objModelo = (Object) (cadastromodelo);
+            cadmodelo.incluir(objModelo);
+
+            dtm = (DefaultTableModel) jTableModeloPesquisa.getModel();
+            dtm.setNumRows(0);
+            String strId, strDescricao, strMarca;
+
+            objDAO = cadmodelo.recuperar();
+            alModelos = (ArrayList<Modelo>) objDAO;
+            for (int i = 0; i < alModelos.size(); i++) {
+                strId = String.valueOf(alModelos.get(i).getIdModelo());
+                strDescricao = alModelos.get(i).getDescricao();
+                strMarca = alModelos.get(i).getMarca();
+
+                Object[] dados = {strId, strDescricao, strMarca};
+                dtm.addRow(dados);
+            }
+            jTextFieldModeloDescricao.setText("");
+            jTextFieldModeloDescricao.requestFocus();
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, new Mensagens().mensagem("MSG14"));
+        }
+
+    }//GEN-LAST:event_jButtonModeloSalvarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonModeloAlterar;
+    private javax.swing.JButton jButtonModeloExcluir;
     private javax.swing.JButton jButtonModeloLimpar;
+    private javax.swing.JButton jButtonModeloLimparAlteracao;
     private javax.swing.JButton jButtonModeloSalvar;
     private javax.swing.JComboBox<String> jComboBoxModeloMarca;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTableModeloPesquisa;
+    private javax.swing.JTextField jTextFieldID;
     private javax.swing.JTextField jTextFieldModeloDescricao;
+    private javax.swing.JTextField jTextFieldModeloEditar;
+    private javax.swing.JTextField jTextFieldModeloMarcaAlterar;
     // End of variables declaration//GEN-END:variables
 }

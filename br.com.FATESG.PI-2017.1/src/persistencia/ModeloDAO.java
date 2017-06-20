@@ -40,14 +40,12 @@ public class ModeloDAO implements CRUD{
             bwModelos = new BufferedWriter(fwModelos);
             GerarId gerarId = new GerarId();
             modelo.setIdModelo(gerarId.getIdModelo());
-            String dados = modelo.getIdModelo() + ";" + modelo.getDescricao() + ";" + modelo.getMarca().getDescricao() + "\n";
+            String dados = modelo.getIdModelo() + ";" + modelo.getDescricao() + ";" + modelo.getMarca() + "\n"; 
             bwModelos.write(dados);
             bwModelos.close();
             
             gerarId.finalize();
-            
             JOptionPane.showMessageDialog(null, new Mensagens().mensagem("MSG01"));
-            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, new Mensagens().mensagem("MSG02"));
         }
@@ -55,24 +53,23 @@ public class ModeloDAO implements CRUD{
 
     @Override
     public ArrayList<Object> recuperar() throws Exception {
-        ArrayList<Object> modelos = new ArrayList<>();
+        ArrayList<Modelo> modelos = new ArrayList<>();
         
         try {
             File fileModelos = new File(arqModelos);
+            if (!fileModelos.exists()) {
+                return null;
+            }
             FileReader frModelos = new FileReader(fileModelos);
             BufferedReader brModelos = new BufferedReader(frModelos);
             String linhaModelos = brModelos.readLine();
             while (linhaModelos != null && !linhaModelos.equals("")){
                 Modelo modelo = new Modelo();
-                Marca marca = new Marca();
                 
                 String vModelos[] = linhaModelos.split(";");
                 modelo.setIdModelo(Integer.parseInt(vModelos[0]));
                 modelo.setDescricao(vModelos[1]);
-//                modelo.setAnoDeFabricacao(Integer.parseInt(vModelos[2]));
-//                modelo.setMotor(Float.parseFloat(vModelos[3]));
-//                modelo.setValorLocacao(Float.parseFloat(vModelos[4]));
-                marca.setDescricao(vModelos[2]);
+                modelo.setMarca(vModelos[2]);
                 
                 modelos.add(modelo);
                 
@@ -82,40 +79,37 @@ public class ModeloDAO implements CRUD{
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, new Mensagens().mensagem("MSG15"));
         }
-        return modelos;
+        return (ArrayList<Object>) (Object) modelos;
     }
 
 
     @Override
     public void excluir(int id) throws Exception {
-        try {
-            Object objModelos = recuperar();
-            ArrayList<Modelo> modelos = (ArrayList<Modelo>) (objModelos);
-            
-            boolean achou = false;
-            String dadosModelo = "";
-            
-            if(modelos.size() >= 0 && modelos != null){
-                for (int i = 0; i < modelos.size(); i++){
-                    if(modelos.get(i).getIdModelo() != id){
-                        
-                        dadosModelo += modelos.get(i).getIdModelo() + ";" + modelos.get(i).getDescricao() + ";" + modelos.get(i).getAnoDeFabricacao() + ";" +
-                                modelos.get(i).getMarca() + ";" + modelos.get(i).getMotor() + ";" + modelos.get(i).getValorLocacao() + "/n";
-                    }
-                }
-            }else{
-                achou = true;
-            }
-            if (achou){
-                fwModelos = new FileWriter(arqModelos);
-                bwModelos = new BufferedWriter(fwModelos);
-                bwModelos.write(dadosModelo);
-                bwModelos.close();
-            }
-            JOptionPane.showMessageDialog(null, new Mensagens().mensagem("MSG04"));
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, new Mensagens().mensagem("MSG17"));
+        Object objModelos = recuperar();
+        ArrayList<Modelo> modelos = (ArrayList<Modelo>) (objModelos);
+
+        boolean achou = false;
+        String dadosModelo = "";
+
+        if(modelos.size() >= 0 && modelos != null){
+            for (int i = 0; i < modelos.size(); i++){
+                if(modelos.get(i).getIdModelo() != id){
+
+                    dadosModelo += modelos.get(i).getIdModelo() + ";" + modelos.get(i).getDescricao() + ";" +
+                            modelos.get(i).getMarca() + "\n";
+                }else{
+            achou = true;
         }
+            }
+        }
+        if (achou){
+            fwModelos = new FileWriter(arqModelos);
+            bwModelos = new BufferedWriter(fwModelos);
+            bwModelos.write(dadosModelo);
+            bwModelos.close();
+        }
+        JOptionPane.showMessageDialog(null, new Mensagens().mensagem("MSG04"));
+        
     }
 
     @Override
@@ -125,22 +119,17 @@ public class ModeloDAO implements CRUD{
             ArrayList<Modelo> modelos = (ArrayList<Modelo>) (objModelos);
             Modelo objModelo = (Modelo) objeto;
             
-            String dadosModelo = "";
             
+            
+            String dadosModelo = "";
             if(modelos.size() >= 0 && modelos != null){
                 for(int i = 0; i < modelos.size(); i++){
-                    if(modelos.get(i).getIdModelo() != id){
-                        
-                        dadosModelo += modelos.get(i).getIdModelo() + ";" + modelos.get(i).getDescricao() + ";" + modelos.get(i).getAnoDeFabricacao() + ";" + modelos.get(i).getMarca() +
-                                ";" + modelos.get(i).getMotor() + ";" + modelos.get(i).getValorLocacao() + "/n";
+                    if(modelos.get(i).getIdModelo() != id){  
+                        dadosModelo += modelos.get(i).getIdModelo() + ";" + modelos.get(i).getDescricao() + ";" + modelos.get(i).getMarca() + "\n";
                     }else{
-                        dadosModelo += id + ";" + objModelo.getDescricao() + ";" + objModelo.getAnoDeFabricacao() + ";" + objModelo.getMarca() + ";" + objModelo.getMotor() + ";" + objModelo.getValorLocacao() + "/n";
+                        dadosModelo += id + ";" + objModelo.getDescricao() + ";" + objModelo.getMarca() + "\n";
                     }
                 }
-                fwModelos = new FileWriter(arqModelos);
-                bwModelos = new BufferedWriter(fwModelos);
-                bwModelos.write(dadosModelo);
-                bwModelos.close();
                 
                 if(!dadosModelo.equals("")){
                     File file = new File(arqModelos);
@@ -149,6 +138,11 @@ public class ModeloDAO implements CRUD{
                     }else {
                         fwModelos = new FileWriter (arqModelos);
                     }
+                    
+                    fwModelos = new FileWriter(arqModelos);
+                    bwModelos = new BufferedWriter(fwModelos);
+                    bwModelos.write(dadosModelo);
+                    bwModelos.close();
                 }
                 JOptionPane.showMessageDialog(null, new Mensagens().mensagem("MSG12"));
             }

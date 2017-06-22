@@ -10,6 +10,7 @@ import classesdedados.Modelo;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import persistencia.MarcaDAO;
@@ -29,6 +30,8 @@ public class TelaCadastroDeModelo extends javax.swing.JInternalFrame {
         jTextFieldModeloDescricao.requestFocus();
         jTextFieldID.setEnabled(false);
         jTextFieldModeloMarcaAlterar.setEnabled(false);
+        
+        jComboBoxModeloCategoria.setModel(new DefaultComboBoxModel(Modelo.EnumCategoria.values()));
         
         try {
             MarcaDAO marcaDAO = new MarcaDAO();
@@ -68,6 +71,8 @@ public class TelaCadastroDeModelo extends javax.swing.JInternalFrame {
         jButtonModeloSalvar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jTextFieldModeloEditar = new javax.swing.JTextField();
+        jComboBoxModeloCategoria = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
@@ -154,6 +159,14 @@ public class TelaCadastroDeModelo extends javax.swing.JInternalFrame {
 
         jLabel4.setText("ID:");
 
+        jComboBoxModeloCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxModeloCategoriaActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("Categoria");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -164,74 +177,75 @@ public class TelaCadastroDeModelo extends javax.swing.JInternalFrame {
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(122, 122, 122)
-                                .addComponent(jButtonModeloLimpar)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButtonModeloSalvar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jButtonModeloLimparAlteracao)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButtonModeloAlterar)
-                                        .addGap(119, 119, 119))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jLabel2)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextFieldModeloDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(104, 104, 104))))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(76, 76, 76)
-                                .addComponent(jLabel3)
+                                .addComponent(jButtonModeloLimparAlteracao)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBoxModeloMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(38, 38, 38)
+                                .addComponent(jButtonModeloAlterar)
+                                .addGap(119, 119, 119))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel4)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jLabel4)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(40, 40, 40)
-                                                .addComponent(jLabel1))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(38, 38, 38)
-                                                .addComponent(jTextFieldModeloMarcaAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel5)
-                                            .addComponent(jTextFieldModeloEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jTextFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(327, 327, 327)))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(40, 40, 40)
+                                        .addComponent(jLabel1))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(38, 38, 38)
+                                        .addComponent(jTextFieldModeloMarcaAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jTextFieldModeloEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jTextFieldID, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(327, 327, 327)))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButtonModeloExcluir)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButtonModeloExcluir, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jButtonModeloLimpar)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButtonModeloSalvar))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextFieldModeloDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jComboBoxModeloMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jComboBoxModeloCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBoxModeloCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBoxModeloMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jTextFieldModeloDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonModeloLimpar)
                     .addComponent(jButtonModeloSalvar))
-                .addGap(27, 27, 27)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonModeloExcluir)
                 .addGap(3, 3, 3)
@@ -268,15 +282,16 @@ public class TelaCadastroDeModelo extends javax.swing.JInternalFrame {
                 }
 
                 dtm.setNumRows(0);
-                String strId, strDescricao, strMarca;
+                String strId, strDescricao, strMarca, strCategoria;
                 Object objDAO = dao.recuperar();
                 ArrayList<Modelo> alModelos = (ArrayList<Modelo>) objDAO;
                 for (int i = 0; i < alModelos.size(); i++) {
                     strId = String.valueOf(alModelos.get(i).getIdModelo());
                     strDescricao = alModelos.get(i).getDescricao();
                     strMarca = alModelos.get(i).getMarca();
+                    strCategoria=alModelos.get(i).getCategoria().toString();
 
-                    Object[] dados = {strId, strDescricao, strMarca};
+                    Object[] dados = {strId, strDescricao, strMarca,strCategoria};
                     dtm.addRow(dados);
                 }
                 jTextFieldModeloDescricao.setText("");
@@ -299,7 +314,7 @@ public class TelaCadastroDeModelo extends javax.swing.JInternalFrame {
 
                 dtm = (DefaultTableModel) jTableModeloPesquisa.getModel();
                 dtm.setNumRows(0);
-                String strId, strDescricao, strMarca;
+                String strId, strDescricao, strMarca,strCategoria;
 
                 Object objDAO = dao.recuperar();
                 ArrayList<Modelo> alModelos = (ArrayList<Modelo>) objDAO;
@@ -307,8 +322,9 @@ public class TelaCadastroDeModelo extends javax.swing.JInternalFrame {
                     strId = String.valueOf(alModelos.get(i).getIdModelo());
                     strDescricao = alModelos.get(i).getDescricao();
                     strMarca = String.valueOf(alModelos.get(i).getMarca());
+                    strCategoria=alModelos.get(i).getCategoria().toString();
 
-                    Object[] dados = {strId, strDescricao, strMarca};
+                    Object[] dados = {strId, strDescricao, strMarca,strCategoria};
                     dtm.addRow(dados);
                 }
                 jTextFieldModeloDescricao.setText("");
@@ -405,7 +421,7 @@ public class TelaCadastroDeModelo extends javax.swing.JInternalFrame {
 
             dtm = (DefaultTableModel) jTableModeloPesquisa.getModel();
             dtm.setNumRows(0);
-            String strId, strDescricao, strMarca;
+            String strId, strDescricao, strMarca, strCategoria;
 
             objDAO = cadmodelo.recuperar();
             alModelos = (ArrayList<Modelo>) objDAO;
@@ -413,8 +429,9 @@ public class TelaCadastroDeModelo extends javax.swing.JInternalFrame {
                 strId = String.valueOf(alModelos.get(i).getIdModelo());
                 strDescricao = alModelos.get(i).getDescricao();
                 strMarca = alModelos.get(i).getMarca();
+                strCategoria=alModelos.get(i).getCategoria().toString();
 
-                Object[] dados = {strId, strDescricao, strMarca};
+                Object[] dados = {strId, strDescricao, strMarca,strCategoria};
                 dtm.addRow(dados);
             }
             jTextFieldModeloDescricao.setText("");
@@ -426,6 +443,10 @@ public class TelaCadastroDeModelo extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jButtonModeloSalvarActionPerformed
 
+    private void jComboBoxModeloCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxModeloCategoriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxModeloCategoriaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonModeloAlterar;
@@ -433,12 +454,14 @@ public class TelaCadastroDeModelo extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButtonModeloLimpar;
     private javax.swing.JButton jButtonModeloLimparAlteracao;
     private javax.swing.JButton jButtonModeloSalvar;
+    private javax.swing.JComboBox<String> jComboBoxModeloCategoria;
     private javax.swing.JComboBox<String> jComboBoxModeloMarca;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableModeloPesquisa;
     private javax.swing.JTextField jTextFieldID;

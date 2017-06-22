@@ -23,7 +23,7 @@ import javax.swing.JOptionPane;
  */
 public class MarcaDAO implements CRUD {
 
-    String diretorio = "C:\\AmbienteTrabalho\\Projetos\\FATESG-PI-2017.1\\br.com.FATESG.PI-2017.1\\src\\arquivos\\";
+    String diretorio = "C:\\Users\\Vicente\\Desktop\\Teste\\FATESG-PI-2017.1\\br.com.FATESG.PI-2017.1\\src\\arquivos\\";
     String arqMarcas = diretorio + "Marcas.csv";
 
     FileWriter fwMarcas = null;

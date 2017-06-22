@@ -4,13 +4,17 @@
  * and open the template in the editor.
  */
 package classesdedados;
+
 import classesdedados.Pessoa;
+import java.util.*;
+import java.text.*;
 
 /**
  *
  * @author Alexandre Fernandes
  */
 public class Locacao {
+
     private int idLocacao = 0;
     private String dataInicio = "";
     private String dataFim = "";
@@ -22,17 +26,18 @@ public class Locacao {
     private String vistoria = "";
     private EnumLocacao status = null;
     private Pessoa cliente = null;
+    private Veiculo veiculo = null;
     private float valorLocacao = (float) 0.0;
     private float valorCaucao = (float) 0.0;
     private String dataDevolucao = "";
-    
-    public Locacao(){
-        
+
+    public Locacao() {
+
     }
-    
-    public Locacao(int idLocacao, String dataInicio, String dataFim, String finalidadeDaLocacao, String localSaidaVeiculo, 
-            String localChegadaVeiculo, int kmInicial, int kmFinal, String vistoria, EnumLocacao status, Pessoa cliente, 
-            float valorLocacao, float valorCaucao, String dataDevolucao){
+
+    public Locacao(int idLocacao, String dataInicio, String dataFim, String finalidadeDaLocacao, String localSaidaVeiculo,
+            String localChegadaVeiculo, int kmInicial, int kmFinal, String vistoria, EnumLocacao status, Pessoa cliente, Veiculo veiculo,
+            float valorLocacao, float valorCaucao, String dataDevolucao) {
         this.idLocacao = idLocacao;
         this.dataInicio = dataInicio;
         this.dataFim = dataFim;
@@ -44,9 +49,18 @@ public class Locacao {
         this.kmFinal = kmFinal;
         this.status = status;
         this.cliente = cliente;
+        this.veiculo = veiculo;
         this.valorLocacao = valorLocacao;
         this.valorCaucao = valorCaucao;
         this.dataDevolucao = dataDevolucao;
+    }
+
+    public Veiculo getVeiculo() {
+        return veiculo;
+    }
+
+    public void setVeiculo(Veiculo veiculo) {
+        this.veiculo = veiculo;
     }
 
     public int getIdLocacao() {
@@ -164,5 +178,24 @@ public class Locacao {
     public void setDataDevolucao(String dataDevolucao) {
         this.dataDevolucao = dataDevolucao;
     }
-    
+
+    public float calcularLocacao(Modelo.EnumCategoria categoria, int dias) {
+        float valor = (float) 0.0;
+        if (categoria.toString().equals("BASICO")) {
+            valor = (float) 100.0 * dias;
+        } else if (categoria.toString().equals("COMPLETO")) {
+            valor = (float) 150.0 * dias;
+        }
+        return (float) valor;
+    }
+
+    public int calculaDias(String data1, String data2) throws ParseException {
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        df.setLenient(false);
+        Date d1 = df.parse(data1);
+        Date d2 = df.parse(data2);
+        long dt = (d2.getTime() - d1.getTime()) + 3600000; // 1 hora para compensar horário de verão
+        return (int)(dt / 86400000L);
+    }
+
 }

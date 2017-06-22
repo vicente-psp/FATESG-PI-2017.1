@@ -25,7 +25,7 @@ import java.io.FileReader;
  */
 public class VeiculoDAO implements CRUD {
 
-    String diretorio = "C:\\AmbienteTrabalho\\Projetos\\FATESG-PI-2017.1\\br.com.FATESG.PI-2017.1\\src\\arquivos\\";
+    String diretorio = "C:\\Users\\Vicente\\Desktop\\Teste\\FATESG-PI-2017.1\\br.com.FATESG.PI-2017.1\\src\\arquivos\\";
     String arqVeiculo = diretorio + "Veiculo.csv";
 
     FileWriter fwVeiculo = null;

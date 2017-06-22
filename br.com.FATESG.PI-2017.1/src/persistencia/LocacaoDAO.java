@@ -26,7 +26,7 @@ import classesdedados.Veiculo;
  */
 public class LocacaoDAO implements CRUD {
 
-    String diretorio = "C:\\Users\\Vicente\\Desktop\\Teste\\FATESG-PI-2017.1\\br.com.FATESG.PI-2017.1\\src\\arquivos\\";
+    String diretorio = "/Users/renatowsilva/Documents/Faculdade Senai/Segundo Semestre/NetBeansProjects/FATESG-PI-2017.1/br.com.FATESG.PI-2017.1/src/arquivos/";
     String arqLocacao = diretorio + "Locacao.csv";
 
     FileWriter fwLocacao = null;

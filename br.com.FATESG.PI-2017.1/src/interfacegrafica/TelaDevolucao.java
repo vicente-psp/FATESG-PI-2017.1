@@ -5,12 +5,30 @@
  */
 package interfacegrafica;
 
+import classesdedados.Locacao;
+import classesdedados.Modelo;
+import classesdedados.PessoaFisica;
+import classesdedados.Veiculo;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import persistencia.LocacaoDAO;
+import persistencia.PessoaDAO;
+import persistencia.VeiculoDAO;
+
 /**
  *
  * @author renatowsilva
  */
 public class TelaDevolucao extends javax.swing.JInternalFrame {
-
+    VeiculoDAO daoVeiculo = new VeiculoDAO();
+    ArrayList<Veiculo> alVeiculo = new ArrayList<>();
+    ArrayList<PessoaFisica> alPessoaFisica = new ArrayList<>();
+    PessoaDAO daoPessoa = new PessoaDAO();
     /**
      * Creates new form TelaDevolucao
      */
@@ -46,8 +64,8 @@ public class TelaDevolucao extends javax.swing.JInternalFrame {
         jTextFieldDevolucaoKMFinal = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableVeiculoPesquisa = new javax.swing.JTable();
-        jButtonPesquisarVeiculo = new javax.swing.JButton();
         jFormattedTextFieldDevolucaoPesquisarPlaca = new javax.swing.JFormattedTextField();
+        jComboBoxPesquisaPlaca = new javax.swing.JComboBox<>();
 
         jButton1.setText("jButton1");
 
@@ -122,12 +140,13 @@ public class TelaDevolucao extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jTableVeiculoPesquisa);
 
-        jButtonPesquisarVeiculo.setText("PESQUISAR VEICULO");
-        jButtonPesquisarVeiculo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonPesquisarVeiculoActionPerformed(evt);
+        jFormattedTextFieldDevolucaoPesquisarPlaca.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jFormattedTextFieldDevolucaoPesquisarPlacaKeyReleased(evt);
             }
         });
+
+        jComboBoxPesquisaPlaca.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Placa" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -165,33 +184,35 @@ public class TelaDevolucao extends javax.swing.JInternalFrame {
                         .addGap(39, 39, 39)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldDevolucaoValorCobrar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButtonLimparDevolucao)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonSalvarDevolucao)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jFormattedTextFieldDevolucaoPesquisarPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonPesquisarVeiculo)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addComponent(jTextFieldDevolucaoValorCobrar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 655, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 18, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonLimparDevolucao)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonSalvarDevolucao)
+                .addGap(235, 235, 235))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(76, 76, 76)
+                .addComponent(jComboBoxPesquisaPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jFormattedTextFieldDevolucaoPesquisarPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonPesquisarVeiculo)
-                    .addComponent(jFormattedTextFieldDevolucaoPesquisarPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jFormattedTextFieldDevolucaoPesquisarPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxPesquisaPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(jFormattedTextFieldDevolucaoDataFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -231,18 +252,61 @@ public class TelaDevolucao extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldDevolucaoKMFinalActionPerformed
 
-    private void jButtonPesquisarVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisarVeiculoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonPesquisarVeiculoActionPerformed
+    private void jFormattedTextFieldDevolucaoPesquisarPlacaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jFormattedTextFieldDevolucaoPesquisarPlacaKeyReleased
+        DefaultTableModel dtm = (DefaultTableModel) jTableVeiculoPesquisa.getModel();
+
+        if (!jFormattedTextFieldDevolucaoPesquisarPlaca.getText().equals("")) {
+            dtm.setNumRows(0);
+
+            String strPlaca, strMarca, strModelo, strMotor;
+
+            try {
+                Object objDAO = daoVeiculo.recuperar();
+                alVeiculo = (ArrayList<Veiculo>) objDAO;
+
+                String texto = jFormattedTextFieldDevolucaoPesquisarPlaca.getText().toUpperCase();
+
+                if (jComboBoxPesquisaPlaca.getSelectedItem().equals("PLACA")) {
+                    for (int i = 0; i < alVeiculo.size(); i++) {
+                        if (alVeiculo.get(i).getMarca().toUpperCase().contains(texto) && alVeiculo.get(i).getStatus().toString().equals("DISPONIVEL")) {
+                            strPlaca = alVeiculo.get(i).getPlaca();
+                            strMarca = alVeiculo.get(i).getMarca().toUpperCase();
+                            strModelo = alVeiculo.get(i).getModelo();
+                            strMotor = alVeiculo.get(i).getMotor();
+
+                            Object[] dados = {strPlaca, strMarca, strModelo, strMotor};
+                            dtm.addRow(dados);
+                        }
+                    }
+                } else {
+                    for (int i = 0; i < alVeiculo.size(); i++) {
+                        if (alVeiculo.get(i).getPlaca().contains(texto) && alVeiculo.get(i).getStatus().toString().equals("DISPONIVEL")) {
+                            strPlaca = alVeiculo.get(i).getPlaca();
+                            strMarca = alVeiculo.get(i).getMarca().toUpperCase();
+                            strModelo = alVeiculo.get(i).getModelo();
+                            strMotor = alVeiculo.get(i).getMotor();
+
+                            Object[] dados = {strPlaca, strMarca, strModelo, strMotor};
+                            dtm.addRow(dados);
+                        }
+                    }
+                }
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage());
+            }
+        } else {
+            dtm.setNumRows(0);
+        }
+    }//GEN-LAST:event_jFormattedTextFieldDevolucaoPesquisarPlacaKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonLimparDevolucao;
-    private javax.swing.JButton jButtonPesquisarVeiculo;
     private javax.swing.JButton jButtonSalvarDevolucao;
     private javax.swing.JComboBox<String> jComboBoxDevolucaoStatus;
     private javax.swing.JComboBox<String> jComboBoxDevolucaoValidacaoVistoria;
+    private javax.swing.JComboBox<String> jComboBoxPesquisaPlaca;
     private javax.swing.JFormattedTextField jFormattedTextFieldDevolucaoDataFinal;
     private javax.swing.JFormattedTextField jFormattedTextFieldDevolucaoHoraFinal;
     private javax.swing.JFormattedTextField jFormattedTextFieldDevolucaoPesquisarPlaca;

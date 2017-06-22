@@ -51,9 +51,7 @@ public class TelaLocacao extends javax.swing.JInternalFrame {
         jButtonLimparLocacao = new javax.swing.JButton();
         jFormattedTextFieldLocacaoDataInicio = new javax.swing.JFormattedTextField();
         jButtonSalvarLocacao = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jFormattedTextFieldLocacaoHoraInicio = new javax.swing.JFormattedTextField();
         jTextFieldLocacaoValorLocacao = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -127,15 +125,7 @@ public class TelaLocacao extends javax.swing.JInternalFrame {
 
         jButtonSalvarLocacao.setText("Salvar");
 
-        jLabel3.setText("Hora Inicio:");
-
         jLabel5.setText("Valor Locação R$:");
-
-        try {
-            jFormattedTextFieldLocacaoHoraInicio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
 
         jTextFieldLocacaoValorLocacao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -218,11 +208,7 @@ public class TelaLocacao extends javax.swing.JInternalFrame {
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jLabel8)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jFormattedTextFieldLocacaoPrevisaoDevolucao, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel3)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jFormattedTextFieldLocacaoHoraInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jFormattedTextFieldLocacaoPrevisaoDevolucao, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
@@ -262,9 +248,7 @@ public class TelaLocacao extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(jFormattedTextFieldLocacaoDataInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3)
-                            .addComponent(jFormattedTextFieldLocacaoHoraInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jFormattedTextFieldLocacaoDataInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
@@ -328,7 +312,7 @@ public class TelaLocacao extends javax.swing.JInternalFrame {
 
                 if (jComboBoxPesquisa.getSelectedItem().equals("MARCA")) {
                     for (int i = 0; i < alVeiculo.size(); i++) {
-                        if (alVeiculo.get(i).getMarca().toUpperCase().contains(texto)) {
+                        if (alVeiculo.get(i).getMarca().toUpperCase().contains(texto) && alVeiculo.get(i).getStatus().toString().equals("DISPONIVEL")) {
                             strPlaca = alVeiculo.get(i).getPlaca();
                             strMarca = alVeiculo.get(i).getMarca().toUpperCase();
                             strModelo = alVeiculo.get(i).getModelo();
@@ -340,7 +324,7 @@ public class TelaLocacao extends javax.swing.JInternalFrame {
                     }
                 } else if (jComboBoxPesquisa.getSelectedItem().equals("MODELO")) {
                     for (int i = 0; i < alVeiculo.size(); i++) {
-                        if (alVeiculo.get(i).getModelo().toUpperCase().contains(texto)) {
+                        if (alVeiculo.get(i).getModelo().toUpperCase().contains(texto) && alVeiculo.get(i).getStatus().toString().equals("DISPONIVEL")) {
                             strPlaca = alVeiculo.get(i).getPlaca();
                             strMarca = alVeiculo.get(i).getMarca().toUpperCase();
                             strModelo = alVeiculo.get(i).getModelo();
@@ -352,7 +336,7 @@ public class TelaLocacao extends javax.swing.JInternalFrame {
                     }
                 } else {
                     for (int i = 0; i < alVeiculo.size(); i++) {
-                        if (alVeiculo.get(i).getPlaca().contains(texto)) {
+                        if (alVeiculo.get(i).getPlaca().contains(texto) && alVeiculo.get(i).getStatus().toString().equals("DISPONIVEL")) {
                             strPlaca = alVeiculo.get(i).getPlaca();
                             strMarca = alVeiculo.get(i).getMarca().toUpperCase();
                             strModelo = alVeiculo.get(i).getModelo();
@@ -378,7 +362,6 @@ public class TelaLocacao extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> jComboBoxLocacaoPontodePartida;
     private javax.swing.JComboBox<String> jComboBoxPesquisa;
     private javax.swing.JFormattedTextField jFormattedTextFieldLocacaoDataInicio;
-    private javax.swing.JFormattedTextField jFormattedTextFieldLocacaoHoraInicio;
     private javax.swing.JFormattedTextField jFormattedTextFieldLocacaoKMinicial;
     private javax.swing.JFormattedTextField jFormattedTextFieldLocacaoPrevisaoDevolucao;
     private javax.swing.JFormattedTextField jFormattedTextFieldLocacaoValorCaucao;
@@ -387,7 +370,6 @@ public class TelaLocacao extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;

@@ -25,7 +25,7 @@ import javax.swing.JOptionPane;
  */
 public class ModeloDAO implements CRUD{
     
-    String diretorio = "/Users/renatowsilva/Documents/Faculdade Senai/Segundo Semestre/NetBeansProjects/FATESG-PI-2017.1/br.com.FATESG.PI-2017.1/src/arquivos/";
+    String diretorio = "C:\\AmbienteTrabalho\\Projetos\\FATESG-PI-2017.1\\br.com.FATESG.PI-2017.1\\src\\arquivos\\";
     String arqModelos = diretorio + "Modelos.csv";
         
     FileWriter fwModelos = null;

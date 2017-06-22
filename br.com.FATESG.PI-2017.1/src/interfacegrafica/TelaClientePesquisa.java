@@ -168,11 +168,11 @@ public class TelaClientePesquisa extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jTablePesquisarCliente);
         if (jTablePesquisarCliente.getColumnModel().getColumnCount() > 0) {
             jTablePesquisarCliente.getColumnModel().getColumn(0).setPreferredWidth(1);
-            jTablePesquisarCliente.getColumnModel().getColumn(1).setPreferredWidth(40);
-            jTablePesquisarCliente.getColumnModel().getColumn(2).setPreferredWidth(15);
-            jTablePesquisarCliente.getColumnModel().getColumn(3).setPreferredWidth(15);
+            jTablePesquisarCliente.getColumnModel().getColumn(1).setPreferredWidth(150);
+            jTablePesquisarCliente.getColumnModel().getColumn(2).setPreferredWidth(80);
+            jTablePesquisarCliente.getColumnModel().getColumn(3).setPreferredWidth(80);
             jTablePesquisarCliente.getColumnModel().getColumn(4).setPreferredWidth(3);
-            jTablePesquisarCliente.getColumnModel().getColumn(5).setPreferredWidth(5);
+            jTablePesquisarCliente.getColumnModel().getColumn(5).setPreferredWidth(50);
         }
 
         jTextFieldPesquisa.addActionListener(new java.awt.event.ActionListener() {

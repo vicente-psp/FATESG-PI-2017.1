@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package classesdedados;
+
 import classesdedados.Modelo;
 import classesdedados.Marca;
 
@@ -12,20 +13,21 @@ import classesdedados.Marca;
  * @author renatowsilva
  */
 public class Veiculo {
+
     private int idVeiculo = 0;
     private String placa = "";
-    private String status = "";
     private String modelo = "";
     private String marca = "";
     private String anoDeFabricacao = "";
     private String motor = "";
-    
-    
-    public Veiculo(){
-        
+    private EnumVeiculo status = null;
+
+    public Veiculo() {
+
     }
-    public Veiculo(int idVeiculo, String placa, String status, String modelo, String marca, String anoDeFabricacao,
-                            String motor){
+
+    public Veiculo(int idVeiculo, String placa, String modelo, String marca, String anoDeFabricacao,
+            String motor, EnumVeiculo status) {
         this.idVeiculo = idVeiculo;
         this.placa = placa;
         this.status = status;
@@ -35,10 +37,10 @@ public class Veiculo {
         this.motor = motor;
     }
 
-    public int getidVeiculo(){
+    public int getidVeiculo() {
         return idVeiculo;
     }
-    
+
     public void setidVeiculo(int idVeiculo) {
         this.idVeiculo = idVeiculo;
     }
@@ -51,21 +53,18 @@ public class Veiculo {
         this.placa = placa;
     }
 
-//    public EnumVeiculo getStatus() {
-//        return status;
-//    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-    
-    public String getStatus() {
+    public EnumVeiculo getStatus() {
         return status;
     }
-    
-//    public enum EnumVeiculo{
-//        DISPONIVEL, LOCADO, VENDIDO, SINISTRADO;
-//    }
+
+    public void setStatus(EnumVeiculo status) {
+        this.status = status;
+    }
+
+
+    public enum EnumVeiculo {
+        DISPONIVEL, LOCADO, VENDIDO, SINISTRADO;
+    }
 
     public String getModelo() {
         return modelo;
@@ -110,5 +109,5 @@ public class Veiculo {
     public void setMotor(String motor) {
         this.motor = motor;
     }
-    
+
 }

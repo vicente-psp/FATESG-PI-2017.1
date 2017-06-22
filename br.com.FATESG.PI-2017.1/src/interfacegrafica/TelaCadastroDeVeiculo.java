@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package interfacegrafica;
+
 import classesdedados.Marca;
 import classesdedados.Mensagens;
 import classesdedados.Modelo;
@@ -19,13 +20,16 @@ import persistencia.MarcaDAO;
 import persistencia.ModeloDAO;
 import persistencia.VeiculoDAO;
 import persistencia.VeiculoDAO;
+
 /**
  *
  * @author renatowsilva
  */
 public class TelaCadastroDeVeiculo extends javax.swing.JInternalFrame {
+
     DefaultTableModel dtm = null;
     Veiculo objVeiculo = new Veiculo();
+
     /**
      * Creates new form TelaCadastroDeVeiculo
      */
@@ -41,15 +45,15 @@ public class TelaCadastroDeVeiculo extends javax.swing.JInternalFrame {
             MarcaDAO marcaDAO = new MarcaDAO();
             System.out.println(marcaDAO.recuperar().size());
             for (int i = 0; i < marcaDAO.recuperar().size(); i++) {
-            Marca marca = (Marca) marcaDAO.recuperar().get(i);
-            jComboBoxVeiculoMarca.addItem(marca.getDescricao());
+                Marca marca = (Marca) marcaDAO.recuperar().get(i);
+                jComboBoxVeiculoMarca.addItem(marca.getDescricao());
             }
-            
+
             ModeloDAO modeloDAO = new ModeloDAO();
             System.out.println(modeloDAO.recuperar().size());
             for (int i = 0; i < modeloDAO.recuperar().size(); i++) {
-            Modelo modelo = (Modelo) modeloDAO.recuperar().get(i);
-            jComboBoxVeiculoModelo.addItem(modelo.getDescricao());
+                Modelo modelo = (Modelo) modeloDAO.recuperar().get(i);
+                jComboBoxVeiculoModelo.addItem(modelo.getDescricao());
             }
         } catch (Exception ex) {
             Logger.getLogger(TelaCadastroDeModelo.class.getName()).log(Level.SEVERE, null, ex);
@@ -402,7 +406,7 @@ public class TelaCadastroDeVeiculo extends javax.swing.JInternalFrame {
             ArrayList<Veiculo> alVeiculos = (ArrayList<Veiculo>) objDAO;
 
             if (jTextFieldVeiculoMotorizacao.getText().equals("") | jFormattedTextFieldVeiculoAnoFabricacao.getText().equals("")
-                | jFormattedTextFieldVeiculoPlaca.getText().equals("")) {
+                    | jFormattedTextFieldVeiculoPlaca.getText().equals("")) {
                 JOptionPane.showMessageDialog(null, "Campo obrigatório.");
                 jTextFieldVeiculoMotorizacao.requestFocus();
                 jFormattedTextFieldVeiculoAnoFabricacao.requestFocus();
@@ -410,22 +414,24 @@ public class TelaCadastroDeVeiculo extends javax.swing.JInternalFrame {
                 return;
             }
             //            if (jFormattedTextFieldVeiculoAnoFabricacao.getText().equals("")) {
-                //                JOptionPane.showMessageDialog(null, "Campo obrigatório.");
-                //                jFormattedTextFieldVeiculoAnoFabricacao.requestFocus();
-                //                return;
-                //            }
+            //                JOptionPane.showMessageDialog(null, "Campo obrigatório.");
+            //                jFormattedTextFieldVeiculoAnoFabricacao.requestFocus();
+            //                return;
+            //            }
             //            if (jFormattedTextFieldVeiculoPlaca.getText().equals("")) {
-                //                JOptionPane.showMessageDialog(null, "Campo obrigatório.");
-                //                jFormattedTextFieldVeiculoPlaca.requestFocus();
-                //                return;
-                //            }
+            //                JOptionPane.showMessageDialog(null, "Campo obrigatório.");
+            //                jFormattedTextFieldVeiculoPlaca.requestFocus();
+            //                return;
+            //            }
 
             cadastroveiculo.setMarca(jComboBoxVeiculoMarca.getSelectedItem().toString());
             cadastroveiculo.setModelo(jComboBoxVeiculoModelo.getSelectedItem().toString());
             cadastroveiculo.setAnoDeFabricacao(jFormattedTextFieldVeiculoAnoFabricacao.getText());
             cadastroveiculo.setMotor(jTextFieldVeiculoMotorizacao.getText());
             cadastroveiculo.setPlaca(jFormattedTextFieldVeiculoPlaca.getText());
-            cadastroveiculo.setStatus(jComboBoxVeiculoStatusVeiculo.getSelectedItem().toString());
+
+            cadastroveiculo.setStatus(Enum.valueOf(Veiculo.EnumVeiculo.class, jComboBoxVeiculoStatusVeiculo.getSelectedItem().toString()));
+//            cadastroveiculo.setStatus(jComboBoxVeiculoStatusVeiculo.getSelectedItem().toString());
 
             if (alVeiculos != null) {
                 for (int i = 0; i < alVeiculos.size(); i++) {
@@ -451,9 +457,9 @@ public class TelaCadastroDeVeiculo extends javax.swing.JInternalFrame {
                 strMarca = alVeiculos.get(i).getMarca();
                 strModelo = alVeiculos.get(i).getModelo();
                 strAnoFab = alVeiculos.get(i).getAnoDeFabricacao();
-                strMotor = alVeiculos.get(i).getMotor()+"";
+                strMotor = alVeiculos.get(i).getMotor() + "";
                 strPlaca = alVeiculos.get(i).getPlaca();
-                strStatus = alVeiculos.get(i).getStatus();
+                strStatus = alVeiculos.get(i).getStatus().toString();
 
                 Object[] dados = {strId, strMarca, strModelo, strAnoFab, strMotor, strPlaca, strStatus};
                 dtm.addRow(dados);
@@ -491,9 +497,9 @@ public class TelaCadastroDeVeiculo extends javax.swing.JInternalFrame {
                     strMarca = String.valueOf(alVeiculos.get(i).getMarca());
                     strModelo = String.valueOf(alVeiculos.get(i).getModelo());
                     strAnoFab = alVeiculos.get(i).getAnoDeFabricacao();
-                    strMotor = alVeiculos.get(i).getMotor()+"";
+                    strMotor = alVeiculos.get(i).getMotor() + "";
                     strPlaca = alVeiculos.get(i).getPlaca();
-                    strStatus = alVeiculos.get(i).getStatus();
+                    strStatus = alVeiculos.get(i).getStatus().toString();
 
                     Object[] dados = {strId, strMarca, strModelo, strAnoFab, strMotor, strPlaca, strStatus};
                     dtm.addRow(dados);
@@ -521,7 +527,7 @@ public class TelaCadastroDeVeiculo extends javax.swing.JInternalFrame {
                 objVeiculo.setAnoDeFabricacao(jTextFieldVeiculoAnoFabAlterar.getText().toUpperCase());
                 objVeiculo.setMotor(jTextFieldVeiculoMotorizacaoAlterar.getText().toUpperCase());
                 objVeiculo.setPlaca(jFormattedTextFieldVeiculoPlacaAlterar.getText().toUpperCase());
-                objVeiculo.setStatus(jComboBoxVeiculoStatusAlterar.getSelectedItem().toString());
+                objVeiculo.setStatus(Enum.valueOf(Veiculo.EnumVeiculo.class, jComboBoxVeiculoStatusAlterar.getSelectedItem().toString()));
                 dao.alterar(objVeiculo.getidVeiculo(), objVeiculo);
 
                 dtm = (DefaultTableModel) jTableVeiculoPesquisa.getModel();
@@ -537,7 +543,7 @@ public class TelaCadastroDeVeiculo extends javax.swing.JInternalFrame {
                     strAnoFab = alVeiculos.get(i).getAnoDeFabricacao();
                     strMotor = alVeiculos.get(i).getMotor();
                     strPlaca = alVeiculos.get(i).getPlaca();
-                    strStatus = alVeiculos.get(i).getStatus();
+                    strStatus = alVeiculos.get(i).getStatus().toString();
 
                     Object[] dados = {strId, strMarca, strModelo, strAnoFab, strMotor, strPlaca, strStatus};
                     dtm.addRow(dados);
@@ -582,7 +588,7 @@ public class TelaCadastroDeVeiculo extends javax.swing.JInternalFrame {
                     dtm = (DefaultTableModel) jTableVeiculoPesquisa.getModel();
                     objVeiculo.setidVeiculo(Integer.parseInt(dtm.getValueAt(idx, 0).toString()));
                     for (int i = 0; i < alVeiculos.size(); i++) {
-                        if (alVeiculos.get(i).getidVeiculo()== objVeiculo.getidVeiculo()) {
+                        if (alVeiculos.get(i).getidVeiculo() == objVeiculo.getidVeiculo()) {
                             objVeiculo.setMarca(alVeiculos.get(i).getMarca());
                             jTextFieldVeiculoMarcaAlterar.setText(objVeiculo.getMarca());
                             objVeiculo.setModelo(alVeiculos.get(i).getModelo());
@@ -593,11 +599,10 @@ public class TelaCadastroDeVeiculo extends javax.swing.JInternalFrame {
                             jTextFieldVeiculoMotorizacaoAlterar.setText(objVeiculo.getMotor());
                             objVeiculo.setPlaca(alVeiculos.get(i).getPlaca());
                             jFormattedTextFieldVeiculoPlacaAlterar.setText(objVeiculo.getPlaca());
-                            objVeiculo.setStatus(alVeiculos.get(i).getStatus());
-                            //                            jComboBoxVeiculoStatusAlterar.setSelectedItem(objVeiculo.getStatus());
+                            jComboBoxVeiculoStatusAlterar.setSelectedItem(objVeiculo.getStatus());
 
                             //jTextFieldID.setEnabled(true);
-                            jTextFieldID.setText(objVeiculo.getidVeiculo()+ "");
+                            jTextFieldID.setText(objVeiculo.getidVeiculo() + "");
                             //jTextFieldID.setEnabled(false);
                             return;
                         }

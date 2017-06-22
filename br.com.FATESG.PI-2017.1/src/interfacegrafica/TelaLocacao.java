@@ -5,11 +5,20 @@
  */
 package interfacegrafica;
 
+import classesdedados.Veiculo;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import persistencia.VeiculoDAO;
+
 /**
  *
  * @author renatowsilva
  */
 public class TelaLocacao extends javax.swing.JInternalFrame {
+
+    VeiculoDAO dao = new VeiculoDAO();
+    ArrayList<Veiculo> alVeiculo = new ArrayList<>();
 
     /**
      * Creates new form TelaCadastroDeLocacao
@@ -33,9 +42,8 @@ public class TelaLocacao extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jButtonLocacaoSelecionarVeiculo = new javax.swing.JButton();
         jFormattedTextFieldLocacaoKMinicial = new javax.swing.JFormattedTextField();
-        jTextFieldLocacaoVeiculoDisponivel = new javax.swing.JTextField();
+        jTextFieldPesquisa = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jComboBoxLocacaoPontodePartida = new javax.swing.JComboBox<>();
@@ -51,6 +59,11 @@ public class TelaLocacao extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         jFormattedTextFieldLocacaoPrevisaoDevolucao = new javax.swing.JFormattedTextField();
         jFormattedTextFieldLocacaoValorCaucao = new javax.swing.JFormattedTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTablePesquisa = new javax.swing.JTable();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        jComboBoxPesquisa = new javax.swing.JComboBox<>();
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
         jLayeredPane1.setLayout(jLayeredPane1Layout);
@@ -80,16 +93,9 @@ public class TelaLocacao extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
 
-        jLabel9.setText("Veiculo Disponivel");
+        jLabel9.setText("Buscar por:");
 
         jLabel7.setText("KM Inicial:");
-
-        jButtonLocacaoSelecionarVeiculo.setText("Veiculo");
-        jButtonLocacaoSelecionarVeiculo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonLocacaoSelecionarVeiculoActionPerformed(evt);
-            }
-        });
 
         jFormattedTextFieldLocacaoKMinicial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -97,9 +103,15 @@ public class TelaLocacao extends javax.swing.JInternalFrame {
             }
         });
 
+        jTextFieldPesquisa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldPesquisaKeyReleased(evt);
+            }
+        });
+
         jLabel13.setText("Ponto de Partida:");
 
-        jLabel12.setText("Dados da Locação");
+        jLabel12.setText("DADOS DA LOCAÇÃO");
 
         jComboBoxLocacaoPontodePartida.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -141,26 +153,72 @@ public class TelaLocacao extends javax.swing.JInternalFrame {
             ex.printStackTrace();
         }
 
+        jTablePesquisa.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Placa", "Marca", "Modelo", "Motor"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTablePesquisa);
+        if (jTablePesquisa.getColumnModel().getColumnCount() > 0) {
+            jTablePesquisa.getColumnModel().getColumn(0).setPreferredWidth(10);
+            jTablePesquisa.getColumnModel().getColumn(1).setPreferredWidth(60);
+            jTablePesquisa.getColumnModel().getColumn(2).setPreferredWidth(120);
+            jTablePesquisa.getColumnModel().getColumn(3).setPreferredWidth(5);
+        }
+
+        jLabel14.setText("Dados do veículo:");
+
+        jComboBoxPesquisa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MARCA", "MODELO", "PLACA" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jComboBoxPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(205, 205, 205)
+                        .addComponent(jLabel12)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addComponent(jLabel14)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addComponent(jButtonLimparLocacao)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jButtonSalvarLocacao)
+                                    .addGap(104, 104, 104)))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                            .addComponent(jLabel2)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(jFormattedTextFieldLocacaoDataInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                            .addComponent(jLabel8)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(jFormattedTextFieldLocacaoPrevisaoDevolucao, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jLabel8)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jFormattedTextFieldLocacaoPrevisaoDevolucao, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel3)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -181,47 +239,26 @@ public class TelaLocacao extends javax.swing.JInternalFrame {
                                                     .addComponent(jLabel5)
                                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                     .addComponent(jTextFieldLocacaoValorLocacao, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(jLabel7)))
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jFormattedTextFieldLocacaoKMinicial, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(129, 129, 129)
-                                .addComponent(jLabel12)
-                                .addGap(156, 156, 156)))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(jButtonLocacaoSelecionarVeiculo)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jTextFieldLocacaoVeiculoDisponivel, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(jButtonLimparLocacao)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jButtonSalvarLocacao)
-                            .addGap(104, 104, 104)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(164, 164, 164)
-                        .addComponent(jLabel9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(27, 27, 27)
-                .addComponent(jLabel4)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(jFormattedTextFieldLocacaoKMinicial, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jFormattedTextFieldLocacaoDataInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(221, 221, 221))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(333, 333, 333)
-                        .addComponent(jLabel4))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(74, 74, 74)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButtonLocacaoSelecionarVeiculo)
-                            .addComponent(jTextFieldLocacaoVeiculoDisponivel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(47, 47, 47)
-                        .addComponent(jLabel12)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel14))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
@@ -246,11 +283,22 @@ public class TelaLocacao extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel13)
                             .addComponent(jComboBoxLocacaoPontodePartida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addGap(39, 39, 39)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButtonLimparLocacao)
-                            .addComponent(jButtonSalvarLocacao))))
-                .addContainerGap(27, Short.MAX_VALUE))
+                            .addComponent(jButtonSalvarLocacao))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel4))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextFieldPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jComboBoxPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
 
         pack();
@@ -264,19 +312,71 @@ public class TelaLocacao extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldLocacaoValorLocacaoActionPerformed
 
-    private void jButtonLocacaoSelecionarVeiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLocacaoSelecionarVeiculoActionPerformed
-        
-        TelaPesquisaVeiculo tela = new TelaPesquisaVeiculo();
-       
-        tela.setVisible(true);
-    }//GEN-LAST:event_jButtonLocacaoSelecionarVeiculoActionPerformed
+    private void jTextFieldPesquisaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldPesquisaKeyReleased
+        DefaultTableModel dtm = (DefaultTableModel) jTablePesquisa.getModel();
+
+        if (!jTextFieldPesquisa.getText().equals("")) {
+            dtm.setNumRows(0);
+
+            String strPlaca, strMarca, strModelo, strMotor;
+
+            try {
+                Object objDAO = dao.recuperar();
+                alVeiculo = (ArrayList<Veiculo>) objDAO;
+
+                String texto = jTextFieldPesquisa.getText().toUpperCase();
+
+                if (jComboBoxPesquisa.getSelectedItem().equals("MARCA")) {
+                    for (int i = 0; i < alVeiculo.size(); i++) {
+                        if (alVeiculo.get(i).getMarca().toUpperCase().contains(texto)) {
+                            strPlaca = alVeiculo.get(i).getPlaca();
+                            strMarca = alVeiculo.get(i).getMarca().toUpperCase();
+                            strModelo = alVeiculo.get(i).getModelo();
+                            strMotor = alVeiculo.get(i).getMotor();
+
+                            Object[] dados = {strPlaca, strMarca, strModelo, strMotor};
+                            dtm.addRow(dados);
+                        }
+                    }
+                } else if (jComboBoxPesquisa.getSelectedItem().equals("MODELO")) {
+                    for (int i = 0; i < alVeiculo.size(); i++) {
+                        if (alVeiculo.get(i).getModelo().toUpperCase().contains(texto)) {
+                            strPlaca = alVeiculo.get(i).getPlaca();
+                            strMarca = alVeiculo.get(i).getMarca().toUpperCase();
+                            strModelo = alVeiculo.get(i).getModelo();
+                            strMotor = alVeiculo.get(i).getMotor();
+
+                            Object[] dados = {strPlaca, strMarca, strModelo, strMotor};
+                            dtm.addRow(dados);
+                        }
+                    }
+                } else {
+                    for (int i = 0; i < alVeiculo.size(); i++) {
+                        if (alVeiculo.get(i).getPlaca().contains(texto)) {
+                            strPlaca = alVeiculo.get(i).getPlaca();
+                            strMarca = alVeiculo.get(i).getMarca().toUpperCase();
+                            strModelo = alVeiculo.get(i).getModelo();
+                            strMotor = alVeiculo.get(i).getMotor();
+
+                            Object[] dados = {strPlaca, strMarca, strModelo, strMotor};
+                            dtm.addRow(dados);
+                        }
+                    }
+                }
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage());
+            }
+        } else {
+            dtm.setNumRows(0);
+        }
+    }//GEN-LAST:event_jTextFieldPesquisaKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonLimparLocacao;
-    private javax.swing.JButton jButtonLocacaoSelecionarVeiculo;
     private javax.swing.JButton jButtonSalvarLocacao;
     private javax.swing.JComboBox<String> jComboBoxLocacaoPontodePartida;
+    private javax.swing.JComboBox<String> jComboBoxPesquisa;
     private javax.swing.JFormattedTextField jFormattedTextFieldLocacaoDataInicio;
     private javax.swing.JFormattedTextField jFormattedTextFieldLocacaoHoraInicio;
     private javax.swing.JFormattedTextField jFormattedTextFieldLocacaoKMinicial;
@@ -285,6 +385,7 @@ public class TelaLocacao extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -295,7 +396,10 @@ public class TelaLocacao extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTablePesquisa;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextFieldLocacaoValorLocacao;
-    private javax.swing.JTextField jTextFieldLocacaoVeiculoDisponivel;
+    private javax.swing.JTextField jTextFieldPesquisa;
     // End of variables declaration//GEN-END:variables
 }

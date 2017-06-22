@@ -22,12 +22,17 @@ public class Locacao {
     private String vistoria = "";
     private EnumLocacao status = null;
     private Pessoa cliente = null;
+    private float valorLocacao = (float) 0.0;
+    private float valorCaucao = (float) 0.0;
+    private String dataDevolucao = "";
     
     public Locacao(){
         
     }
     
-    public Locacao(int idLocacao, String dataInicio, String dataFim, String finalidadeDaLocacao, String localSaidaVeiculo, String localChegadaVeiculo, int kmInicial, int kmFinal, String vistoria, EnumLocacao status, Pessoa cliente){
+    public Locacao(int idLocacao, String dataInicio, String dataFim, String finalidadeDaLocacao, String localSaidaVeiculo, 
+            String localChegadaVeiculo, int kmInicial, int kmFinal, String vistoria, EnumLocacao status, Pessoa cliente, 
+            float valorLocacao, float valorCaucao, String dataDevolucao){
         this.idLocacao = idLocacao;
         this.dataInicio = dataInicio;
         this.dataFim = dataFim;
@@ -39,6 +44,9 @@ public class Locacao {
         this.kmFinal = kmFinal;
         this.status = status;
         this.cliente = cliente;
+        this.valorLocacao = valorLocacao;
+        this.valorCaucao = valorCaucao;
+        this.dataDevolucao = dataDevolucao;
     }
 
     public int getIdLocacao() {
@@ -131,6 +139,30 @@ public class Locacao {
 
     public void setCliente(Pessoa cliente) {
         this.cliente = cliente;
+    }
+
+    public float getValorLocacao() {
+        return valorLocacao;
+    }
+
+    public void setValorLocacao(float valorLocacao) {
+        this.valorLocacao = valorLocacao;
+    }
+
+    public float getValorCaucao() {
+        return valorCaucao;
+    }
+
+    public void setValorCaucao(float valorCaucao) {
+        this.valorCaucao = valorCaucao;
+    }
+
+    public String getDataDevolucao() {
+        return dataDevolucao;
+    }
+
+    public void setDataDevolucao(String dataDevolucao) {
+        this.dataDevolucao = dataDevolucao;
     }
     
 }

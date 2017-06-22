@@ -16,6 +16,7 @@ import classesdedados.GerarId;
 import classesdedados.Locacao;
 import classesdedados.GerarId;
 import classesdedados.Mensagens;
+import classesdedados.Pessoa;
 
 /**
  *
@@ -23,7 +24,7 @@ import classesdedados.Mensagens;
  */
 public class LocacaoDAO implements CRUD {
     
-    String diretorio = "C:\\Users\\Vicente\\Google Drive\\ADS\\01 - FATESG\\2017.1\\Projetos Equipe ADS\\Projeto Integrador\\br.com.FATESG.PI-2017.1\\br.com.FATESG.PI-2017.1\\FATESG-PI-2017.1\\br.com.FATESG.PI-2017.1\\src\\arquivos\\";
+    String diretorio = "C:\\Users\\Alexandre Fernandes\\Documents\\NetBeansProjects\\FATESG-PI-2017.1\\br.com.FATESG.PI-2017.1\\src\\arquivos";
     String arqLocacao = diretorio + "Locacao.csv";
         
     FileWriter fwLocacao = null;
@@ -39,7 +40,8 @@ public class LocacaoDAO implements CRUD {
             GerarId gerarId = new GerarId();
             locacao.setIdLocacao(gerarId.getIdLocacao());
             String dados = locacao.getIdLocacao() + ";" + locacao.getDataInicio() + ";" + locacao.getDataFim() + ";" + locacao.getFinalidadeDaLocacao() + ";" + locacao.getLocalSaidaVeiculo() + ";"
-                    + locacao.getLocalChegadaVeiculo() + ";" + locacao.getVistoria() + ";" + locacao.getKmInicial() + ";" + locacao.getKmFinal() + ";" + locacao.getCliente() + ";" + locacao.getStatus() + "/n";
+                    + locacao.getLocalChegadaVeiculo() + ";" + locacao.getVistoria() + ";" + locacao.getKmInicial() + ";" + locacao.getKmFinal() + ";" + locacao.getCliente().getId() + ";" + locacao.getStatus() + 
+                    ";" + locacao.getValorCaucao() + ";" + locacao.getValorLocacao() + ";" + locacao.getDataDevolucao() + "\n";
             bwLocacao.write(dados);
             bwLocacao.close();
             
@@ -65,18 +67,24 @@ public class LocacaoDAO implements CRUD {
             String linhaLocacao = brLocacao.readLine();
             while (linhaLocacao != null && !linhaLocacao.equals("")){
                 Locacao locacao = new Locacao();
-                
+                Pessoa pessoa = new Pessoa();
+                                
                 String vLocacao[] = linhaLocacao.split(";");
                 locacao.setIdLocacao(Integer.parseInt(vLocacao[0]));
-                locacao.setLocalSaidaVeiculo(vLocacao[1]);
-                locacao.setLocalChegadaVeiculo(vLocacao[2]);
-                locacao.setDataInicio(vLocacao[3]);
-                locacao.setDataFim(vLocacao[4]);
-                locacao.setFinalidadeDaLocacao(vLocacao[5]);
-                locacao.setKmInicial(Integer.parseInt(vLocacao[6]));
-                locacao.setKmFinal(Integer.parseInt(vLocacao[7]));
-                locacao.setVistoria(vLocacao[8]);
-                locacao.setStatus(Enum.valueOf(Locacao.EnumLocacao.class, vLocacao[9]));
+                locacao.setDataInicio(vLocacao[1]);
+                locacao.setDataFim(vLocacao[2]);
+                locacao.setFinalidadeDaLocacao(vLocacao[3]);
+                locacao.setLocalSaidaVeiculo(vLocacao[4]);
+                locacao.setLocalChegadaVeiculo(vLocacao[5]);
+                locacao.setVistoria(vLocacao[6]);
+                locacao.setKmInicial(Integer.parseInt(vLocacao[7]));
+                locacao.setKmFinal(Integer.parseInt(vLocacao[8]));
+                pessoa.setId(Integer.parseInt(vLocacao[9]));
+                locacao.setCliente(pessoa);
+                locacao.setStatus(Enum.valueOf(Locacao.EnumLocacao.class, vLocacao[10]));
+                locacao.setValorCaucao(Float.parseFloat(vLocacao[11]));
+                locacao.setValorLocacao(Float.parseFloat(vLocacao[12]));
+                locacao.setDataDevolucao(vLocacao[13]);
                 
                 locacoes.add(locacao);
                 
@@ -97,17 +105,20 @@ public class LocacaoDAO implements CRUD {
             Locacao objLocacao = (Locacao) objeto;
             
             String dadosLocacao = "";
+                       
             
                 if(locacoes.size() >= 0 && locacoes != null){
                     for(int i = 0; i < locacoes.size(); i++){
                         if (locacoes.get(i).getIdLocacao() != id){
-                            dadosLocacao += locacoes.get(i).getIdLocacao() + ";" + locacoes.get(i).getLocalSaidaVeiculo() + ";" + locacoes.get(i).getLocalChegadaVeiculo() + ";" +
-                        locacoes.get(i).getFinalidadeDaLocacao() + ";" + locacoes.get(i).getDataInicio() + ";" + locacoes.get(i).getDataFim() + ";" + locacoes.get(i).getVistoria() + ";" +
-                        locacoes.get(i).getKmInicial() + ";" + locacoes.get(i).getKmFinal() + ";" + locacoes.get(i).getStatus() + "/n"; 
+                            dadosLocacao += locacoes.get(i).getIdLocacao() + ";" + locacoes.get(i).getDataInicio()+ ";" + locacoes.get(i).getDataFim()+ ";" +
+                        locacoes.get(i).getFinalidadeDaLocacao() + ";" + locacoes.get(i).getLocalSaidaVeiculo()+ ";" + locacoes.get(i).getLocalChegadaVeiculo()+ ";" + locacoes.get(i).getVistoria() + ";" +
+                        locacoes.get(i).getKmInicial() + ";" + locacoes.get(i).getKmFinal() + ";" + locacoes.get(i).getCliente().getId()+ ";" + locacoes.get(i).getStatus() + ";" + locacoes.get(i).getValorCaucao() +
+                        ";" + locacoes.get(i).getValorLocacao() + ";" + locacoes.get(i).getDataDevolucao() + "\n";
                         }else {
-                            dadosLocacao += id + ";" + objLocacao.getIdLocacao() + ";" + objLocacao.getLocalSaidaVeiculo() + ";" + objLocacao.getLocalChegadaVeiculo() + ";" +
-                        objLocacao.getFinalidadeDaLocacao() + ";" + objLocacao.getDataInicio() + ";" + objLocacao.getDataFim() + ";" + objLocacao.getVistoria() + ";" +
-                        objLocacao.getKmInicial() + ";" + objLocacao.getKmFinal() + ";" + objLocacao.getStatus() + "/n";
+                            dadosLocacao += id + ";" + objLocacao.getIdLocacao() + ";" + objLocacao.getDataInicio()+ ";" + objLocacao.getDataFim()+ ";" +
+                        objLocacao.getFinalidadeDaLocacao() + ";" + objLocacao.getLocalSaidaVeiculo()+ ";" + objLocacao.getLocalChegadaVeiculo()+ ";" + objLocacao.getVistoria() + ";" +
+                        objLocacao.getKmInicial() + ";" + objLocacao.getKmFinal() + ";" + objLocacao.getCliente().getId() + ";" + objLocacao.getStatus() + ";" + objLocacao.getValorCaucao() +
+                         ";" + objLocacao.getValorLocacao() + ";" + objLocacao.getDataDevolucao() + "\n";
                         }
                     }
                     if (!dadosLocacao.equals("")){
@@ -140,9 +151,10 @@ public class LocacaoDAO implements CRUD {
         if(locacoes.size() >= 0 && locacoes != null){
             for (int i = 0; i < locacoes.size(); i++){
                 if(locacoes.get(i).getIdLocacao() != id){
-                dadosLocacao += locacoes.get(i).getIdLocacao() + ";" + locacoes.get(i).getLocalSaidaVeiculo() + ";" + locacoes.get(i).getLocalChegadaVeiculo() + ";" +
-                        locacoes.get(i).getFinalidadeDaLocacao() + ";" + locacoes.get(i).getDataInicio() + ";" + locacoes.get(i).getDataFim() + ";" + locacoes.get(i).getVistoria() + ";" +
-                        locacoes.get(i).getKmInicial() + ";" + locacoes.get(i).getKmFinal() + ";" + locacoes.get(i).getStatus() + "/n";
+                dadosLocacao += locacoes.get(i).getIdLocacao() + ";" + locacoes.get(i).getDataInicio()+ ";" + locacoes.get(i).getDataFim()+ ";" +
+                        locacoes.get(i).getFinalidadeDaLocacao() + ";" + locacoes.get(i).getLocalSaidaVeiculo()+ ";" + locacoes.get(i).getLocalChegadaVeiculo()+ ";" + locacoes.get(i).getVistoria() + ";" +
+                        locacoes.get(i).getKmInicial() + ";" + locacoes.get(i).getKmFinal() + ";" + locacoes.get(i).getCliente().getId()+ ";" + locacoes.get(i).getStatus() + ";" + locacoes.get(i).getValorCaucao() +
+                        ";" + locacoes.get(i).getValorLocacao() + ";" + locacoes.get(i).getDataDevolucao() + "\n";
             }else {
                     achou = true;
                 }
